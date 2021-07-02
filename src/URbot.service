@@ -1,0 +1,14 @@
+[Unit]
+Description=Discord Bot for unionrolistes.fr
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/bot/URbot.py
+Restart=always
+RestartSec=5s
+StandardOutput=journal
+StandardError=inherit
+
+[Install]
+WantedBy=multi-user.target

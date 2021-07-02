@@ -1,0 +1,6 @@
+{name}
+======
+    ->  Version : {version}
+    {credits}
+
+{services}
