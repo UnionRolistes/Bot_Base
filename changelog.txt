@@ -1,3 +1,4 @@
 29/06/2021 - Bot python 0.1
 ===========================
     - add $credit and $version commands
+    - add install and start scripts

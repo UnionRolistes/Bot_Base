@@ -39,7 +39,7 @@ deactivate
 # Copies python code to usr/local/sbin
 sudo cp -vr $python_package /usr/local/bin
 sudo chmod -R 755 /usr/local/bin/$pckg_name
-sudo chown $USER /usr/local/bin/$pckg_name
+sudo chown "$USER" /usr/local/bin/$pckg_name
 
 
 # Copies .service to /etc/systemd/system
@@ -49,8 +49,8 @@ sudo systemctl enable URbot.service
 # Reads and writes token into root folder
 echo
 echo '|~ Veuillez entrer le token du bot :'
-read bot_token
-echo $bot_token | sudo tee /root/.bot_token > /dev/null
+read -r bot_token
+echo "$bot_token" | sudo tee /root/.bot_token > /dev/null
 exit
 
 echo
