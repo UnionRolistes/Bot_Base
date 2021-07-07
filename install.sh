@@ -48,12 +48,12 @@ sudo chown "$USER" /usr/local/bin/$pckg_name
 sudo cp -v $service /etc/systemd/system
 sudo systemctl enable URbot.service
 
-# Reads and writes token into root folder
-#echo
-#echo '|~ Veuillez entrer le token du bot :'
-#read -r bot_token
-#echo "$bot_token" | sudo tee /root/.bot_token > /dev/null
-#exit
+ Reads and writes token into root folder
+echo
+echo '|~ Veuillez entrer le token du bot :'
+read -r bot_token
+echo "$bot_token" | sudo tee /usr/local/bin/bot/.bot_token > /dev/null
+exit
 
 echo
 echo 'Installation terminée.'

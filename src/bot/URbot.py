@@ -69,7 +69,7 @@ def main():
 
     # with open("/root/.bot_token", 'r') as f:
     #     bot_token = f.read()
-    with open("../../../bot_token") as f:
+    with open("/usr/local/bin/bot/.bot_token") as f:
         bot_token = f .read()
 
     ur_bot.run(bot_token)
