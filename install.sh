@@ -48,7 +48,7 @@ sudo chown "$USER" /usr/local/bin/$pckg_name
 sudo cp -v $service /etc/systemd/system
 sudo systemctl enable URbot.service
 
- Reads and writes token into root folder
+# Reads and writes token into root folder
 echo
 echo '|~ Veuillez entrer le token du bot :'
 read -r bot_token

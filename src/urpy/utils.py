@@ -22,7 +22,7 @@ async def get_public_ip() -> str:
     """
     return requests.get('https://api.ipify.org').text
 
-async def get_informations(msg: discord.Message) -> dict[str, str]:
+async def get_informations(msg: discord.Message):
     """
     Extract information from an announcement message.
 
