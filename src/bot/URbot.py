@@ -4,6 +4,7 @@ import inspect
 import logging
 import os
 import sys
+sys.path.append("/usr/local/bin/")
 import importlib
 from importlib import resources
 
