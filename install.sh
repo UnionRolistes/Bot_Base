@@ -22,7 +22,7 @@ venv='/opt/virtualenv/URBot'
 bin="$venv/bin/"
 pckg_name='bot'
 python_package="src/$pckg_name"
-service='src/URbot.service'
+service='src/Bot_Base.service'
 requirements="$python_package/requirements.txt"
 
 # Installs required softwares
