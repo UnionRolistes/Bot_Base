@@ -17,7 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Variables
-python='python3.9'
+python='python3.7'
 venv='/opt/virtualenv/URBot'
 bin="$venv/bin/"
 pckg_name='bot'
@@ -49,11 +49,11 @@ sudo cp -v $service /etc/systemd/system
 sudo systemctl enable URbot.service
 
 # Reads and writes token into root folder
-echo
-echo '|~ Veuillez entrer le token du bot :'
-read -r bot_token
-echo "$bot_token" | sudo tee /root/.bot_token > /dev/null
-exit
+#echo
+#echo '|~ Veuillez entrer le token du bot :'
+#read -r bot_token
+#echo "$bot_token" | sudo tee /root/.bot_token > /dev/null
+#exit
 
 echo
 echo 'Installation terminée.'
