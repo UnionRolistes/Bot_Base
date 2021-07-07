@@ -60,7 +60,7 @@ def main():
     ur_bot = URBot()
 
     sys.path.append(os.path.abspath('cogs'))
-    for dir_entry in os.scandir('cogs'):
+    for dir_entry in os.scandir(os.path.abspath('cogs')):
         dir_entry: os.DirEntry
         if dir_entry.is_dir() and dir_entry.name != '__pycache__' and not dir_entry.name.startswith('.'):
             module = importlib.import_module(f"{dir_entry.name}.cog")
