@@ -2,3 +2,5 @@ __pycache__
 src/bot/cogs/
 
 src/bot/.idea/
+
+src/urpy/.idea/
