@@ -1,4 +1,2 @@
 # Bot_Base
-
-sudo git clone url
-cd Bot
+sudo git clone https://github.com/UnionRolistes/Bot_Base.git && cd Bot_Base
