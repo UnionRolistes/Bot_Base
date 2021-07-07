@@ -38,6 +38,8 @@ deactivate
 
 # Copies python code to usr/local/sbin
 sudo cp -vr $python_package /usr/local/bin
+# rush
+sudo cp -vr 'src/urpy' $venv/lib/$python/site-packages
 sudo chmod -R 755 /usr/local/bin/$pckg_name
 sudo chown "$USER" /usr/local/bin/$pckg_name
 

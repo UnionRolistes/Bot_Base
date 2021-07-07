@@ -1,25 +1,38 @@
 #!/opt/virtualenv/URBot/bin/python
-import importlib
+
 import inspect
 import logging
 import os
-import re
 import sys
-from discord.ext import commands
 import importlib
-# sys.path.append("D:\\Florian\\Documents\\_Documents\\Projets\\Union_Rolistes\\URbot\\cog_planning\\src")
 from importlib import resources
-import info
-import template
 
-from pathlib import Path
+import urpy
+from discord.ext import commands
+
+from bot import info
+from bot import settings
+from bot.cog_General import General
 from cog_About import About
 
 
-class URBot(commands.Bot):
+class URBot(urpy.MyBot):
+    """
+    Discord bot for "l'Union des Rôlistes". Contains global settings
+    and functions.
+
+    Additional groups of functions can be added at runtime through
+    the .add_cog method.
+    """
+
     def __init__(self):
-        super(URBot, self).__init__('$')
+        """
+        Creates an instance of URBot. Use the run method to start it.
+        """
+        super(URBot, self).__init__(settings.command_prefix)
         self.add_cog(About(self))
+        self.general_cog = General(self)
+        self.add_cog(self.general_cog)
 
     @staticmethod
     def get_credits():
@@ -37,8 +50,11 @@ class URBot(commands.Bot):
     async def on_ready(self):
         print("We have logged in as {}!".format(self.user))
 
+    def add_to_command(self, command: str, *callbacks):
+        self.general_cog.add_to_command(command, *callbacks)
 
-if __name__ == '__main__':
+
+def main():
     logging.basicConfig(level=logging.INFO)
     ur_bot = URBot()
 
@@ -56,3 +72,7 @@ if __name__ == '__main__':
         bot_token = f .read()
 
     ur_bot.run(bot_token)
+
+
+if __name__ == '__main__':
+    main()

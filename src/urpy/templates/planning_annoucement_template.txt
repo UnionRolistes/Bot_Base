@@ -1,0 +1,14 @@
+ ** Nouveau jeu de rôle ! **
+
+ **Type ** {type}
+:calendar: ** Date ** {date}
+:clapper: **Titre** {title}
+:timer:  ** Durée moyenne du scénario ** {length}
+:crown: **MJ** {pseudoMJ}
+:d10: ** Système** {system}
+:baby::skin-tone-1: **PJ Mineur ** {minors_allowed}
+:star2: ** Plateformes ** {platforms}
+:grey_question: ** Détails**
+{details}
+
+** Participe ** ✅ / ** Ne participe pas ❌ **
