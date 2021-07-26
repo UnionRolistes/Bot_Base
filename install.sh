@@ -59,14 +59,18 @@ sudo chown "$USER" $install_folder
 sudo cp -v src/$service /etc/systemd/system
 sudo systemctl enable $service
 
-# Reads and writes token into root folder
 echo
-echo '|~ Veuillez entrer le token du bot :'
-read -r bot_token
-echo "$bot_token" | sudo tee $install_folder/.bot_token > /dev/null
-exit
 
-echo
+# Reads and writes token into root folder
+if [ ! -e $install_folder/.bot_token ]; then
+  echo '|~ Veuillez entrer le token du bot :'
+  read -r bot_token
+  echo "$bot_token" | sudo tee $install_folder/.bot_token > /dev/null
+  echo
+  exit
+fi
+
+
 echo 'Installation terminée.'
 echo
 
