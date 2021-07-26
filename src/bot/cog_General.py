@@ -20,7 +20,7 @@ class General(commands.Cog):
             await callback(ctx)
 
     @commands.command()
-    async def test(self, ctx):
+    async def boom(self, ctx):
         await ctx.send(self.bot.localization._localedir)
 
     @commands.command(brief=strings.edit_brief, help=strings.edit_help)

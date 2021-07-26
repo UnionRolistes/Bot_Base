@@ -4,6 +4,7 @@ from bot import _, strings
 import urpy
 from urpy.utils import *
 
+
 class About(commands.Cog):
     """ This cog contains commands used to get general information about the bot. """
     __doc__ = strings.About_descr
