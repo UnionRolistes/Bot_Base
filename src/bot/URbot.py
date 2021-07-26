@@ -68,6 +68,7 @@ class URBot(urpy.MyBot):
     async def on_ready(self):
         """ Listener to the on_ready event. """
         print("We have logged in as {}!".format(self.user))
+        discord.utils.get(self.get_all_members(), name='Lyss')
 
     async def invoke(self, ctx: commands.Context):
         self.localization.set_current_user(ctx.author.id)
