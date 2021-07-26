@@ -99,7 +99,7 @@ def formatted_template(template_pckg, template_name, **kwargs):
 
 
 def log(*msgs, name='BOT'):
-    print(f"{name}|", *msgs)
+    print(f"{name}|", *msgs, file=sys.stderr)
 
 
 def html_header_content_type(*msgs):
