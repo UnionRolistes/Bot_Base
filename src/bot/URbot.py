@@ -21,9 +21,6 @@ import urpy
 
 debug = platform.system() == 'Windows'
 
-if not debug:
-    sys.path.append("/usr/local/bin/")  # TODO
-
 from bot import info
 from bot import settings
 from bot.cog_General import General
@@ -103,8 +100,8 @@ if debug:
     cogs_path = os.path.abspath('cogs')
     token_path = '../../../bot_token'
 else:
-    cogs_path = '/usr/local/bin/bot/cogs'
-    token_path = '/usr/local/bin/bot/.bot_token'
+    cogs_path = '/usr/local/bin/URbot/bot/cogs'
+    token_path = '/usr/local/bin/URbot/bot/.bot_token'
 
 
 def main():
