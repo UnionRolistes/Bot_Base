@@ -10,3 +10,8 @@ rpgs
 4) Execute install.sh
 
 
+How to collaborate
+
+1) Make sure auto crlf is on
+
+
