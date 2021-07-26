@@ -1,5 +1,5 @@
 from discord.ext import commands
-import templates
+from bot import templates
 from bot import _, strings
 import urpy
 from urpy.utils import *
