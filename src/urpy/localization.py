@@ -6,13 +6,14 @@ def lcl(s: str, domain=None):
     return s
 
 
-class Localization:
-    def __init__(self, default_language='fr', default_domain='bot_base'):
-        self._localedir = ''
+class Localization:  # TODO default localedir
+    def __init__(self, localedir='', default_language='fr', default_domain='bot_base', user_based=False):
+        self._localedir = localedir
         self.languages = {}  # TODO make languages a class
         self._default_language = default_language
         self.users_custom_language = {}
         self._current_user_id = ''
+        self.user_based = user_based
         self._default_domain = default_domain
         self._current_domain = None
         # TODO add handling of several domains (context manager)
@@ -63,9 +64,12 @@ class Localization:
             lang = self.users_custom_language[self._current_user_id]
         else:
             lang = self._default_language
-        #  TODO automatization of fallback based on folder name
-        lang = self._default_language if domain not in self.languages[lang] else lang
-        return self.languages[lang][domain](s)
+        #  TODO automatize fallback based on folder name
+        if lang in self.languages:
+            lang = self._default_language if domain not in self.languages[lang] else lang
+            return self.languages[lang][domain](s)
+        else:
+            return s
 
     def set_localedir(self, param):
         self._localedir = param

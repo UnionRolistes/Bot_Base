@@ -4,7 +4,7 @@ from urpy import Localization
 
 localedir = '../locale'
 
-localization = Localization()
+localization = Localization(user_based=True)
 domain = 'bot_base'
 # TODO automate adding all languages
 localization.set_localedir('../locale')

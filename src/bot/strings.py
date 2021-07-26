@@ -1,4 +1,4 @@
-from urpy import lcl
+from urpy.localization import lcl
 
 bot_title = lcl('URbot - The discord bot of "l\'Union des Rôlistes"')
 lang_brief = lcl('Switches to specified language')

@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-07-23 02:25+0200\n"
-"PO-Revision-Date: 2021-07-23 02:25+0200\n"
+"POT-Creation-Date: 2021-07-26 19:20+0200\n"
+"PO-Revision-Date: 2021-07-26 19:20+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -16,33 +16,13 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Poedit-Basepath: ../../../bot\n"
+"X-Poedit-Basepath: ../../..\n"
 "X-Poedit-KeywordsList: lcl\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPath-1: strings.py\n"
+"X-Poedit-SearchPath-0: bot\n"
+"X-Poedit-SearchPath-1: urpy\n"
+"X-Poedit-SearchPathExcluded-0: bot/cogs\n"
 
-#: URbot.py:33
-msgid "Shows this message"
-msgstr "Affiche ce message"
-
-#: URbot.py:34
-msgid "Commands:"
-msgstr "Commandes:"
-
-#: URbot.py:35
-msgid "No Category"
-msgstr ""
-
-#: URbot.py:40
-#, python-brace-format
-msgid ""
-"Type {0}{1} command for more info on a command.\n"
-"You can also type {0}{1} category for more info on a category."
-msgstr ""
-"Entrez {0}{1} commande pour plus d'info sur une commande.\n"
-"Vous pouvez aussi entrer {0}{1} catégorie pour plus d'info sur une catégorie."
-
-#: URbot.py:118
+#: bot/URbot.py:82
 #, python-brace-format
 msgid ""
 "{err_msg}\n"
@@ -52,43 +32,43 @@ msgstr ""
 "Utilisation incorrecte ☹ Allez voir l'aide de la commande pour plus "
 "d'information."
 
-#: cog_General.py:42
+#: bot/cog_General.py:42
 msgid "Your language has successfully been set to english !"
 msgstr "Votre langue a bien été passée en français !"
 
-#: cog_General.py:45
+#: bot/cog_General.py:45
 msgid "Sorry, i don't know this language !"
 msgstr "Désolé, je ne connais pas cette langue !"
 
-#: strings.py:3
+#: bot/strings.py:3
 msgid "URbot - The discord bot of \"l'Union des Rôlistes\""
 msgstr "URBot - Le bot discord de l'Union des Rôlistes"
 
-#: strings.py:4
+#: bot/strings.py:4
 msgid "Switches to specified language"
 msgstr "Change la langue de l'utilisateur"
 
-#: strings.py:5
+#: bot/strings.py:6
 msgid "Confirms the current action"
 msgstr "Confirme l'action en cours"
 
-#: strings.py:6
+#: bot/strings.py:8
 msgid "Edits a message"
 msgstr "Édite un message"
 
-#: strings.py:7
+#: bot/strings.py:10
 msgid "Cancels the current action"
 msgstr "Annule l'action en cours"
 
-#: strings.py:8
+#: bot/strings.py:12
 msgid "Displays the version numbers"
 msgstr "Affiche les numéros de version"
 
-#: strings.py:9
+#: bot/strings.py:14
 msgid "Displays the credits"
 msgstr "Affiche les crédits"
 
-#: strings.py:10
+#: bot/strings.py:16
 msgid ""
 "This category groups various commands to display general information about "
 "the bot."
@@ -96,12 +76,37 @@ msgstr ""
 "Cette catégorie comporte des commandes donnant des informations générales "
 "sur le bot."
 
-#: strings.py:11
+#: bot/strings.py:17
 msgid ""
 "This category groups various commands whose utility depends on the context."
 msgstr ""
 "Cette catégorie regroupe des commandes générales qui jouent un rôle "
 "différent en fonction du contexte."
+
+#: urpy/help.py:12
+msgid "Shows this message"
+msgstr "Affiche ce message"
+
+#: urpy/help.py:13
+msgid "Commands:"
+msgstr "Commandes:"
+
+#: urpy/help.py:14
+msgid "No Category"
+msgstr ""
+
+#: urpy/help.py:46
+#, python-brace-format
+msgid ""
+"Type {0}{1} command for more info on a command.\n"
+"You can also type {0}{1} category for more info on a category."
+msgstr ""
+"Entrez {0}{1} commande pour plus d'info sur une commande.\n"
+"Vous pouvez aussi entrer {0}{1} catégorie pour plus d'info sur une catégorie."
+
+#: urpy/utils.py:112
+msgid "Error: Webhook not supplied."
+msgstr "Erreur : Webhook non fourni."
 
 #~ msgid "Other"
 #~ msgstr "Sans Catégorie"

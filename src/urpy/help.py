@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-from urpy.classes.localization import lcl
+from urpy.localization import lcl
 
 _ = lcl
 

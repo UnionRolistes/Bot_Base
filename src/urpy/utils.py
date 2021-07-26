@@ -3,9 +3,11 @@ import sys
 import requests
 import discord
 from importlib import resources
+from urpy import _
+
 
 def error_log(*msg, name="BOT"):
-    print(f"{name}: ERROR | ", *msg, file=sys.stderr)
+    print(f"{name}:ERROR|", *msg, file=sys.stderr)
 
 
 async def get_public_ip() -> str:
@@ -54,11 +56,14 @@ async def get_informations(msg: discord.Message):
 def code_block(s):
     return f"```{s}```"
 
+
 def edit_fmt(s):
     return f"\|~ {s} ~|"
 
+
 def code_line(s: str):
     return f"`{s}`"
+
 
 def formatted_template(template_pckg, template_name, **kwargs):
     res = ""
@@ -91,3 +96,23 @@ def formatted_template(template_pckg, template_name, **kwargs):
         return res[:-1]
     else:
         return res
+
+
+def log(*msgs, name='BOT'):
+    print(f"{name}|", *msgs)
+
+
+def html_header_content_type(*msgs):
+    print("Content-Type: text/html")
+    print()
+    print(*msgs, sep='\n')
+
+
+def html_header_relocate(dest: str):
+    print("Status: 303 See other")
+    print(f"Location: {dest}")
+    print()
+
+
+def html_header_webhook_not_supplied():
+    html_header_content_type('Error: Webhook not supplied.')

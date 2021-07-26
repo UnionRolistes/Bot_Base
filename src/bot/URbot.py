@@ -11,7 +11,8 @@ from importlib import resources
 import discord
 from discord.ext import commands
 
-from urpy import MyHelpCommand, lcl
+from urpy import MyHelpCommand
+from urpy.localization import lcl
 from urpy.utils import error_log, code_block
 from bot import _, strings
 from bot import localization

@@ -1,6 +1,7 @@
-from urpy.classes.my_commands import MyBot, MyCog, MyContext
-from urpy.classes.help import MyHelpCommand
-from urpy.classes.localization import Localization, lcl
+from urpy.localization import Localization, lcl
+from urpy.help import MyHelpCommand
+from urpy.my_commands import MyBot, MyCog, MyContext
 from urpy.get_ressources import *
-from urpy.classes import localization
-import urpy.classes.localization
+
+base_localization = Localization('../locale')
+_ = base_localization.gettext
