@@ -32,11 +32,11 @@ requirements="$urpy_pckg/requirements.txt"
 
 # Installs required softwares
 sudo apt update
-sudo apt install $python
-sudo apt install $python-venv
-sudo apt install python3-venv
-sudo apt install $python-dev
-sudo apt install build-essential
+sudo apt install -y $python
+sudo apt install -y $python-venv
+sudo apt install -y python3-venv
+sudo apt install -y $python-dev
+sudo apt install -y build-essential
 
 # Creates a python virtualenv
 sudo $python -m venv $venv

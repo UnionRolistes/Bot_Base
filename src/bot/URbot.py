@@ -8,13 +8,11 @@ import sys
 import importlib
 from importlib import resources
 
-import discord
 from discord.ext import commands
 
 from urpy import MyHelpCommand
-from urpy.localization import lcl
 from urpy.utils import error_log, code_block, log
-from bot import _, strings, localedir
+from bot import _, strings
 from bot import localization
 
 import urpy
@@ -135,7 +133,7 @@ def main():
                         log(f"Loaded : {cog.qualified_name}")
         log("Done")
     else:
-        log("No cogs found.")
+        log("No cogs found")
 
     # reads the bot token
     with open(token_path) as f:
@@ -146,5 +144,4 @@ def main():
 
 
 if __name__ == '__main__':
-    print(_(""))
     main()
