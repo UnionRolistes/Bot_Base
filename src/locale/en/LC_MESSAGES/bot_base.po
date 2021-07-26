@@ -1,0 +1,50 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2021-07-22 21:19+0200\n"
+"PO-Revision-Date: 2021-07-22 21:41+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language: en\n"
+
+#: bot\URbot.py:61
+msgid "bot_title"
+msgstr "URbot - The discord bot of \"l'Union des Rôlistes\""
+
+#: bot\cog_About.py:9
+msgid "About_descr"
+msgstr "This category groups various commands to display general information about the bot."
+
+#: bot\cog_About.py:16
+msgid "version_descr"
+msgstr "Displays the version numbers"
+
+#: bot\cog_About.py:21
+msgid "credit_descr"
+msgstr "Displays the credits"
+
+#: bot\cog_General.py:6
+msgid "General_descr"
+msgstr "This category groups various commands whose utility depends on the context."
+
+#: bot\cog_General.py:20
+msgid "edit_descr"
+msgstr "Edits a message"
+
+#: bot\cog_General.py:25
+msgid "done_descr"
+msgstr "Confirms the current action"
+
+#: bot\cog_General.py:30
+msgid "cancel_descr"
+msgstr "Cancels the current action"

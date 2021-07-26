@@ -1,0 +1,96 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2021-07-23 04:21+0200\n"
+"PO-Revision-Date: 2021-07-23 05:09+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-KeywordsList: lcl\n"
+"X-Poedit-SearchPath-0: bot\n"
+"X-Poedit-SearchPath-1: urpy\n"
+
+#: bot/URbot.py:81
+#, python-brace-format
+msgid ""
+"{err_msg}\n"
+"Incorrect usage ☹ Check help of the command for more information."
+msgstr ""
+"{err_msg}\n"
+"Ben alors, on ne sait plus comment utiliser cette commande Voyageur ? ☹ "
+"Consultez votre manuel si vous requérez assistance."
+
+# 🪶 is a feather.
+#: bot/cog_General.py:42
+msgid "Your language has successfully been set to english !"
+msgstr "Bienvenue dans le chemin de Traverse ! 🪶"
+
+#: bot/cog_General.py:45
+msgid "Sorry, i don't know this language !"
+msgstr "Mmm, non. Désolé ! Ce dialecte m'est inconnu."
+
+#: bot/strings.py:3
+msgid "URbot - The discord bot of \"l'Union des Rôlistes\""
+msgstr ""
+
+#: bot/strings.py:4
+msgid "Switches to specified language"
+msgstr "Portail de téléportation"
+
+#: bot/strings.py:6
+msgid "Confirms the current action"
+msgstr "Prends une décision avec assurance"
+
+#: bot/strings.py:8
+msgid "Edits a message"
+msgstr "Direction le scribble"
+
+#: bot/strings.py:10
+msgid "Cancels the current action"
+msgstr "Retourne sur ses pas en plein désarroi"
+
+#: bot/strings.py:12
+msgid "Displays the version numbers"
+msgstr "Affiche les dates de publication des différentes sections"
+
+#: bot/strings.py:14
+msgid "Displays the credits"
+msgstr "Affiche les auteurs de ce manuel"
+
+#: bot/strings.py:16
+msgid ""
+"This category groups various commands to display general information about "
+"the bot."
+msgstr ""
+
+#: bot/strings.py:17
+msgid ""
+"This category groups various commands whose utility depends on the context."
+msgstr ""
+
+#: urpy/classes/help.py:12
+msgid "Shows this message"
+msgstr "Affiche le manuel du Voyageur"
+
+#: urpy/classes/help.py:13
+msgid "Commands:"
+msgstr ""
+
+#: urpy/classes/help.py:14
+msgid "No Category"
+msgstr ""
+
+#: urpy/classes/help.py:46
+#, python-brace-format
+msgid ""
+"Type {0}{1} command for more info on a command.\n"
+"You can also type {0}{1} category for more info on a category."
+msgstr ""
+"~ {0}{1} commande ~\n"
+"Bonne route Voyageur. Que la déesse veille sur vous."
