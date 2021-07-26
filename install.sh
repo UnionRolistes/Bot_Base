@@ -18,15 +18,15 @@
 
 # Variables
 install_folder="/usr/local/bin/URbot"
+src="src"
+bot_pckg_name='bot'
 bot_pckg="$src/$bot_pckg_name"
 urpy_pckg="$src/urpy"
-bot_pckg_name='bot'
 # TODO better variables
 
 python='python3.7'
 venv='/opt/virtualenv/URBot'
 bin="$venv/bin/"
-src="src"
 service='Bot_Base.service'
 requirements="$urpy_pckg/requirements.txt"
 
