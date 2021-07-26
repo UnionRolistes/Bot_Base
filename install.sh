@@ -61,7 +61,7 @@ sudo systemctl enable $service
 echo
 echo '|~ Veuillez entrer le token du bot :'
 read -r bot_token
-echo "$bot_token" | sudo tee /usr/local/bin/bot/.bot_token > /dev/null
+echo "$bot_token" | sudo tee $install_folder/.bot_token > /dev/null
 exit
 
 echo

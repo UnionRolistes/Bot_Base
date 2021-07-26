@@ -13,7 +13,7 @@ from discord.ext import commands
 
 from urpy import MyHelpCommand
 from urpy.localization import lcl
-from urpy.utils import error_log, code_block
+from urpy.utils import error_log, code_block, log
 from bot import _, strings
 from bot import localization
 
@@ -101,13 +101,13 @@ if debug:
     token_path = '../../../bot_token'
 else:
     cogs_path = '/usr/local/bin/URbot/bot/cogs'
-    token_path = '/usr/local/bin/URbot/bot/.bot_token'
+    token_path = '/usr/local/bin/URbot/.bot_token'
 
 
 def main():
     logging.basicConfig(level=logging.INFO)
     ur_bot = URBot()
-
+    log("Loading cogs...")
     # adds the "cogs" folder to the import path
     sys.path.append(cogs_path)
 
@@ -134,6 +134,8 @@ def main():
                     for cog in cog_classes:
                         # adds cog to the bot
                         ur_bot.add_cog(cog[1](ur_bot))
+    else:
+        log("No cogs found.")
 
     # reads the bot token
     with open(token_path) as f:
