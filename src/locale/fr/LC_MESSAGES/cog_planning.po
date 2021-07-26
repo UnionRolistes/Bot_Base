@@ -1,0 +1,111 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2021-07-23 19:11+0200\n"
+"PO-Revision-Date: 2021-07-23 19:11+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: ../../../bot/cogs/cog_planning\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-KeywordsList: lcl\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: strings.py:3
+#, python-brace-format
+msgid "🎉 Congratulations ! {user} has joined the game !"
+msgstr "🎉 Célébrations ! {user} a rejoint le JDR !"
+
+#: strings.py:4
+#, python-brace-format
+msgid "😭 Despair and loneliness... {user} has left us. {user} is a meanie."
+msgstr "😭 Ô rage, ô désespoir... {user} nous a quitté. Méchant {user}."
+
+#: strings.py:5
+msgid "You must answer to a message in order to edit it !"
+msgstr "Vous devez répondre à un message pour l'éditer !"
+
+#: strings.py:6
+msgid "You cannot edit in this channel !"
+msgstr "Vous ne pouvez pas éditer dans ce salon !"
+
+#: strings.py:7
+msgid "Here we go ! Join me in your DMs."
+msgstr "C'est parti ! Rejoignez-moi dans vos dms."
+
+#: strings.py:8
+msgid "This message is not editable."
+msgstr "Ce message n'est pas éditable."
+
+#: strings.py:9
+msgid "You are not the owner of this announce ! Thus, you cannot edit it."
+msgstr ""
+"Vous n'êtes pas le MJ de cette annonce ! Vous ne pouvez donc pas l'éditer."
+
+#: strings.py:10
+msgid ""
+"\\|~ Whichs pieces of information do you wish to edit ? (**$done** to "
+"validate, **$cancel** to undo) ~|"
+msgstr ""
+"\\|~ Quelles informations souhaitez-vous modifier ? (**$done** pour valider, "
+"**$cancel** pour annuler) ~|"
+
+#: strings.py:11
+msgid ""
+"\\|~ Unrecognised information. Please try again. (**$done** to validate, **"
+"$cancel** to undo) ~|"
+msgstr ""
+"\\|~ Information non reconnue. Veuillez réessayer. (**$done** pour valider, "
+"**$cancel** pour annuler) ~|"
+
+#: strings.py:12
+#, python-brace-format
+msgid "\\|~ New content for {info} ? ~|"
+msgstr "\\|~ Nouveau contenu pour {info} ? ~|"
+
+#: strings.py:14
+msgid "\\|~ Congratulations, the message has been successfully edited. ~|"
+msgstr "\\|~ Félicitations, le message a été édité avec brio. ~|"
+
+#: strings.py:15
+msgid "\\|~ Canceled. ~|"
+msgstr "\\|~ Annulation. ~|"
+
+#: strings.py:16
+msgid "Sends a link to create a game"
+msgstr "Envoie un lien pour créer une partie"
+
+#: strings.py:18
+msgid "A link has been sent into your DMs to create a new event !"
+msgstr "Un lien a été envoyé dans vos MP pour créer un nouvel événement !"
+
+#: strings.py:19
+#, python-brace-format
+msgid ""
+"Here is the link :\n"
+"{link}"
+msgstr "Voici le lien :\\n{link}"
+
+#: strings.py:20
+msgid "This command is only usable in a server!"
+msgstr "Cette commande n'est utilisable que dans un serveur !"
+
+#: strings.py:21
+#, python-brace-format
+msgid "*Impossible.* The ** {channel} ** channel does not exist."
+msgstr "*Impossible*. Le salon ** {channel} ** n'existe pas."
+
+#: strings.py:22
+#, python-brace-format
+msgid "*Impossible.* The ** {channel} ** channel does not have a webhook."
+msgstr "*Impossible. Le salon ** {channel} ** ne dispose pas d'un webhook."
+
+#: strings.py:23
+msgid ""
+"Error, the bot doesn't have the required permissions. Contact the admin."
+msgstr ""
+"Erreur, le bot n'a pas les permissions requises. Contactez l'administrateur."

@@ -1,11 +1,15 @@
-import discord
 from discord.ext import commands
+import bot
+from bot import localization, _, strings
 import urpy
 
+
 class General(commands.Cog):
+    __doc__ = strings.General_descr
+
     def __init__(self, URBot: urpy.MyBot):
         self.bot = URBot
-        self.callbacks: dict[str, list] = {
+        self.callbacks = {
             'edit': [],
             'done': [],
             'cancel': []
@@ -15,21 +19,32 @@ class General(commands.Cog):
         for callback in self.callbacks[command]:
             await callback(ctx)
 
-    @commands.command()
+    @commands.command(brief=strings.edit_brief, help=strings.edit_help)
     async def edit(self, ctx):
-        """ Édite un message """
+        """ Call callbacks bound to the edit command. """
         await self.call_callbacks('edit', ctx)
 
-    @commands.command()
+    @commands.command(brief=strings.done_brief, help=strings.done_help)
     async def done(self, ctx):
-        """ Confirme l'action en cours"""
+        """ Call callbacks bound to the done command. """
         await self.call_callbacks('done', ctx)
 
-    @commands.command()
+    @commands.command(brief=strings.cancel_brief)
     async def cancel(self, ctx):
-        """ Annule l'action en cours """
+        """ Call callbacks bound to the cancel command. """
         await self.call_callbacks('cancel', ctx)
 
+    @commands.command(brief=strings.lang_brief, help=strings.lang_help)
+    async def lang(self, ctx: commands.Context, language):
+        """ Switches to specified language """
+        if language in localization.languages:
+            localization.set_user_language(language)
+            await ctx.send(_("Your language has successfully been set to english !"))
+
+        else:
+            await ctx.send(_("Sorry, i don't know this language !"))
+
     def add_to_command(self, command: str, *callbacks):
+        """ Adds a callback to the specified command. It will be called on command invokation."""
         for callback in callbacks:
             self.callbacks[command].append(callback)
