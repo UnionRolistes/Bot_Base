@@ -19,7 +19,7 @@ from bot import localization
 
 import urpy
 
-debug = True or platform.system() == 'Windows'
+debug = platform.system() == 'Windows'
 
 if not debug:
     sys.path.append("/usr/local/bin/")  # TODO

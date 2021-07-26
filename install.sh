@@ -31,6 +31,7 @@ sudo apt install $python
 sudo apt install $python-venv
 sudo apt install python3-venv
 sudo apt install $python-dev
+sudo apt install build-essential
 
 # Creates a python virtualenv
 sudo $python -m venv $venv
