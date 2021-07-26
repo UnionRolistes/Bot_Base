@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-07-26 19:20+0200\n"
-"PO-Revision-Date: 2021-07-26 19:20+0200\n"
+"POT-Creation-Date: 2021-07-27 00:03+0200\n"
+"PO-Revision-Date: 2021-07-27 00:03+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Poedit-SearchPath-1: urpy\n"
 "X-Poedit-SearchPathExcluded-0: bot/cogs\n"
 
-#: bot/URbot.py:82
+#: bot/URbot.py:79
 #, python-brace-format
 msgid ""
 "{err_msg}\n"
@@ -32,11 +32,11 @@ msgstr ""
 "Utilisation incorrecte ☹ Allez voir l'aide de la commande pour plus "
 "d'information."
 
-#: bot/cog_General.py:42
+#: bot/cog_General.py:46
 msgid "Your language has successfully been set to english !"
 msgstr "Votre langue a bien été passée en français !"
 
-#: bot/cog_General.py:45
+#: bot/cog_General.py:49
 msgid "Sorry, i don't know this language !"
 msgstr "Désolé, je ne connais pas cette langue !"
 
@@ -104,9 +104,8 @@ msgstr ""
 "Entrez {0}{1} commande pour plus d'info sur une commande.\n"
 "Vous pouvez aussi entrer {0}{1} catégorie pour plus d'info sur une catégorie."
 
-#: urpy/utils.py:112
-msgid "Error: Webhook not supplied."
-msgstr "Erreur : Webhook non fourni."
+#~ msgid "Error: Webhook not supplied."
+#~ msgstr "Erreur : Webhook non fourni."
 
 #~ msgid "Other"
 #~ msgstr "Sans Catégorie"

@@ -7,13 +7,12 @@ def lcl(s: str, domain=None):
 
 
 class Localization:  # TODO default localedir
-    def __init__(self, localedir='', default_language='fr', default_domain='bot_base', user_based=False):
+    def __init__(self, localedir='', default_language='fr', default_domain='bot_base'):
         self._localedir = localedir
         self.languages = {}  # TODO make languages a class
         self._default_language = default_language
         self.users_custom_language = {}
         self._current_user_id = ''
-        self.user_based = user_based
         self._default_domain = default_domain
         self._current_domain = None
         # TODO add handling of several domains (context manager)

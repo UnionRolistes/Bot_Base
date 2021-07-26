@@ -14,7 +14,7 @@ from discord.ext import commands
 from urpy import MyHelpCommand
 from urpy.localization import lcl
 from urpy.utils import error_log, code_block, log
-from bot import _, strings
+from bot import _, strings, localedir
 from bot import localization
 
 import urpy
@@ -68,7 +68,6 @@ class URBot(urpy.MyBot):
     async def on_ready(self):
         """ Listener to the on_ready event. """
         print("We have logged in as {}!".format(self.user))
-        discord.utils.get(self.get_all_members(), name='Lyss')
 
     async def invoke(self, ctx: commands.Context):
         self.localization.set_current_user(ctx.author.id)
@@ -81,9 +80,6 @@ class URBot(urpy.MyBot):
                 err_msg=code_block(exception)))
         else:
             raise exception
-
-    async def send_bot_help(self, mapping):
-        print(mapping)
 
     def add_to_command(self, command: str, *callbacks):
         """
@@ -132,9 +128,12 @@ def main():
                     # retrieves all discord.Cog based classes
                     cog_classes = filter(lambda member: inspect.isclass(member[1]) and issubclass(member[1], commands.Cog),
                                          inspect.getmembers(module))
-                    for cog in cog_classes:
+                    for Cog in cog_classes:
                         # adds cog to the bot
-                        ur_bot.add_cog(cog[1](ur_bot))
+                        cog = Cog[1](ur_bot)
+                        ur_bot.add_cog(cog)
+                        log(f"Loaded : {cog.qualified_name}")
+        log("Done")
     else:
         log("No cogs found.")
 

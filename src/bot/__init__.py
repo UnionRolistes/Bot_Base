@@ -9,7 +9,7 @@ if platform.system() == 'Windows':
 else:
     localedir = '/usr/local/bin/URbot/locale'
 
-localization = Localization(user_based=True)
+localization = Localization()
 domain = 'bot_base'
 # TODO automate adding all languages
 localization.set_localedir(localedir)

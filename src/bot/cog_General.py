@@ -19,6 +19,10 @@ class General(commands.Cog):
         for callback in self.callbacks[command]:
             await callback(ctx)
 
+    @commands.command()
+    async def test(self, ctx):
+        await ctx.send(self.bot.localization._localedir)
+
     @commands.command(brief=strings.edit_brief, help=strings.edit_help)
     async def edit(self, ctx):
         """ Call callbacks bound to the edit command. """
