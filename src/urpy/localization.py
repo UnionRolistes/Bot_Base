@@ -53,6 +53,9 @@ class Localization:  # TODO default localedir
         self._current_domain = domain
 
     def gettext(self, s, domain=None):
+        if not s:
+            return ""
+
         if domain is None:
             if self._current_domain is not None:
                 domain = self._current_domain
