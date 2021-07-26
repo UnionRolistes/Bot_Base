@@ -49,8 +49,8 @@ sudo cp -vr "$src/bot" $install_folder
 sudo cp -vr "$src/start.py" $install_folder
 sudo cp -vr "$src/urpy" $venv/lib/$python/site-packages
 # rush
-sudo chmod -R 755 $install_folder/$bot_pckg_name
-sudo chown "$USER" $install_folder/$bot_pckg_name
+sudo chmod -R 755 $install_folder
+sudo chown "$USER" $install_folder
 
 
 # Copies .service to /etc/systemd/system
