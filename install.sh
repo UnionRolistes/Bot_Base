@@ -17,13 +17,18 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Variables
+install_folder="/usr/local/bin/URbot"
+bot_pckg="$src/$bot_pckg_name"
+urpy_pckg="$src/urpy"
+bot_pckg_name='bot'
+# TODO better variables
+
 python='python3.7'
 venv='/opt/virtualenv/URBot'
 bin="$venv/bin/"
-pckg_name='bot'
-python_package="src/$pckg_name"
+src="src"
 service='Bot_Base.service'
-requirements="src/urpy/requirements.txt"
+requirements="$urpy_pckg/requirements.txt"
 
 # Installs required softwares
 sudo apt update
@@ -36,15 +41,15 @@ sudo apt install build-essential
 # Creates a python virtualenv
 sudo $python -m venv $venv
 source $bin/activate
-sudo $bin/pip install -r $requirements
+sudo $bin/pip install -r "$requirements"
 deactivate
 
-# Copies python code to usr/local/sbin
-sudo cp -vr $python_package /usr/local/bin
+# Copies python code to install folder
+sudo cp -vr "$src/bot" $install_folder
+sudo cp -vr "$src/urpy" $venv/lib/$python/site-packages
 # rush
-sudo cp -vr 'src/urpy' $venv/lib/$python/site-packages
-sudo chmod -R 755 /usr/local/bin/$pckg_name
-sudo chown "$USER" /usr/local/bin/$pckg_name
+sudo chmod -R 755 $install_folder/$bot_pckg_name
+sudo chown "$USER" $install_folder/$bot_pckg_name
 
 
 # Copies .service to /etc/systemd/system

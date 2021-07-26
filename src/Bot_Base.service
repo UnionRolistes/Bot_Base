@@ -5,7 +5,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/bot/URbot.py
+ExecStart=/usr/local/bin/URbot/URbot.py
 Restart=always
 RestartSec=5s
 StandardOutput=journal
