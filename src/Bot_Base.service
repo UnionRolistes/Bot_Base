@@ -1,5 +1,6 @@
 [Unit]
 Description=Discord Bot for unionrolistes.fr
+RequiresMountsFor=/usr/local/bin/bot
 After=multi-user.target
 
 [Service]
