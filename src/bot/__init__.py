@@ -2,7 +2,12 @@ import gettext
 
 from urpy import Localization
 
-localedir = '../locale'
+import platform
+
+if platform.system() == 'Windows':
+    localedir = '../locale'
+else:
+    localedir = '/usr/local/bin/URbot/locale'
 
 localization = Localization(user_based=True)
 domain = 'bot_base'
