@@ -22,7 +22,7 @@ venv='/opt/virtualenv/URBot'
 bin="$venv/bin/"
 pckg_name='bot'
 python_package="src/$pckg_name"
-service='src/Bot_Base.service'
+service='Bot_Base.service'
 requirements="$python_package/requirements.txt"
 
 # Installs required softwares
@@ -45,8 +45,8 @@ sudo chown "$USER" /usr/local/bin/$pckg_name
 
 
 # Copies .service to /etc/systemd/system
-sudo cp -v $service /etc/systemd/system
-sudo systemctl enable URbot.service
+sudo cp -v src/$service /etc/systemd/system
+sudo systemctl enable $service
 
 # Reads and writes token into root folder
 echo
