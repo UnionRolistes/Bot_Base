@@ -111,28 +111,29 @@ def main():
     # adds the "cogs" folder to the import path
     sys.path.append(cogs_path)
 
-    # scans the "cogs" folder for cogs to add to the bot
-    for dir_entry in os.scandir(cogs_path):
-        dir_entry: os.DirEntry
+    if os.path.exists(cogs_path):
+        # scans the "cogs" folder for cogs to add to the bot
+        for dir_entry in os.scandir(cogs_path):
+            dir_entry: os.DirEntry
 
-        # imports and adds all found cogs
-        if dir_entry.is_dir() and dir_entry.name != '__pycache__' and not dir_entry.name.startswith('.'):
+            # imports and adds all found cogs
+            if dir_entry.is_dir() and dir_entry.name != '__pycache__' and not dir_entry.name.startswith('.'):
 
-            # tries to import the cog module
-            try:
-                module = importlib.import_module(f"{dir_entry.name}.cog")
+                # tries to import the cog module
+                try:
+                    module = importlib.import_module(f"{dir_entry.name}.cog")
 
-            except ModuleNotFoundError as e:
-                error_log(
-                    f"The package \'{dir_entry.name}\' does not contain a module named \'cog.py\' (in {dir_entry.path}).")
+                except ModuleNotFoundError as e:
+                    error_log(
+                        f"The package \'{dir_entry.name}\' does not contain a module named \'cog.py\' (in {dir_entry.path}).")
 
-            else:
-                # retrieves all discord.Cog based classes
-                cog_classes = filter(lambda member: inspect.isclass(member[1]) and issubclass(member[1], commands.Cog),
-                                     inspect.getmembers(module))
-                for cog in cog_classes:
-                    # adds cog to the bot
-                    ur_bot.add_cog(cog[1](ur_bot))
+                else:
+                    # retrieves all discord.Cog based classes
+                    cog_classes = filter(lambda member: inspect.isclass(member[1]) and issubclass(member[1], commands.Cog),
+                                         inspect.getmembers(module))
+                    for cog in cog_classes:
+                        # adds cog to the bot
+                        ur_bot.add_cog(cog[1](ur_bot))
 
     # reads the bot token
     with open(token_path) as f:
