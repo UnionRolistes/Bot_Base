@@ -29,6 +29,7 @@ requirements="$python_package/requirements.txt"
 sudo apt update
 sudo apt install $python
 sudo apt install $python-venv
+sudo apt install python3-venv
 
 # Creates a python virtualenv
 sudo $python -m venv $venv
