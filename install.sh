@@ -47,6 +47,7 @@ deactivate
 # Copies python code to install folder
 sudo cp -vr "$src/bot" $install_folder
 sudo cp -vr "$src/start.py" $install_folder
+sudo cp -vr "$src/locale" $install_folder
 sudo cp -vr "$src/urpy" $venv/lib/$python/site-packages
 # rush
 sudo chmod -R 755 $install_folder
