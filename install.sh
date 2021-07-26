@@ -23,13 +23,14 @@ bin="$venv/bin/"
 pckg_name='bot'
 python_package="src/$pckg_name"
 service='Bot_Base.service'
-requirements="$python_package/requirements.txt"
+requirements="src/urpy/requirements.txt"
 
 # Installs required softwares
 sudo apt update
 sudo apt install $python
 sudo apt install $python-venv
 sudo apt install python3-venv
+sudo apt install $python-dev
 
 # Creates a python virtualenv
 sudo $python -m venv $venv
