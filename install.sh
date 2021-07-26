@@ -45,6 +45,7 @@ sudo $bin/pip install -r "$requirements"
 deactivate
 
 # Copies python code to install folder
+sudo mkdir $install_folder
 sudo cp -vr "$src/bot" $install_folder
 sudo cp -vr "$src/start.py" $install_folder
 sudo cp -vr "$src/locale" $install_folder
