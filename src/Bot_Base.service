@@ -1,11 +1,11 @@
 [Unit]
 Description=Discord Bot for unionrolistes.fr
-RequiresMountsFor=/usr/local/bin/bot
+RequiresMountsFor=/usr/local/bin/
 After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/URbot/URbot.py
+ExecStart=/usr/local/bin/URbot/start.py
 Restart=always
 RestartSec=5s
 StandardOutput=journal
