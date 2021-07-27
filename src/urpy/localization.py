@@ -68,8 +68,11 @@ class Localization:  # TODO default localedir
             lang = self._default_language
         #  TODO automatize fallback based on folder name
         if lang in self.languages:
-            lang = self._default_language if domain not in self.languages[lang] else lang
-            return self.languages[lang][domain](s)
+            lang = self._default_language if domain not in self.languages[lang] else lang  # TODO optimize all this
+            if domain in self.languages[lang]:
+                return self.languages[lang][domain](s)
+            else:
+                return s
         else:
             return s
 
