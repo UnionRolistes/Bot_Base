@@ -2,7 +2,8 @@
 # This script starts the discord bot of "L'Union des Rôlistes"
 # TODO add copyright to follow bash scripts rules
 tmp='/tmp/ur_bot/cogs'
-cogs_folder='/usr/local/bin/URbot/bot/cogs'
+ur_bot_dir='/usr/local/bin/URbot'
+cogs_folder="$ur_bot_dir/bot/cogs"
 repo="$tmp/$1"
 
 # checks repo name has been supplied
@@ -28,4 +29,10 @@ else
   git pull
 fi
 
-cp -vr "$repo/src/." $cogs_folder
+# installs cogs
+find "$repo/src/cog_*" -exec cp -vr '{}' $cogs_folder \;
+# installs locale
+cp -vr "$repo/src/locale" "$ur_bot_dir/locale"
+# TODO bash 3 +
+# TODO add installation of locale folder
+# TODO add installation of the cog's requirements.txt
