@@ -2,7 +2,15 @@ from urpy.localization import lcl
 
 bot_title = lcl('URbot - The discord bot of "l\'Union des Rôlistes"')
 lang_brief = lcl('Switches to specified language')
-lang_help = lang_brief
+lang_help = lcl(
+    """\
+Switches to specified language
+
+Available languages :
+    - en
+    - fr
+    - special-rp\
+""")
 done_brief = lcl('Confirms the current action')
 done_help = lang_brief
 edit_brief = lcl('Edits a message')

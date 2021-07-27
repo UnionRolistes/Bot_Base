@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-07-27 00:03+0200\n"
-"PO-Revision-Date: 2021-07-27 00:03+0200\n"
+"POT-Creation-Date: 2021-07-27 06:08+0200\n"
+"PO-Revision-Date: 2021-07-27 06:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Poedit-SearchPath-1: urpy\n"
 "X-Poedit-SearchPathExcluded-0: bot/cogs\n"
 
-#: bot/URbot.py:79
+#: bot/URbot.py:77
 #, python-brace-format
 msgid ""
 "{err_msg}\n"
@@ -32,11 +32,11 @@ msgstr ""
 "Utilisation incorrecte ☹ Allez voir l'aide de la commande pour plus "
 "d'information."
 
-#: bot/cog_General.py:46
+#: bot/cog_General.py:42
 msgid "Your language has successfully been set to english !"
 msgstr "Votre langue a bien été passée en français !"
 
-#: bot/cog_General.py:49
+#: bot/cog_General.py:45
 msgid "Sorry, i don't know this language !"
 msgstr "Désolé, je ne connais pas cette langue !"
 
@@ -49,26 +49,42 @@ msgid "Switches to specified language"
 msgstr "Change la langue de l'utilisateur"
 
 #: bot/strings.py:6
+msgid ""
+"Switches to specified language\n"
+"\n"
+"Available languages :\n"
+"    - en\n"
+"    - fr\n"
+"    - special-rp"
+msgstr ""
+"Change la langue de l'utilisateur\n"
+"\n"
+"Langues disponibles :\n"
+"    - en\n"
+"    - fr\n"
+"    - special-rp"
+
+#: bot/strings.py:14
 msgid "Confirms the current action"
 msgstr "Confirme l'action en cours"
 
-#: bot/strings.py:8
+#: bot/strings.py:16
 msgid "Edits a message"
 msgstr "Édite un message"
 
-#: bot/strings.py:10
+#: bot/strings.py:18
 msgid "Cancels the current action"
 msgstr "Annule l'action en cours"
 
-#: bot/strings.py:12
+#: bot/strings.py:20
 msgid "Displays the version numbers"
 msgstr "Affiche les numéros de version"
 
-#: bot/strings.py:14
+#: bot/strings.py:22
 msgid "Displays the credits"
 msgstr "Affiche les crédits"
 
-#: bot/strings.py:16
+#: bot/strings.py:24
 msgid ""
 "This category groups various commands to display general information about "
 "the bot."
@@ -76,7 +92,7 @@ msgstr ""
 "Cette catégorie comporte des commandes donnant des informations générales "
 "sur le bot."
 
-#: bot/strings.py:17
+#: bot/strings.py:25
 msgid ""
 "This category groups various commands whose utility depends on the context."
 msgstr ""
