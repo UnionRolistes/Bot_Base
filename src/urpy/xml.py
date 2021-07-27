@@ -1,3 +1,4 @@
+import discord
 from lxml import etree as et
 import cgi
 from urpy.utils import error_log, log
@@ -76,8 +77,9 @@ class Calendar:
 
     def find_last_id(self) -> int:
         return max(map(lambda e: int(e.attrib['id']), self.tree.getroot()))
+    # TODO check Publish
 
-    def add_event(self, form: cgi.FieldStorage):
+    def add_event(self, form: cgi.FieldStorage, msg: discord.Message):
         """ Add an event to the calendar. """
         root = self.tree.getroot()
         root.set('last_id', str(int(root.get('last_id')) + 1))
@@ -87,6 +89,8 @@ class Calendar:
             new_elmnt = et.SubElement(parent, tag)
             if tag in tags_to_form:
                 new_elmnt.text = form.getvalue(tags_to_form[tag], 'NotFound')
+            elif tag == link_tag:
+                new_elmnt.text = msg.jump_url
             else:
                 new_elmnt.text = tags_to_lambda[tag](form)
 
