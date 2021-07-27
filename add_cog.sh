@@ -29,10 +29,10 @@ else
   git pull
 fi
 
-# installs cogs
-find "$repo/src/cog_*" -exec cp -vr '{}' $cogs_folder \;
+# installs cogs (located in the src folder and starting with 'cog_')
+find "$repo/src/" -maxdepth 1 -name "cog_*" -exec cp -vr '{}' $cogs_folder \;
 # installs locale
-cp -vr "$repo/src/locale" "$ur_bot_dir/locale"
+cp -vr "$repo/src/locale/." "$ur_bot_dir/locale"
 # TODO bash 3 +
 # TODO add installation of locale folder
 # TODO add installation of the cog's requirements.txt
