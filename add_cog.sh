@@ -30,9 +30,14 @@ else
 fi
 
 # installs cogs (located in the src folder and starting with 'cog_')
+echo Installing cogs
 find "$repo/src/" -maxdepth 1 -name "cog_*" -exec cp -vr '{}' $cogs_folder \;
+
 # installs locale
+echo Installing translations
 cp -vr "$repo/src/locale/." "$ur_bot_dir/locale"
+
+echo Installation complete
 # TODO bash 3 +
 # TODO add installation of locale folder
 # TODO add installation of the cog's requirements.txt
