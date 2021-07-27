@@ -6,7 +6,7 @@ cogs_folder='/usr/local/bin/URbot/bot/cogs'
 repo="$tmp/$1"
 
 # checks repo name has been supplied
-if [ -z ${$1+x} ]; then
+if [ -z ${1+x} ]; then
   echo error: repo_name unfilled
   echo
   echo 'usage : ./add_cog.sh <repo_name>'
