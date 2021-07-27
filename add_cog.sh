@@ -24,7 +24,8 @@ if [ ! -e "$repo" ] ; then
   fi
 else
   # updates the repo
-  git pull "$repo"
+  cd "$repo" || exit
+  git pull
 fi
 
 cp -vr "$repo/src/." $cogs_folder
