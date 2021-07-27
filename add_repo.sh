@@ -31,6 +31,9 @@ fi
 
 # installs cogs (located in the src folder and starting with 'cog_')
 echo Installing cogs...
+if [ ! -e "$cogs_folder" ] ; then
+  mkdir $cogs_folder
+fi
 find "$repo/src/" -maxdepth 1 -name "cog_*" -exec cp -vr '{}' $cogs_folder \;
 echo
 
