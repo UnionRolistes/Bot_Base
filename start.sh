@@ -8,7 +8,7 @@ sleep 1
 sub_state=$(systemctl show -p SubState Bot_Base --value)
 
 if [ "$sub_state" = "running" ]; then
-  echo "Bot successfully started !"
+  echo "Success!"
 else
-  echo "Failure... Use 'systemctl status Bot_Base' for more information."
+  echo "Failure... Use 'journalctl -eu Bot_Base -e' to check the logs."
 fi

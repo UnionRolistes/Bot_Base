@@ -1,5 +1,5 @@
 #!/opt/virtualenv/URBot/bin/python
-import pizza
+
 import inspect
 import logging
 import os
