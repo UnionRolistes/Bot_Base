@@ -10,7 +10,7 @@ from importlib import resources
 
 from discord.ext import commands
 
-from urpy import MyHelpCommand, MyCog
+from urpy import MyHelpCommand
 from urpy.utils import error_log, code_block, log
 from bot import _, strings
 from bot import localization
