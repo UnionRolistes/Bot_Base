@@ -118,7 +118,7 @@ def main():
                 try:
                     module = importlib.import_module(f"{dir_entry.name}.cog")
 
-                except ModuleNotFoundError as e:
+                except ValueError as e:
                     error_log(
                         f"The package \'{dir_entry.name}\' does not contain a module named \'cog.py\' (in {dir_entry.path}).")
 
