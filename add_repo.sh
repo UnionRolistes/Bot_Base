@@ -10,7 +10,7 @@ repo="$tmp/$1"
 if [ -z ${1+x} ]; then
   echo 'error: argument not supplied'
   echo
-  echo 'usage : ./add_cog.sh <repo_name>'
+  echo 'usage : ./add_repo.sh <repo_name>'
   exit
 fi
 
@@ -30,14 +30,16 @@ else
 fi
 
 # installs cogs (located in the src folder and starting with 'cog_')
-echo Installing cogs
+echo Installing cogs...
 find "$repo/src/" -maxdepth 1 -name "cog_*" -exec cp -vr '{}' $cogs_folder \;
+echo
 
 # installs locale
-echo Installing translations
+echo Installing translations...
 cp -vr "$repo/src/locale/." "$ur_bot_dir/locale"
+echo
 
-echo Installation complete
+echo Installation complete.
 # TODO bash 3 +
 # TODO add installation of locale folder
 # TODO add installation of the cog's requirements.txt

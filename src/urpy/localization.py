@@ -16,6 +16,7 @@ class Localization:  # TODO default localedir
         self._default_domain = default_domain
         self._current_domain = None
         # TODO add handling of several domains (context manager)
+        # TODO autoload
 
     def add_translation(self, domain, codes, *aliases):  # TODO make aliases
         language = gettext.translation(domain, self._localedir, codes, fallback=True)
