@@ -71,8 +71,23 @@ if [ ! -e $install_folder/.bot_token ]; then
 fi
 
 
-echo 'Installation terminée.'
+echo 'Installation du bot terminée.'
 echo
+
+echo '## Begin webserver installation'
+echo
+
+apt install -y apache2
+apt install -y php
+apt install -y libapache2-mod-php  # TODO check if necessary
+apt install -y php-xml
+apt install -y php-curl
+a2enmod cgid
+systemctl restart apache2
+
+# TODO add user name
+
+
 
 
 
