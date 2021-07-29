@@ -5,6 +5,9 @@ tmp='/tmp/ur_bot/cogs'
 ur_bot_dir='/usr/local/bin/URbot'
 cogs_folder="$ur_bot_dir/bot/cogs"
 repo="$tmp/$1"
+src="$repo/src"
+a2=/etc/apache2
+www=/var/www
 
 # checks repo name has been supplied
 if [ -z ${1+x} ]; then
@@ -31,18 +34,35 @@ fi
 
 # installs cogs (located in the src folder and starting with 'cog_')
 echo Installing cogs...
-if [ ! -e "$cogs_folder" ] ; then
+if [ ! -e $cogs_folder ] ; then
   mkdir $cogs_folder
 fi
-find "$repo/src/" -maxdepth 1 -name "cog_*" -exec cp -vr '{}' $cogs_folder \;
+find "$src" -maxdepth 1 -name "cog_*" -exec cp -vr '{}' $cogs_folder \;
 echo
 
 # installs locale
 echo Installing translations...
-cp -vr "$repo/src/locale/." "$ur_bot_dir/locale"
+cp -vr "$src/locale/." "$ur_bot_dir/locale"
 echo
 
 echo Installation complete.
+
+# installs www
+if [ -e "$src/www" ]; then
+  if [ ! -e "$www/$1" ]; then
+    mkdir -v "$www/$1"
+  fi
+  cp -vr "$src/www/." "$www/$1"
+fi
+
+# installs virtualhosts
+if [ -e "$src"/sites-available ]; then
+  cp -vr "$src"/sites-available/. $a2/sites-available
+  for f in "$src"/sites-available/*.conf; do
+    a2ensite "$(basename "$f")"
+  done
+  systemctl reload apache2
+fi
 # TODO bash 3 +
 # TODO add installation of locale folder
 # TODO add installation of the cog's requirements.txt
