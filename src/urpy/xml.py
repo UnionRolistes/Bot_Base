@@ -65,6 +65,11 @@ class Calendar:
         @fp path to xml file
         """
         self.fp = fp
+        import os
+        from urpy import utils
+        #utils.html_header_content_type()
+        #print(os.listdir("/usr/share/urbot/"))
+        #print(open("/usr/share"))
         self.tree: et.ElementTree = et.parse(self.fp, et.XMLParser(remove_blank_text=True))
         if localization is not None:
             global _
@@ -86,15 +91,13 @@ class Calendar:
 
     async def add_event(self, form: cgi.FieldStorage, embed: discord.Embed):
         """ Add an event to the calendar. """
-        with open('/tmp/cal', 'rb') as f:
+        with open('/usr/share/urbot/cal', 'rb') as f:  # TODO clean up
             d = pickle.load(f)
-        wh_url, guild_id, channel_id = d[form.getvalue('user_id')]
+        wh_url, guild_id, channel_id = d[int(form.getvalue('user_id'))]
 
-        async with ClientSession as client:
+        async with ClientSession() as client:
             webhook: Webhook = Webhook.from_url(wh_url, adapter=AsyncWebhookAdapter(client))
-            webhook.guild_id = guild_id
-            webhook.channel_id = channel_id
-            
+
             msg = await webhook.send("", wait=True, embed=embed, allowed_mentions=discord.AllowedMentions(users=True))
         root = self.tree.getroot()
         root.set('last_id', str(int(root.get('last_id')) + 1))
@@ -105,7 +108,7 @@ class Calendar:
             if tag in tags_to_form:
                 new_elmnt.text = form.getvalue(tags_to_form[tag], 'NotFound')
             elif tag == link_tag:
-                new_elmnt.text = msg.jump_url
+                new_elmnt.text = f"https://discord.com/channels/{guild_id}/{channel_id}/{msg.id}"
             else:
                 new_elmnt.text = tags_to_lambda[tag](form)
 
