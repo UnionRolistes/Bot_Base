@@ -80,7 +80,7 @@ class Calendar:
         return max(map(lambda e: int(e.attrib['id']), self.tree.getroot()))
     # TODO check Publish
 
-    def add_event(self, form: cgi.FieldStorage, embed: discord.Embed):
+    async def add_event(self, form: cgi.FieldStorage, embed: discord.Embed):
         """ Add an event to the calendar. """
         webhook: discord.Webhook = Calendar.creators_to_webhook[form.getvalue('user_id')]
         msg = await webhook.send("", wait=True, embed=embed, allowed_mentions=discord.AllowedMentions(users=True))
