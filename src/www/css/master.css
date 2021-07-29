@@ -1,0 +1,37 @@
+
+
+/*Police et taille d'écriture : */
+html {
+  /* 1 */
+ font-size: 16px;
+  font-weight: normal;
+  line-height: 1.5;
+  /* 2 */
+  -webkit-text-size-adjust: 100%;
+  /* 3 */
+  color: white;
+}
+body{
+padding: 20px;
+overflow: auto;
+background-color: #23272A;
+}
+.titleCenter{ /*!IMPORTANT, utilisé dans plusieurs pages*/
+text-align: center;
+}
+.divCenter{
+  margin: 0 auto;
+}
+
+
+/*Cadre : */
+#UR {
+  padding: 1.2em;
+  width: 85%; /*Taille horizontale du formulaire*/
+  margin-left: 7%;
+  border : 1px solid #000;
+  box-shadow: 5px 8px 6px black;
+  background: #2C2F33;
+}
+
+a{ text-decoration: none; }
