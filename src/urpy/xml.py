@@ -1,4 +1,8 @@
+import pickle
+
 import discord
+from discord import Webhook, AsyncWebhookAdapter
+from aiohttp import ClientSession
 from lxml import etree as et
 import cgi
 from urpy.utils import error_log, log
@@ -82,8 +86,16 @@ class Calendar:
 
     async def add_event(self, form: cgi.FieldStorage, embed: discord.Embed):
         """ Add an event to the calendar. """
-        webhook: discord.Webhook = Calendar.creators_to_webhook[form.getvalue('user_id')]
-        msg = await webhook.send("", wait=True, embed=embed, allowed_mentions=discord.AllowedMentions(users=True))
+        with open('/tmp/cal', 'rb') as f:
+            d = pickle.load(f)
+        wh_url, guild_id, channel_id = d[form.getvalue('user_id')]
+
+        async with ClientSession as client:
+            webhook: Webhook = Webhook.from_url(wh_url, adapter=AsyncWebhookAdapter(client))
+            webhook.guild_id = guild_id
+            webhook.channel_id = channel_id
+            
+            msg = await webhook.send("", wait=True, embed=embed, allowed_mentions=discord.AllowedMentions(users=True))
         root = self.tree.getroot()
         root.set('last_id', str(int(root.get('last_id')) + 1))
         parent = et.SubElement(self.tree.getroot(), game_tag, id=root.get('last_id'))
