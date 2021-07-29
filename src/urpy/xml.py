@@ -52,6 +52,7 @@ class Calendar:
     """
     This class allows updating an xml file that contains the data of an event calendar.
     """
+    creators_to_webhook = {}
 
     def __init__(self, fp: str, localization: Localization = None):  # TODO localization
         """
@@ -79,8 +80,10 @@ class Calendar:
         return max(map(lambda e: int(e.attrib['id']), self.tree.getroot()))
     # TODO check Publish
 
-    def add_event(self, form: cgi.FieldStorage, msg: discord.Message):
+    def add_event(self, form: cgi.FieldStorage, embed: discord.Embed):
         """ Add an event to the calendar. """
+        webhook: discord.Webhook = Calendar.creators_to_webhook[form.getvalue('user_id')]
+        msg = await webhook.send("", wait=True, embed=embed, allowed_mentions=discord.AllowedMentions(users=True))
         root = self.tree.getroot()
         root.set('last_id', str(int(root.get('last_id')) + 1))
         parent = et.SubElement(self.tree.getroot(), game_tag, id=root.get('last_id'))
