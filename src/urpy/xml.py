@@ -23,7 +23,7 @@ system_tag = 'systeme'
 minors_allowed_tag = 'pjMineur'
 platforms_tag = 'plateformes'
 details_tag = 'details'
-link_tag = 'link'
+link_tag = 'lien'
 
 tags = [title_tag, max_players_tag, min_players_tag, nb_joined_tag,
         date_tag, time_tag, length_tag, type_tag, mj_tag, system_tag,
@@ -43,10 +43,10 @@ tags_to_form = {
 
 tags_to_lambda = {
     nb_joined_tag: lambda f: '0',
-    time_tag: lambda f: 'TODO time',
+    time_tag: lambda f: '15h00',
     mj_tag: lambda f: f"<@{f.getvalue('user_id')}> [{f.getvalue('pseudo')}]",
     platforms_tag: lambda f: " ".join(f.getlist('platform')),
-    link_tag: lambda f: 'TODO link'
+    link_tag: lambda f: 'https://discord.com/channels/TODO'
 }
 
 _ = lcl
