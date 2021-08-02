@@ -56,13 +56,14 @@ if [ -e "$src/www" ]; then
 fi
 
 # installs virtualhosts
-if [ -e "$src"/sites-available ]; then
-  cp -vra "$src"/sites-available/. $a2/sites-available
-  for f in "$src"/sites-available/*.conf; do
-    a2ensite "$(basename "$f")"
-  done
-  systemctl reload apache2
-fi
+#if [ -e "$src"/sites-available ]; then
+ # cp -vra "$src"/sites-available/. $a2/sites-available
+ # for f in "$src"/sites-available/*.conf; do
+#    a2ensite "$(basename "$f")"
+ # done
+ # systemctl reload apache2
+# fi
+
 # TODO bash 3 +
 # TODO add installation of locale folder
 # TODO add installation of the cog's requirements.txt

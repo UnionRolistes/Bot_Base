@@ -69,9 +69,12 @@ if [ ! -e $install_folder/.bot_token ]; then
   echo
   exit
 fi
+if [ -e $install_folder/.bot_token ]; then
+  echo '## Token déjà saisi'
+  exit
+fi
 
-
-echo 'Installation du bot terminée.'
+echo '## Installation du bot terminée.'
 echo
 
 echo '## Begin webserver installation'
@@ -86,9 +89,3 @@ a2enmod cgid
 systemctl restart apache2
 
 # TODO add user name
-
-
-
-
-
-
