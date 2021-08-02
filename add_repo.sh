@@ -37,12 +37,12 @@ echo Installing cogs...
 if [ ! -e $cogs_folder ] ; then
   mkdir $cogs_folder
 fi
-find "$src" -maxdepth 1 -name "cog_*" -exec cp -vr '{}' $cogs_folder \;
+find "$src" -maxdepth 1 -name "cog_*" -exec cp -vra '{}' $cogs_folder \;
 echo
 
 # installs locale
 echo Installing translations...
-cp -vr "$src/locale/." "$ur_bot_dir/locale"
+cp -vra "$src/locale/." "$ur_bot_dir/locale"
 echo
 
 echo Installation complete.
@@ -52,12 +52,12 @@ if [ -e "$src/www" ]; then
   if [ ! -e "$www/$1" ]; then
     mkdir -v "$www/$1"
   fi
-  cp -vr "$src/www/." "$www/$1"
+  cp -vra "$src/www/." "$www/$1"
 fi
 
 # installs virtualhosts
 if [ -e "$src"/sites-available ]; then
-  cp -vr "$src"/sites-available/. $a2/sites-available
+  cp -vra "$src"/sites-available/. $a2/sites-available
   for f in "$src"/sites-available/*.conf; do
     a2ensite "$(basename "$f")"
   done

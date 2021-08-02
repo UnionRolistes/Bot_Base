@@ -46,10 +46,10 @@ deactivate
 
 # Copies python code to install folder
 sudo mkdir $install_folder
-sudo cp -vr "$src/bot" $install_folder
-sudo cp -vr "$src/start.py" $install_folder
-sudo cp -vr "$src/locale" $install_folder
-sudo cp -vr "$src/urpy" $venv/lib/$python/site-packages
+sudo cp -vra "$src/bot" $install_folder
+sudo cp -vra "$src/start.py" $install_folder
+sudo cp -vra "$src/locale" $install_folder
+sudo cp -vra "$src/urpy" $venv/lib/$python/site-packages
 # rush
 sudo chmod -R 755 $install_folder
 sudo chown "$USER" $install_folder
