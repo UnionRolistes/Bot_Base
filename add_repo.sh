@@ -7,7 +7,7 @@ cogs_folder="$ur_bot_dir/bot/cogs"
 repo="$tmp/$1"
 src="$repo/src"
 a2=/etc/apache2
-www=/var/www
+www=/var/www/html
 
 # checks repo name has been supplied
 if [ -z ${1+x} ]; then
