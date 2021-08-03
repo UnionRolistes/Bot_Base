@@ -17,7 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Variables
-install_folder="/usr/local/bin/URbot"
+install_folder="/usr/local/src/URbot"
 src="src"
 bot_pckg_name='bot'
 bot_pckg="$src/$bot_pckg_name"
