@@ -70,14 +70,15 @@ if [ ! -e $install_folder/.bot_token ]; then
   exit
 fi
 if [ -e $install_folder/.bot_token ]; then
-  echo '## Token déjà saisi'
+  echo '\e[1;31m ## Token déjà saisi \e[0m'
+  echo
   exit
 fi
 
-echo '## Installation du bot terminée.'
+echo '\e[1;31m ## Installation du bot terminée\e[0m'
 echo
 
-echo '## Begin webserver installation'
+echo '\e[1;31m ## Begin webserver installation \e[0m'
 echo
 
 apt install -y apache2
