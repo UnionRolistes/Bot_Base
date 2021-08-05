@@ -2,7 +2,7 @@
 # This script starts the discord bot of "L'Union des Rôlistes"
 # TODO add copyright to follow bash scripts rules
 tmp='/usr/local/src'            #'tmp/ur_bot/cogs' # Where the repos are cloned. TODO : change to /usr/local/src
-ur_bot_dir='/usr/local/bin/URbot'
+ur_bot_dir='/usr/local/src/URbot'
 cogs_folder="$ur_bot_dir/bot/cogs"
 repo="$tmp/$1"
 src="$repo/src"
