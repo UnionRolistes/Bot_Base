@@ -95,8 +95,8 @@ if debug:
     cogs_path = os.path.abspath('cogs')
     token_path = '../../../bot_token'
 else:
-    cogs_path = '/usr/local/bin/URbot/bot/cogs'
-    token_path = '/usr/local/bin/URbot/.bot_token'
+    cogs_path = '/usr/local/src/URbot/bot/cogs'
+    token_path = '/usr/local/src/URbot/.bot_token'
 
 
 def main():
