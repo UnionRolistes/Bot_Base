@@ -92,12 +92,11 @@ class Calendar:
 
     async def add_event(self, form: cgi.FieldStorage, embed: discord.Embed):
         """ Add an event to the calendar. """
-        my_file = Path("/tmp/urbot/cal") #Si le fichier existe dejà, on peut l'ouvrir. Sinon, c'est qu'on est pas passé par $jdr
-        if not my_file.is_file():
-            print('Le fichier cal n\'existe pas. Vous devez passer par $jdr')
 
         with open('/tmp/urbot/cal', 'rb') as f:  # TODO clean up
             d = pickle.load(f)
+            print('Pickle chargé !')
+            
         wh_url, guild_id, channel_id = d[int(form.getvalue('user_id'))]
 
         async with ClientSession() as client:
