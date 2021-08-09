@@ -29,11 +29,12 @@ if [ ! -d "$repo" ] ; then
 else
   # updates the repo
   cd "$repo" || exit
+  git stash
   git pull
 fi
 
 # installs cogs (located in the src folder and starting with 'cog_')
-echo Installing cogs...
+echo ------------ TEXT: Installing cogs... ------------
 if [ ! -d $cogs_folder ] ; then
   mkdir $cogs_folder
 fi
@@ -41,11 +42,13 @@ find "$src" -maxdepth 1 -name "cog_*" -exec cp -vra '{}' $cogs_folder \;
 echo
 
 # installs locale
-echo Installing translations...
-cp -vra "$src/locale/." "$ur_bot_dir/locale"
-echo
+if [ -d "$src/locale" ]; then
+  echo ------------ TEXT: Installing translations... ------------
+  echo
+  cp -vra "$src/locale/." "$ur_bot_dir/locale"
+fi
 
-echo Installation complete.
+echo ------------ TEXT: Installation complete. ------------
 
 # installs www
 if [ -d "$src/www" ]; then
@@ -56,14 +59,14 @@ if [ -d "$src/www" ]; then
 fi
 
 # installs virtualhosts
-#if [ -d "$src"/sites-available ]; then
- # cp -vra "$src"/sites-available/. $a2/sites-available
- # for f in "$src"/sites-available/*.conf; do
-#    a2ensite "$(basename "$f")"
- # done
- # systemctl reload apache2
-# fi
+if [ -d "$src/sites-available" ]; then
+  echo ------------ TEXT: Installing virtualhosts... ------------
+  cp -vra "$src/sites-available/." "$a2/sites-available"
+  for f in "$src/sites-available/*.conf"; do
+    a2ensite "$(basename "$f")"
+  done
+  systemctl reload apache2
+fi
 
 # TODO bash 3 +
-# TODO add installation of locale folder
 # TODO add installation of the cog's requirements.txt

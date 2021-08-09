@@ -8,6 +8,7 @@ from lxml import etree as et
 import cgi
 from urpy.utils import error_log, log
 from urpy.localization import lcl, Localization
+from cog_planning import settings
 import re
 
 game_tag = 'partie'
@@ -93,9 +94,10 @@ class Calendar:
     async def add_event(self, form: cgi.FieldStorage, embed: discord.Embed):
         """ Add an event to the calendar. """
 
-        with open('/tmp/urbot/cal', 'rb') as f:  # TODO clean up
+        print('Debug: Chargement du webhook...')
+        with open(f'{settings.tmp_wh_location}/wh', 'rb') as f:  # TODO clean up
             d = pickle.load(f)
-            print('Pickle chargé !')
+            print('Debug: Webhook chargé !')
             
         wh_url, guild_id, channel_id = d[int(form.getvalue('user_id'))]
 

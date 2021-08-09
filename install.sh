@@ -63,22 +63,22 @@ echo
 
 # Reads and writes token into root folder
 if [ ! -e $install_folder/.bot_token ]; then
-  echo '|~ Veuillez entrer le token du bot :'
+  echo '------------ TEXT: |~ Veuillez entrer le token du bot : ------------'
   read -r bot_token
   echo "$bot_token" | sudo tee $install_folder/.bot_token > /dev/null
   echo
   exit
 fi
 if [ -e $install_folder/.bot_token ]; then
-  echo '\e[1;31m ## Token déjà saisi \e[0m'
+  echo '------------ TEXT: Token déjà saisi ------------'
   echo
   exit
 fi
 
-echo '\e[1;31m ## Installation du bot terminée\e[0m'
+echo '------------ TEXT: Installation du bot terminée ------------'
 echo
 
-echo '\e[1;31m ## Begin webserver installation \e[0m'
+echo '------------ TEXT: Begin webserver installation ------------'
 echo
 
 apt install -y apache2
