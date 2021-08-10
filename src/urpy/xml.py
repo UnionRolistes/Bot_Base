@@ -10,6 +10,7 @@ from urpy.utils import error_log, log
 from urpy.localization import lcl, Localization
 from cog_planning import settings
 import re
+from datetime import datetime
 
 game_tag = 'partie'
 title_tag = 'titre'
@@ -115,6 +116,21 @@ class Calendar:
                 new_elmnt.text = form.getvalue(tags_to_form[tag], 'NotFound')
             elif tag == link_tag:
                 new_elmnt.text = f"https://discord.com/channels/{guild_id}/{channel_id}/{msg.id}"
+            elif tag == time_tag:
+
+                date_string = form.getvalue(tags_to_form[date_tag]) #On récupére la date en string (actuellement sous la forme 2021-08-10 11:00)
+                date = datetime.strptime(date_string, "%Y-%m-%d %H:%M") #On transforme ce string en objet (Doit avoir la même mise en forme - - - : que le string cité ci-dessus)
+                heure = date.strftime("%Hh%M") #On récupère uniquement l'heure, sous la forme 12h00
+                new_elmnt.text = heure
+
+            elif tag == date_tag:
+
+                date_string = form.getvalue(tags_to_form[date_tag]) #On récupére la date en string (actuellement sous la forme 2021-08-10 11:00)
+                date = datetime.strptime(date_string, "%Y-%m-%d %H:%M") #On transforme ce string en objet (Doit avoir la même mise en forme - - - : que le string cité ci-dessus)
+                date = date.strftime("%Y-%m-%d")#On récupère uniquement la date sous la forme 2021-08-10
+                #Ces changements de format ne concernent pas le message Discord, déjà posté, mais l'écriture dans le xml. Le calendrier php a besoin d'une date et heure sous ce format pour fonctionner
+
+                new_elmnt.text = date
             else:
                 new_elmnt.text = tags_to_lambda[tag](form)
 

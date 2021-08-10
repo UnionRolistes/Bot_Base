@@ -1,3 +1,7 @@
+10/08/2021 - Bot python 0.2.0
+===========================
+    - Separating date and hour in the xml
+
 09/08/2021 - Bot python 0.1.7
 ===========================
     - Visual changes in install scripts
