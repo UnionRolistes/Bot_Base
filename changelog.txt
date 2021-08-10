@@ -1,3 +1,7 @@
+10/08/2021 - Bot python 0.2.1
+===========================
+    - Annulation de l'écriture du webhook dans le fichier car bug
+
 10/08/2021 - Bot python 0.2.0
 ===========================
     - Separating date and hour in the xml
