@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script updates the files for the discord bot of "L'Union des Rôlistes"
+# This script updates the files for the discord bot of "L'Union des Rôlistes", and restart it
 # TODO add copyright to follow bash scripts rules
 
 cd /usr/local/src/Bot_Base
