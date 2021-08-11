@@ -61,14 +61,15 @@ if [ -d "$src/www" ]; then
 fi
 
 # installs virtualhosts
-#if [ -d "$src/sites-available" ]; then
- # echo ------------ TEXT: Installing virtualhosts... ------------
-  #cp -vra "$src/sites-available/." "$a2/sites-available"
-  #for f in "$src/sites-available/*.conf"; do
-  #  a2ensite "$(basename "$f")"
- # done
- # systemctl reload apache2
-#fi
+if [ -d "$src/sites-available" ]; then
+  echo ------------ TEXT: Installing virtualhosts... ------------
+  cp -vra "$src/sites-available/." "$a2/sites-available"
+  for f in "$src/sites-available/*.conf"; do
+    ln -s $a2/sites-available/$f $a2/sites-enabled/$f
+    a2ensite "$(basename "$f")"
+  done
+  systemctl reload apache2
+fi
 
 # TODO bash 3 +
 # TODO add installation of the cog's requirements.txt
