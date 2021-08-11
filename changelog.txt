@@ -1,3 +1,7 @@
+11/08/2021 - Bot python 0.2.2
+===========================
+    - Added updateBot.sh script
+
 11/08/2021 - Bot python 0.2.1
 ===========================
     - Improving add_repo.sh script
