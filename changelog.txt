@@ -1,6 +1,6 @@
-10/08/2021 - Bot python 0.2.1
+11/08/2021 - Bot python 0.2.1
 ===========================
-    - Annulation de l'écriture du webhook dans le fichier car bug
+    - Improving add_repo.sh script
 
 10/08/2021 - Bot python 0.2.0
 ===========================

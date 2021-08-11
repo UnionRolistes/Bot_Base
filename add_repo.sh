@@ -1,7 +1,8 @@
 #!/bin/bash
 # This script starts the discord bot of "L'Union des Rôlistes"
 # TODO add copyright to follow bash scripts rules
-tmp='/usr/local/src'            #'tmp/ur_bot/cogs'
+# TODO : Add commands verifications with $? (renvoie souvent 0 si tout se passe bien)
+tmp='/usr/local/src'          #'tmp/ur_bot/cogs'
 ur_bot_dir='/usr/local/src/URbot'
 cogs_folder="$ur_bot_dir/bot/cogs"
 repo="$tmp/$1"
@@ -22,14 +23,14 @@ if [ ! -d "$repo" ] ; then
   git clone "https://github.com/UnionRolistes/$1.git" "$repo" # TODO add several cogs at once
 
   # checks that the clone was successful
-  if [ ! -d "$repo" ]; then
+  if [ $? != 0 ]; then
     echo Failure
     exit
   fi
 else
   # updates the repo
   cd "$repo" || exit
-  git stash
+  git checkout .
   git pull
 fi
 
@@ -55,6 +56,7 @@ if [ -d "$src/www" ]; then
   if [ ! -d "$www/$1" ]; then
     mkdir -v "$www/$1"
   fi
+  chmod -R 775 "$src/www"
   cp -vra "$src/www/." "$www/$1"
 fi
 
