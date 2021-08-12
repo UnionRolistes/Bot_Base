@@ -1,3 +1,7 @@
+12/08/2021 - Bot python 0.2.5
+===========================
+    - Fix
+
 11/08/2021 - Bot python 0.2.4
 ===========================
     - Improved virtualhost install

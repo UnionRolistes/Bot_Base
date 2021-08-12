@@ -8,7 +8,6 @@ from lxml import etree as et
 import cgi
 from urpy.utils import error_log, log
 from urpy.localization import lcl, Localization
-from cog_planning import settings
 import re
 from datetime import datetime
 
@@ -96,7 +95,7 @@ class Calendar:
         """ Add an event to the calendar. """
 
         print('Debug: Chargement du webhook...')
-        with open(f'{settings.tmp_wh_location}/wh', 'rb') as f:  # TODO clean up
+        with open(f'/usr/local/src/URbot/wh', 'rb') as f:  # TODO clean up
             d = pickle.load(f)
             print('Debug: Webhook chargé !')
             
