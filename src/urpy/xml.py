@@ -11,6 +11,11 @@ from urpy.localization import lcl, Localization
 import re
 from datetime import datetime
 
+#UR_Bot © 2020 by "Association Union des Rôlistes & co" is licensed under Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA)
+#To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/
+#Ask a derogation at Contact.unionrolistes@gmail.com
+
+
 game_tag = 'partie'
 title_tag = 'titre'
 max_players_tag = 'capacite'
@@ -105,33 +110,37 @@ class Calendar:
             webhook: Webhook = Webhook.from_url(wh_url, adapter=AsyncWebhookAdapter(client))
 
             msg = await webhook.send("", wait=True, embed=embed, allowed_mentions=discord.AllowedMentions(users=True))
-        root = self.tree.getroot()
-        root.set('last_id', str(int(root.get('last_id')) + 1))
-        parent = et.SubElement(self.tree.getroot(), game_tag, id=root.get('last_id'))
+       
+        try:
+            root = self.tree.getroot()
+            root.set('last_id', str(int(root.get('last_id')) + 1))
+            parent = et.SubElement(self.tree.getroot(), game_tag, id=root.get('last_id'))
 
-        for tag in tags:
-            new_elmnt = et.SubElement(parent, tag)
-            if tag in tags_to_form:
-                new_elmnt.text = form.getvalue(tags_to_form[tag], 'NotFound')
-            elif tag == link_tag:
-                new_elmnt.text = f"https://discord.com/channels/{guild_id}/{channel_id}/{msg.id}"
-            elif tag == time_tag:
+            for tag in tags:
+                new_elmnt = et.SubElement(parent, tag)
+                if tag in tags_to_form:
+                    new_elmnt.text = form.getvalue(tags_to_form[tag], 'NotFound')
+                elif tag == link_tag:
+                    new_elmnt.text = f"https://discord.com/channels/{guild_id}/{channel_id}/{msg.id}"
+                elif tag == time_tag:
 
-                date_string = form.getvalue(tags_to_form[date_tag]) #On récupére la date en string (actuellement sous la forme 10/08/2021 11:00)
-                date = datetime.strptime(date_string, "%d/%m/%Y %H:%M") #On transforme ce string en objet (Doit avoir la même mise en forme / / / : que le string cité ci-dessus)
-                heure = date.strftime("%Hh%M") #On récupère uniquement l'heure, sous la forme 12h00
-                new_elmnt.text = heure
+                    date_string = form.getvalue(tags_to_form[date_tag]) #On récupére la date en string (actuellement sous la forme 10/08/2021 11:00)
+                    date = datetime.strptime(date_string, "%d/%m/%Y %H:%M") #On transforme ce string en objet (Doit avoir la même mise en forme / / / : que le string cité ci-dessus)
+                    heure = date.strftime("%Hh%M") #On récupère uniquement l'heure, sous la forme 12h00
+                    new_elmnt.text = heure
 
-            elif tag == date_tag:
+                elif tag == date_tag:
 
-                date_string = form.getvalue(tags_to_form[date_tag]) #On récupére la date en string (actuellement sous la forme 10/08/2021 11:00)
-                date = datetime.strptime(date_string, "%d/%m/%Y %H:%M") #On transforme ce string en objet (Doit avoir la même mise en forme / / / : que le string cité ci-dessus)
-                date = date.strftime("%Y-%m-%d")#On récupère uniquement la date sous la forme 2021-08-10, pour la compatibilité dans le calendrier web
-                #Ces changements de format ne concernent pas le message Discord, déjà posté, mais l'écriture dans le xml. Le calendrier php a besoin d'une date et heure sous ce format pour fonctionner
+                    date_string = form.getvalue(tags_to_form[date_tag]) #On récupére la date en string (actuellement sous la forme 10/08/2021 11:00)
+                    date = datetime.strptime(date_string, "%d/%m/%Y %H:%M") #On transforme ce string en objet (Doit avoir la même mise en forme / / / : que le string cité ci-dessus)
+                    date = date.strftime("%Y-%m-%d")#On récupère uniquement la date sous la forme 2021-08-10, pour la compatibilité dans le calendrier web
+                    #Ces changements de format ne concernent pas le message Discord, déjà posté, mais l'écriture dans le xml. Le calendrier php a besoin d'une date et heure sous ce format pour fonctionner
 
-                new_elmnt.text = date
-            else:
-                new_elmnt.text = tags_to_lambda[tag](form)
+                    new_elmnt.text = date
+                else:
+                    new_elmnt.text = tags_to_lambda[tag](form)
+        except Exception as e:
+            print("Problème lors de l'écriture dans le XML") #Si l'écriture dans le xml ne marche pas, il ne faut pas que cela empêche de poster le message sur Discord
 
     def remove_event(self, id, show_errors=True):  # TODO better name for show_errors
         root = self.tree.getroot()

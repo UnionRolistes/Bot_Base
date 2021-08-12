@@ -1,6 +1,9 @@
 #!/bin/bash
 # This script installs the discord bot of "L'Union des Rôlistes"
-# TODO add copyright
+
+#UR_Bot © 2020 by "Association Union des Rôlistes & co" is licensed under Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA)
+#To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/
+#Ask a derogation at Contact.unionrolistes@gmail.com
 
 # Variables
 install_folder="/usr/local/src/URbot"

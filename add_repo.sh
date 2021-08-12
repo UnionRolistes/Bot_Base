@@ -1,6 +1,10 @@
 #!/bin/bash
 # This script starts the discord bot of "L'Union des Rôlistes"
-# TODO add copyright to follow bash scripts rules
+
+#UR_Bot © 2020 by "Association Union des Rôlistes & co" is licensed under Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA)
+#To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/
+#Ask a derogation at Contact.unionrolistes@gmail.com
+
 # TODO : Add commands verifications with $? (renvoie souvent 0 si tout se passe bien)
 tmp='/usr/local/src'          #'tmp/ur_bot/cogs'
 ur_bot_dir='/usr/local/src/URbot'

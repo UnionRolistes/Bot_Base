@@ -3,6 +3,10 @@ import bot
 from bot import localization, _, strings
 import urpy
 
+#UR_Bot © 2020 by "Association Union des Rôlistes & co" is licensed under Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA)
+#To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/
+#Ask a derogation at Contact.unionrolistes@gmail.com
+
 
 class General(commands.Cog):
     __doc__ = strings.General_descr
