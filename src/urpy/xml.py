@@ -51,7 +51,7 @@ tags_to_form = {
 tags_to_lambda = {
     nb_joined_tag: lambda f: '0',
     #time_tag: lambda f: '15h00',
-    mj_tag: lambda f: f"<@{f.getvalue('user_id')}> [{f.getvalue('pseudo')}]",
+    mj_tag: lambda f: f"&lt;@{f.getvalue('user_id')}&gt; [{f.getvalue('pseudo')}]",
     platforms_tag: lambda f: " ".join(f.getlist('platform')),
     link_tag: lambda f: 'https://discord.com/channels/TODO'
 }
