@@ -14,5 +14,8 @@ bash add_repo.sh Web_Planning
 bash add_repo.sh Web_Presentation
 bash add_repo.sh Bot_Presentation
 
+#Droits particuliers :
+chmod 776 /var/www/html/Web_Planning/Calendar/data/events.xml 
+
 service apache2 restart
 bash start.sh

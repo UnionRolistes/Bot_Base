@@ -61,8 +61,8 @@ if [ -d "$src/www" ]; then
   if [ ! -d "$www/$1" ]; then
     mkdir -v "$www/$1"
   fi
-  chmod -R 775 "$src/www"
   cp -vra "$src/www/." "$www/$1"
+  chmod -R 775 "$www/$1"
 fi
 
 # installs virtualhosts

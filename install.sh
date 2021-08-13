@@ -64,6 +64,20 @@ if [ -e $install_folder/.bot_token ]; then
   exit
 fi
 
+echo '------------ TEXT: Creation des fichiers de stockage webhook ------------'
+echo
+# Create 2 files for webhook storing
+if [ ! -e $install_folder/wh ]; then
+  touch $install_folder/wh
+  chmod 776 $install_folder/wh
+  exit
+fi
+if [ ! -e $install_folder/whPrez ]; then
+  touch $install_folder/whPrez
+  chmod 776 $install_folder/wh
+  exit
+fi
+
 echo '------------ TEXT: Installation du bot terminée ------------'
 echo
 

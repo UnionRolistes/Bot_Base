@@ -1,3 +1,7 @@
+13/08/2021 - Bot python 0.3.0
+===========================
+    - Added webhook files creation and chmods
+
 13/08/2021 - Bot python 0.2.7
 ===========================
     - Disabling virtualhost install
