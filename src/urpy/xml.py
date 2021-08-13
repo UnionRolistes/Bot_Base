@@ -40,7 +40,7 @@ tags_to_form = {
     title_tag: 'jdr_title',
     max_players_tag: 'maxJoueurs',
     min_players_tag: 'minJoueurs',
-    date_tag: 'jdr_date',
+    #date_tag: 'jdr_date', car on ne veut pas que celui là s'écrive automatiquement. On veut d'abord séparer la date et l'heure et faire le mettre sous la forme Y-M-D
     length_tag: 'jdr_length',
     type_tag: 'jdr_type',
     system_tag: 'jdr_system',
@@ -50,7 +50,7 @@ tags_to_form = {
 
 tags_to_lambda = {
     nb_joined_tag: lambda f: '0',
-    time_tag: lambda f: '15h00',
+    #time_tag: lambda f: '15h00',
     mj_tag: lambda f: f"<@{f.getvalue('user_id')}> [{f.getvalue('pseudo')}]",
     platforms_tag: lambda f: " ".join(f.getlist('platform')),
     link_tag: lambda f: 'https://discord.com/channels/TODO'
@@ -122,13 +122,6 @@ class Calendar:
                     new_elmnt.text = form.getvalue(tags_to_form[tag], 'NotFound')
                 elif tag == link_tag:
                     new_elmnt.text = f"https://discord.com/channels/{guild_id}/{channel_id}/{msg.id}"
-                elif tag == time_tag:
-
-                    date_string = form.getvalue(tags_to_form[date_tag]) #On récupére la date en string (actuellement sous la forme 10/08/2021 11:00)
-                    date = datetime.strptime(date_string, "%d/%m/%Y %H:%M") #On transforme ce string en objet (Doit avoir la même mise en forme / / / : que le string cité ci-dessus)
-                    heure = date.strftime("%Hh%M") #On récupère uniquement l'heure, sous la forme 12h00
-                    new_elmnt.text = heure
-
                 elif tag == date_tag:
 
                     date_string = form.getvalue(tags_to_form[date_tag]) #On récupére la date en string (actuellement sous la forme 10/08/2021 11:00)
@@ -137,6 +130,12 @@ class Calendar:
                     #Ces changements de format ne concernent pas le message Discord, déjà posté, mais l'écriture dans le xml. Le calendrier php a besoin d'une date et heure sous ce format pour fonctionner
 
                     new_elmnt.text = date
+                elif tag == time_tag:
+
+                    date_string = form.getvalue(tags_to_form[date_tag]) #On récupére la date en string (actuellement sous la forme 10/08/2021 11:00)
+                    date2 = datetime.strptime(date_string, "%d/%m/%Y %H:%M") #On transforme ce string en objet (Doit avoir la même mise en forme / / / : que le string cité ci-dessus)
+                    heure = date2.strftime("%Hh%M") #On récupère uniquement l'heure, sous la forme 12h00
+                    new_elmnt.text = heure
                 else:
                     new_elmnt.text = tags_to_lambda[tag](form)
         except Exception as e:

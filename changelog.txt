@@ -1,3 +1,7 @@
+13/08/2021 - Bot python 0.3.1
+===========================
+    - Changed date syntax in the xml
+
 13/08/2021 - Bot python 0.3.0
 ===========================
     - Added webhook files creation and chmods
