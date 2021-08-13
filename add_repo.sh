@@ -34,7 +34,8 @@ if [ ! -d "$repo" ] ; then
 else
   # updates the repo
   cd "$repo" || exit
-  git checkout .
+  #git checkout . --> Dit qu'on est sur aucune branche. Problème, les branches n'ont pas toute une branche master (parfois main), donc on ne peut pas rajouter git pull origin master pour l'instant
+  git stash
   git pull
 fi
 
@@ -65,15 +66,15 @@ if [ -d "$src/www" ]; then
 fi
 
 # installs virtualhosts
-if [ -d "$src/sites-available" ]; then
-  echo ------------ TEXT: Installing virtualhosts... ------------
-  cp -vra "$src/sites-available/." "$a2/sites-available"
-  for f in "$src/sites-available/*.conf"; do
-    ln -s $a2/sites-available/$f $a2/sites-enabled/$f
-    a2ensite "$(basename "$f")"
-  done
-  systemctl reload apache2
-fi
+#if [ -d "$src/sites-available" ]; then
+#  echo ------------ TEXT: Installing virtualhosts... ------------
+#  cp -vra "$src/sites-available/." "$a2/sites-available"
+#  for f in "$src/sites-available/*.conf"; do
+#    ln -s $a2/sites-available/$f $a2/sites-enabled/$f
+#    a2ensite "$(basename "$f")"
+#  done
+#  systemctl reload apache2
+#fi
 
 # TODO bash 3 +
 # TODO add installation of the cog's requirements.txt

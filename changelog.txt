@@ -1,3 +1,7 @@
+13/08/2021 - Bot python 0.2.7
+===========================
+    - Disabling virtualhost install
+
 12/08/2021 - Bot python 0.2.6
 ===========================
     - Update README with install steps
