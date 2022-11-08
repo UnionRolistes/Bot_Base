@@ -55,7 +55,7 @@
  Bot_Base est un repo commun aux autres projet.
 Il permet de simplifier l'installation d'un ou plusieurs éléments.
   ### Installation         
-   **Pour une 1ère installation** : ``` "cd /usr/local/src && sudo git clone   **https://github.com/UnionRolistes/Bot_Base** && cd Bot_Base && sudo bash updateBot.sh" ``` 
+   **Pour une 1ère installation** : ``` "cd /usr/local/src && sudo git clone https://github.com/UnionRolistes/Bot_Base && cd Bot_Base && sudo bash updateBot.sh" ``` 
 			
    **Pour une mise à jour** : ``` "cd /usr/local/src/Bot_Base && sudo git checkout . && sudo git pull && sudo bash updateBot.sh" ```	 
    
