@@ -9,30 +9,28 @@
 ├── Description du projet 
 ├── Languages utilisés
 ├── Credit , participant, organisation
-│
+|
 ├── 1) Bot Base
 │	├── - But
+│	├── -Installation
+│	└── - Usage
+|
+├── 2.1) Bot-Prez
+│ 	├── - But
 │	├── - Installation
 │	└── - Usage
-│
-├── 2) $Prez
-│	├── 2.1) Bot-Prez
-│ 	│	├── - But
-│	│	├── - Installation
-│	│	└── - Usage
-│	│
-│	└── 2.2) WebPrez
-│
-└── 3) $jdr
-	├── 3.1) Bot-planning
-	│   ├── - But
-	│   ├── - Installation
-	│   └── - Usage
-	│
-	└── 3.2) Web-Planning
-		├── - But
-		├── - Installation
-		└── - Usage
+|
+├── 2.2) WebPrez
+|
+├── 3.1) Bot-planning
+|   ├── - But
+|   ├── - Installation
+|   └── - Usage
+|
+├── 3.2) Web-Planning
+├── - But
+├── - Installation
+└── - Usage
 ```
 
 
@@ -40,40 +38,34 @@
 
 
 ## Description
-> Le UR-Bot(Python3.7) permet à un utilisateur d'accéder à un formulaire via $prez et $jdr
-Les informations saisies sont ensuite mises en forme et postées sur le discord de l'union des Rôlistes via un Webhook.
+> Le BotPresentation(Python3.7) permet à un utilisateur d'accéder à un formulaire de présentation via la commande $prez. Les informations saisies sont ensuite mises en forme et postées sur le discord de l'union des Rôlistes via un Webhook dans la section #presentation
 
 ## Languages utilisés
-- Py ( Python )
-- XML (  eXtensible Markup Language )
-- sh (  Bash )
-- Html
-- Css
+###### Py ( Python )
+###### XML (  eXtensible Markup Language )
+###### sh (  Bash )
 
 ## Credit , participant, organisation
-credit.md Licence.md
+  > ###### Maestro#8364
+  > ###### Lyss 
   
-##  1) Bot Base
+#  1) Bot Base
 
 ######  https://github.com/UnionRolistes/Bot_Base
- 
  Bot_Base est un repo commun aux autres projet.
 Il permet de simplifier l'installation d'un ou plusieurs éléments.
-
   ### Installation         
    **Pour une 1ère installation** : ``` "cd /usr/local/src && sudo git clone   **https://github.com/UnionRolistes/Bot_Base** && cd Bot_Base && sudo bash updateBot.sh" ``` 
 			
    **Pour une mise à jour** : ``` "cd /usr/local/src/Bot_Base && sudo git checkout . && sudo git pull && sudo bash updateBot.sh" ```	 
    
  How to setup URbot - The discord bot for managing servers dedicated to rpgs 
-
  ---
+  ##### - 1 )   Install a linux based OS (we'll be using Debian as a reference)
 
-##### - 1 )  Install a linux based OS (we'll be using Debian as a reference)
+  ##### - 2 )  Install git
 
-##### - 2 )  Install git
-
-##### - 3 )  ``` "cd /usr/local/src && sudo git clone  https://github.com/UnionRolistes/Bot_Base  && cd Bot_Base && sudo bash updateBot.sh" ```
+ ##### - 3 )  ``` "cd /usr/local/src && sudo git clone  https://github.com/UnionRolistes/Bot_Base  && cd Bot_Base && sudo bash updateBot.sh" ```
 
   **It installs the bot and the 2 sub features** : 
 
@@ -84,7 +76,7 @@ Il permet de simplifier l'installation d'un ou plusieurs éléments.
 
    ##### - 5 )  Start the bot and the web sites with "cd/usr/local/src/Bot_Base && sudo bash start.sh && sudo service apache2 restart "
 
-###  2.1) Bot-Prez
+#  2.1) Bot-Prez
 
   ######  https://github.com/UnionRolistes/Bot_Presentation
   Le BotPresentation(Python3.7) permet à un utilisateur d'accéder à un formulaire de présentation via la commande $prez. Les informations saisies sont ensuite mises en forme et postées sur le discord de l'union des Rôlistes via un Webhook dans la section #presentation
@@ -97,9 +89,9 @@ Il permet de simplifier l'installation d'un ou plusieurs éléments.
 			
 - **Pour une mise à jour** : ``` "cd /usr/local/src/Bot_Base && sudo git checkout . && sudo git pull && sudo bash updateBot.sh" ```
 
-###  2.2) WebPrez
+#  2.2) WebPrez
 
-###  3.1) Bot-planning
+#  3.1) Bot-planning
    >  - ###### https://github.com/UnionRolistes/Bot_Planning_python
    
    >  - Le BotPlanning(Python3.7) et FormulaireJdR (HTML CSS PHP) est un projet lancé a l'initiative de l'Union des Rôlistes (**http://unionrolistes.fr**) un bot discord capable de générer des messages correctement mis en forme, annoncant de prochaine partie de JdR, quel soit physique ou a distance. actuellement les message finaux sont visible sur le discord de l'union des Rôlistes via un Webhook dans la section #Planning-JdR .
@@ -112,7 +104,7 @@ Il permet de simplifier l'installation d'un ou plusieurs éléments.
 
 **how to use (in discord)** une fois sur votre serveur discord, et apres avoir vérifier que le bot (ou role des bot) pouvais ecrire dans le canal où vous vous trouvez ecrivez $cal la commande s'effacera, puis vous receverez un message privé avec les instruction.
 
-###  3.2) Web-Planning
+#  3.2) Web-Planning
 
    ###### https://github.com/UnionRolistes/Web_Planning
    #### Web_Planning : Formulaire de création de partie
@@ -127,3 +119,4 @@ Il permet de simplifier l'installation d'un ou plusieurs éléments.
 ``` sudo nano /etc/apache2/sites-available/100-UR_Planning.conf``` --> Remplacer "serverName planning.unionrolistes.fr" (ligne 9) par la redirection saisie sur votre hébergeur en ligne
 
 **Pour une mise à jour** :  ``` "cd /usr/local/src/Bot_Base && sudo git checkout . && sudo git pull && sudo bash updateBot.sh"```
+
