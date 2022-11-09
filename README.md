@@ -1,3 +1,4 @@
+[![forthebadge](https://forthebadge.com/images/badges/cc-nc-sa.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-markdown.svg)](https://forthebadge.com)
 ## Bot Python (UR-Bot)
 
 [TOCM]
@@ -35,17 +36,16 @@
 
 
 
-
-
 ## Description
 > Le BotPresentation(Python3.7) permet à un utilisateur d'accéder à un formulaire de présentation via la commande $prez. Les informations saisies sont ensuite mises en forme et postées sur le discord de l'union des Rôlistes via un Webhook dans la section #presentation
 
 ## Languages utilisés
-###### Py ( Python )
-###### XML (  eXtensible Markup Language )
-###### HTML (  eXtensible Markup Language )
-###### CSS (  eXtensible Markup Language )
-###### sh (  Bash )
+ - Py ( Python )
+ - XML (  eXtensible Markup Language )
+ - HTML (  eXtensible Markup Language )
+ - CSS (  eXtensible Markup Language )
+ - sh (  Bash )
+
 
 Credits -> [credits.md](https://github.com/UnionRolistes/Bot_Base/blob/main/credits.md)
 
@@ -82,8 +82,8 @@ Il permet de simplifier l'installation d'un ou plusieurs éléments.
   ######  https://github.com/UnionRolistes/Bot_Presentation
   Le BotPresentation(Python3.7) permet à un utilisateur d'accéder à un formulaire de présentation via la commande $prez. Les informations saisies sont ensuite mises en forme et postées sur le discord de l'union des Rôlistes via un Webhook dans la section #presentation
   
-   ![](https://github.com/UnionRolistes/Bot_Base/blob/main/img/BotPresentation_Grafcet-page-002.jpg?raw=true)
    ![](https://github.com/UnionRolistes/Bot_Base/blob/main/img/BotPresentation_Grafcet-page-001.jpg?raw=true)
+   ![](https://github.com/UnionRolistes/Bot_Base/blob/main/img/BotPresentation_Grafcet-page-002.jpg?raw=true)
  
    ### Installation
             
