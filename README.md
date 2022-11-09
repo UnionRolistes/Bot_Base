@@ -45,6 +45,8 @@
 ###### XML (  eXtensible Markup Language )
 ###### sh (  Bash )
 
+Credits -> credits.md
+
   
 #  1) Bot Base
 
