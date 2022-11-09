@@ -47,7 +47,7 @@
 ###### CSS (  eXtensible Markup Language )
 ###### sh (  Bash )
 
-Credits -> credits.md
+Credits -> [credits.md](https://github.com/UnionRolistes/Bot_Base/blob/main/credits.md)
 
   
 #  1) Bot Base
