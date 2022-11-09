@@ -43,6 +43,8 @@
 ## Languages utilisés
 ###### Py ( Python )
 ###### XML (  eXtensible Markup Language )
+###### HTML (  eXtensible Markup Language )
+###### CSS (  eXtensible Markup Language )
 ###### sh (  Bash )
 
 Credits -> credits.md
