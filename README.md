@@ -124,3 +124,5 @@ Il permet de simplifier l'installation d'un ou plusieurs éléments.
 
 **Pour une mise à jour** :  ``` "cd /usr/local/src/Bot_Base && sudo git checkout . && sudo git pull && sudo bash updateBot.sh"```
 
+# TODO
+https://github.com/orgs/UnionRolistes/projects/1/views/1
