@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  os:
+    image: ${ENV_IMAGE_NAME}
+    container_name: ${ENV_CONTAINER_NAME}
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    hostname: ${ENV_CONTAINER_NAME}
+    volumes:
+        - ../Bot:/UR-BOT-PROJECT

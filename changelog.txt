@@ -1,3 +1,9 @@
+02/12/2022 - Bot python 0.3.3
+===========================
+    - Le bot ne donne plus son token en mp.
+    - Cree une application docker pour facilité le developpement.
+    - ping fonctionne.
+
 13/08/2021 - Bot python 0.3.2
 ===========================
     - README Update
@@ -77,3 +83,5 @@
 ===========================
     - add $credit and $version commands
     - add install and start scripts
+    
+   
