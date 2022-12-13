@@ -7,10 +7,10 @@ import os
 
 
 load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
-print("coucou")
-print("coucou")
-print(TOKEN)
+TOKEN = os.getenv('DISCORD_TOKEN', None)
+if TOKEN is None:
+    print("The discord token is not defined \n\t defined it in the .env file (dev) \n\t or in the environment in docker-compose")
+    exit(1)
 
 class UR_BOT(commands.Bot):
 

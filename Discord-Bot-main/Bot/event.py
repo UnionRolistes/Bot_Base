@@ -1,68 +1,71 @@
 
 import asyncio
 import discord
+from dotenv import load_dotenv
+import os
 
-BOT_PREFIX = "$"
 
+load_dotenv()
+BOT_PREFIX = os.getenv('BOT_PREFIX', '$')
 
 HELP_DATA = {
-    "About": 
+    "About":
     {
-        "cmd_0": 
+        "cmd_0":
         {
             "cmd": "credit",
             "help": "Affiche les crédits"
         },
 
-        "cmd_1": 
+        "cmd_1":
         {
             "cmd": "version",
             "help": "Affiche les numéros de version"
         },
     },
 
-    "General": 
+    "General":
     {
-        "cmd_0": 
+        "cmd_0":
         {
             "cmd": "cancel",
             "help": "Annule l'action en cours"
         },
 
-        "cmd_1": 
+        "cmd_1":
         {
             "cmd": "done",
             "help": "Confirme l'action en cours"
         },
 
-         "cmd_2": 
+         "cmd_2":
         {
             "cmd": "edit",
             "help": "Édite un message"
         },
 
-         "cmd_3": 
+         "cmd_3":
         {
             "cmd": "lang",
             "help": "Change la langue de l'utilisateur"
         },
     },
 
-     "Planning": 
+     "Planning":
     {
-        "cmd_0": 
+        "cmd_0":
         {
             "cmd": "cal",
             "help": "Permet d'accéder au calendrier"
         },
 
-        "cmd_1": 
+        "cmd_1":
         {
             "cmd": "jdr",
             "help": "Envoie un lien pour créer une partie"
         },
 
-         "cmd_2": 
+         "cmd_2":
         {
             "cmd": "site",
             "help": "Permet d'accéder au calendrier"
@@ -70,9 +73,9 @@ HELP_DATA = {
 
     },
 
-    "Presentation": 
+    "Presentation":
     {
-        "cmd_0": 
+        "cmd_0":
         {
             "cmd": "prez",
             "help": "Envoie un lien pour se présenter"
@@ -81,7 +84,7 @@ HELP_DATA = {
 
     "No Category":
     {
-        "cmd_0": 
+        "cmd_0":
         {
             "cmd": "help",
             "help": "Affiche ce message"
@@ -103,7 +106,7 @@ def GetMaxStrSizeInArray(array:dict,callback=None):
 async def on_ping(event):
         await event.author.send("pong");
 
-        
+
 
 async def on_message(event,*args,**kwargs):
     if event.content.startswith('hi'):
@@ -123,9 +126,9 @@ async def on_prez(event,*args,**kwargs):
     await event.author.send(embed=embed) # envoie un message de presentation privée à l'auteur qui a fait a commandes
 
 async def on_help(event,*args):
-    embed = discord.Embed(title="URBOT - helper", color= 0x0CC1EE) 
+    embed = discord.Embed(title="URBOT - helper", color= 0x0CC1EE)
     embed.set_author(name="UR-BOT", icon_url="https://cdn.discordapp.com/avatars/1040275175687606372/33d5a8782c1d658caeeae59799e722b0.webp?size=32")
-    
+
     HELP = str(f"**prefix :    {BOT_PREFIX}**\n\n\t```diff\n")
     for x in HELP_DATA.items():
             HELP += f"\r+ {x[0]}\n\n\t"
