@@ -1,0 +1,11 @@
+version: '3'
+name: union des rolistes
+
+services:
+  bot_base:
+    build: . #utilise le dockerfile pour cree le container a utiliser
+    container_name: bot_base
+    environment:
+      - DISCORD_TOKEN=MTA0MDI3NTE3NTY4NzYwNjM3Mg.GRMHqA.yEreIkPlGQh4wMWz5_TK3yLPf3ygEMfGCYrwmk #token pour comm avec discord
+      - BOT_PREFIX=/ #prefix pour les commandes
+      #- BOT_EXTEND=coucou, coucou2 #extensions a charger

@@ -7,24 +7,27 @@ import os
 
 
 load_dotenv()
-TOKEN = os.getenv('TOKEN')
+TOKEN = os.getenv('DISCORD_TOKEN')
+print("coucou")
+print("coucou")
+print(TOKEN)
 
 class UR_BOT(commands.Bot):
 
     async def on_ready(self):
         print('--- We have successfully loggged in as {0.user}'.format(self))
-    
+
     async def on_message(self, message):
 
         if message.author == self.user:
                return
-        
+
         await DebugBot.debug_on_message(message);
 
         return await bot.process_commands(message)
-   
 
-    
+
+
 
 intent = discord.Intents.default()
 intent.members = True
@@ -63,7 +66,6 @@ async def reload_module(ctx):
     await reload_module();
     await ctx.channel.send("The scripts has been reloaded.");
     return 0;
-  
+
 
 bot.run(TOKEN)
-
