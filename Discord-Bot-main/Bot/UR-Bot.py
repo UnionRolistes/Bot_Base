@@ -1,4 +1,4 @@
-#ext import
+# ext import
 import discord
 from dotenv import load_dotenv
 # import DebugBot
@@ -6,7 +6,7 @@ from discord.ext import commands
 import os
 import asyncio
 
-#load token from env
+# load token from env
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN', None)
 BOT_PREFIX = os.getenv('BOT_PREFIX', '$')
@@ -16,32 +16,48 @@ if TOKEN is None:
     print("The discord token is not defined \n\t defined it in the .env file (dev) \n\t or in the environment in docker-compose")
     exit(1)
 
+
 class BOT_BASE(commands.Bot):
     async def on_ready(self):
         print('--- We have successfully loggged in as {0.user}'.format(self))
 
     async def on_message(self, message):
         if message.author == self.user:
-               return
+            return
         # await DebugBot.debug_on_message(message);
         return await bot.process_commands(message)
 
-#set listeners
+
+# set listeners
 intent = discord.Intents.default()
 intent.members = True
 intent.messages = True
-intent.message_content = True #v2
+intent.message_content = True  # v2
 
-bot = BOT_BASE(command_prefix=BOT_PREFIX, intents=intent) #build bot
+bot = BOT_BASE(command_prefix=BOT_PREFIX, intents=intent)  # build bot
 
-#laod all extensions in the glob "./**/*.py"
+# laod all extensions in the glob "./**/*.py"
 # like that to limit side effect between extension
+
+
 async def load_all_extensions():
     for dir in os.listdir('./extends'):
+        # run pip install -r requirements.txt if exists
+        if os.path.exists('./extends/'+dir+'/requirements.txt'):
+            try:
+                print('pip install -r ./extends/'+dir+'/requirements.txt')
+                os.system('pip install -r ./extends/'+dir+'/requirements.txt')
+            except:
+                print('pip install -r ./extends/' +
+                      dir+'/requirements.txt failed')
         for file in os.listdir('./extends/'+dir):
             if file.endswith('.py'):
-                print(dir+'/'+file)
-                await bot.load_extension('extends.'+dir+'.'+file[:-3])
+                try:
+                    print(dir+'/'+file)
+                    await bot.load_extension('extends.'+dir+'.'+file[:-3])
+                except Exception as e:
+                    print('Failed to load extension {0}.'.format(file))
+                    print(e)
 
 # if the file is run directly, run the bot
 if __name__ == '__main__':
