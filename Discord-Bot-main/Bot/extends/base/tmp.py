@@ -1,9 +1,8 @@
-
 import asyncio
-import discord
-from dotenv import load_dotenv
 import os
-
+from dotenv import load_dotenv
+import discord
+from discord.ext import commands
 
 load_dotenv()
 BOT_PREFIX = os.getenv('BOT_PREFIX', '$')
@@ -91,8 +90,7 @@ HELP_DATA = {
         },
     }
 
-};
-
+}
 
 def GetMaxStrSizeInArray(array:dict,callback=None):
     _size=0;
@@ -101,7 +99,6 @@ def GetMaxStrSizeInArray(array:dict,callback=None):
         if(_r > _size):
            _size = _r
     return _size
-
 
 async def on_ping(event):
     await asyncio.gather( # concurent await
@@ -116,20 +113,15 @@ async def on_message(event,*args,**kwargs):
 async def on_prez(event,*args,**kwargs):
     embed = discord.Embed(url="http://presentation.unionrolistes.fr/?webhook=https://discord.com/api/webhooks/875068900612665396/DJusy0eGs9Xyx2os-dodBVfWia2fbhfBzfmnDM9g-30ozoFYAuZBHVXaD9TKaC1wwBwg", description="⬆️ Here is the link to create your presentation.", title="Union Roliste - Presentation", color= 0x0CC1EE)
     embed.set_author(name=event.author.display_name, icon_url=event.author.avatar_url)
-
     DATA = ["**:pen_ballpoint:  Nom\n**","**:pen_ballpoint:  Prenom\n**",":round_pushpin:  **Address\n**",":telephone:   **N° Telephone\n**", ":postbox: **Code postal\n**","**:computer:  Support (Windows / Linux / Mac)\n**","**Expérience en programmation\n**"]
     embed.add_field(name="**\n**", value="**───────────────────────────────**", inline=False)
-
     embed.set_footer(text="Union Roliste dev presentation.", icon_url="https://avatars.githubusercontent.com/u/62179928?s=200&v=4")
-
     embed.set_thumbnail(url="https://avatars.githubusercontent.com/u/62179928?s=200&v=4")
-
     await event.author.send(embed=embed) # envoie un message de presentation privée à l'auteur qui a fait a commandes
 
 async def on_help(event,*args):
     embed = discord.Embed(title="URBOT - helper", color= 0x0CC1EE)
     embed.set_author(name="UR-BOT", icon_url="https://cdn.discordapp.com/avatars/1040275175687606372/33d5a8782c1d658caeeae59799e722b0.webp?size=32")
-
     HELP = str(f"**prefix :    {BOT_PREFIX}**\n\n\t```diff\n")
     for x in HELP_DATA.items():
             HELP += f"\r+ {x[0]}\n\n\t"
@@ -137,15 +129,34 @@ async def on_help(event,*args):
             for cmd in x[1].items():
                 _offset = (c - cmd[1]["cmd"].__len__())+1 # centrage de lq flèche (->)
                 HELP += cmd[1]["cmd"]+ (" "*_offset) + "-> "+cmd[1]["help"]+"\n\t" # Ecrit la command -> description
-
     HELP += f"\n```"
-
     embed.add_field(name="**\n**", value="**───────────────────────────────**", inline=False)
-
     embed.add_field(name="**\n**", value=HELP, inline=False)
-
     embed.set_footer(text="Union Roliste commands helper.", icon_url="https://avatars.githubusercontent.com/u/62179928?s=200&v=4")
-
     embed.set_thumbnail(url="https://avatars.githubusercontent.com/u/62179928?s=200&v=4") # set le logo en haut a droit
+    await event.channel.send(embed=embed)
 
-    await event.channel.send(embed=embed);
+class Tmp(commands.Cog, name='tmp'):
+    def __init__(self, bot):
+        self.bot = bot
+        self._last_member = None
+
+    async def cog_load(self): # called when the cog is loaded
+        print(self.__class__.__name__ + " is loaded")
+
+    @commands.command(name="_help")
+    async def help(Self, ctx):
+        await on_help(ctx)
+
+    @commands.command(name="prez")
+    async def prez(Self, ctx):
+        await on_prez(ctx)
+
+    @commands.command(aliases=['reload', 'rld'])
+    async def reload_module(Self, ctx):
+        await reload_module()
+        await ctx.channel.send("The scripts has been reloaded.")
+        return 0
+
+async def setup(bot):
+    await bot.add_cog(Tmp(bot))
