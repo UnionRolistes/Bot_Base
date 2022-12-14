@@ -104,9 +104,10 @@ def GetMaxStrSizeInArray(array:dict,callback=None):
 
 
 async def on_ping(event):
-        await event.author.send("pong");
-
-
+    await asyncio.gather( # concurent await
+        event.message.add_reaction('🏓'),
+        event.author.send("pong")
+    )
 
 async def on_message(event,*args,**kwargs):
     if event.content.startswith('hi'):

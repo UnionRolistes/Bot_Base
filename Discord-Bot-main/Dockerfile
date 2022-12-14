@@ -1,4 +1,4 @@
-FROM python:3.7-alpine
+FROM python:3.8-alpine
 WORKDIR /app
 COPY /Bot/requirements.txt bot/requirements.txt
 RUN pip3 install -r bot/requirements.txt
