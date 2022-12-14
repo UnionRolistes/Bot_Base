@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 # import DebugBot
 from discord.ext import commands
 import os
+import asyncio
 
 #local import
 import event
@@ -26,25 +27,18 @@ intent.messages = True
 intent.message_content = True #v2
 
 bot = BOT_BASE(command_prefix= event.BOT_PREFIX,intents=intent) #build bot
-bot.remove_command('help')
+# bot.remove_command('help')
 
-@bot.command(name="ping")
-@commands.guild_only()
-async def ping(ctx):
-    print("ping")
-    await  event.on_ping(ctx)
+#load extension base
+asyncio.run(bot.load_extension("extends.base.event"))
 
-@bot.command(name="help")
+@bot.command(name="_help")
 async def help(ctx):
      await event.on_help(ctx)
 
 @bot.command(name="prez")
 async def prez(ctx):
   await event.on_prez(ctx)
-
-# @DebugBot.update_all_modules
-# async def reload_module():
-#     return 0
 
 @bot.command(aliases=['reload', 'rld'])
 async def reload_module(ctx):
