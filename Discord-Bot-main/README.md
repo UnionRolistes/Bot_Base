@@ -6,7 +6,6 @@
 - Install [Docker](https://docs.docker.com/desktop/) (only need engine and compose)
 - dowload repo
 
-
 ## first use (or if you want to change the token)
 
 - [tuto](https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token) to get your token
@@ -26,7 +25,23 @@
   > add `-f repo-y/docker-compose.yml` for each repo
 - start command here
 
+```cmd
+  docker-compose -f .\docker-compose.yml -f ..\..\Bot_Presentation\bot_docker\docker-compose.yml config >test.yml
+  docker-compose -f test.yml up --build -d
+```
+
 ## Commandes disponible dans le bot base
 
 - `$help` : show all command available
 - `$ping` : show pong and time to respond  ( test if bot is alive )
+
+
+
+## dev
+
+### web
+
+pour travailler en local penser a faire mentir le dns de votre machine pour que le nom de domaine voulu pointe la ou il faut
+
+- windows : `C:\WINDOWS\system32\drivers\etc\hosts`
+- linux : `/etc/hosts`
