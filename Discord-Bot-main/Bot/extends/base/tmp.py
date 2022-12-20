@@ -146,7 +146,7 @@ class Tmp(commands.Cog, name='tmp'):
 
     @commands.command(aliases=['reload', 'rld'])
     async def reload_module(Self, ctx):
-        await reload_module()
+        # await reload_module() # work ???
         await ctx.channel.send("The scripts has been reloaded.")
         return 0
 
