@@ -6,10 +6,12 @@ from discord.ext import commands
 import os
 import asyncio
 
-# load token from env
+# load .env file
 load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN', None)
-BOT_PREFIX = os.getenv('BOT_PREFIX', '$')
+
+# get token from .env file
+TOKEN = os.getenv('DISCORD_TOKEN')  # get token from .env file
+BOT_PREFIX = os.getenv('BOT_PREFIX')  # get prefix from .env file
 
 # exit if no token found
 if TOKEN is None:
@@ -24,7 +26,6 @@ class BOT_BASE(commands.Bot):
     async def on_message(self, message):
         if message.author == self.user:
             return
-        # await DebugBot.debug_on_message(message);
         return await bot.process_commands(message)
 
 
@@ -36,10 +37,9 @@ intent.message_content = True  # v2
 
 bot = BOT_BASE(command_prefix=BOT_PREFIX, intents=intent)  # build bot
 
+
 # laod all extensions in the glob "./**/*.py"
 # like that to limit side effect between extension
-
-
 async def load_all_extensions():
     for dir in os.listdir('./extends'):
         # run pip install -r requirements.txt if exists
