@@ -1,4 +1,4 @@
-# Discord-Bot
+# Union des Roliste base : bot / api / web
  [doc lib](https://discordpy.readthedocs.io/en/stable/api.html?highlight=on_message#discord.Guild.get_channel)
 
 ## Instalation
@@ -23,12 +23,9 @@
 - clone repo needed
 - merge docker-compose with `docker-compose -f docker-compose.yml -f ../repo-x/docker-compose.yml config > docker-compose-merge.yml`
   > add `-f repo-y/docker-compose.yml` for each repo
-- start command here
-
-```cmd
-  docker-compose -f .\docker-compose.yml -f ..\..\Bot_Presentation\bot_docker\docker-compose.yml config >test.yml
-  docker-compose -f test.yml up --build -d
-```
+- start command here (dev for prod future script)
+  - `docker-compose -f .\docker-compose.yml -f ..\Bot_Presentation\docker-compose.yml -f ..\Bot_Planning_python\bot\docker-compose.yml config >test.yml`
+  - `docker-compose -f test.yml up --build -d`
 
 ## Commandes disponible dans le bot base
 
