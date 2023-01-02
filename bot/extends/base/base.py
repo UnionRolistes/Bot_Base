@@ -77,6 +77,34 @@ class Base(commands.Cog, name='base'):
                         print(e)
         await event.send(txt)
 
+    @commands.command(name="_help", help='affiche la version du bot', aliases=['h'], )
+    async def on_help(self, event):
+        help = f""
+        await event.channel.send(help)
+
+    # async def on_help(self, event):
+    #     HELP = str(f"```diff\n\nprefix : {BOT_PREFIX}\n\n")
+    #     # Obtenir la chaine la plus longe pour ensuite center la fleche (->)
+    #     c = GetMaxCommandSize(bot_instance.walk_commands())
+    #     for command in bot_instance.walk_commands():  # pour chaque commandes
+    #         fullcmd = (command.name+(" ("+",".join(command.aliases) +
+    #                                  ") " if (command.aliases != []) else ""))
+    #         _offset = (c["size"] - fullcmd.__len__()) + \
+    #             1  # centrage de la flèche (->)
+    #         if (command.name and command.help):
+    #             fullcmd += (" "*_offset) + "-> "+command.help
+    #             if (command.description in [*c["type"].keys()]):
+    #                 # Ajout la command à la description actuel (About, Presentation, No Category)
+    #                 c["type"][command.description].append(fullcmd)
+    #     for category in c["type"]:  # prépare le text final qui sera afficher
+    #         HELP += category+":"  # ajout la cqtégory
+    #         # pour chaque command dans la catégory qlors on l'ajout au text final (HELP)
+    #         for help in c["type"][category]:
+    #             HELP += "\n"+"\t"+help
+    #         HELP += "\n\n"
+    #     HELP += f"Entrez $help commande pour plus d'info sur une commande.\nVous pouvez aussi entrer $help categorie pour plus d'info sur une catégorie.```"
+    #     await event.channel.send(HELP)
+
 
 async def setup(bot):
     await bot.add_cog(Base(bot))
