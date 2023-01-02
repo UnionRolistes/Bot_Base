@@ -12,7 +12,7 @@ sys.path.append('..')
 
 
 class Base(commands.Cog, name='base'):
-    def __init__(self, bot):
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
         self._last_member = None
 
@@ -79,7 +79,15 @@ class Base(commands.Cog, name='base'):
 
     @commands.command(name="_help", help='affiche la version du bot', aliases=['h'], )
     async def on_help(self, event):
-        help = f""
+        # get commands by category
+        commands = {}
+        for command in self.bot.walk_commands():
+            if command.cog_name not in commands:
+                commands[command.cog_name] = []
+            commands[command.cog_name].append(command)
+            print(command.cog_name)
+        help = f"""```properties
+        ```"""
         await event.channel.send(help)
 
     # async def on_help(self, event):
