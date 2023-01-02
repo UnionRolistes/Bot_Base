@@ -28,5 +28,5 @@ async def get_discord_client():
     tmp_discord_client = await discord_client()
     return await tmp_discord_client
 
-
+asyncio.create_task(get_discord_client())
 # start discord client (doit etre deplacer dans api_base)
