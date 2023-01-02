@@ -1,0 +1,6 @@
+URBot_base Le bot discord de l'Union des Rôlistes
+  contributeurs :
+    - Mortifia#7249
+    - Eὔδοξος#2170
+    - Lyss#4053
+    - Maestro#8364
