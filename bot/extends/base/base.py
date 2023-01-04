@@ -77,44 +77,39 @@ class Base(commands.Cog, name='base'):
                         print(e)
         await event.send(txt)
 
-    @commands.command(name="_help", help='affiche la version du bot', aliases=['h'], )
+    @commands.command(name="help", help='affiche les commandes, aliases, et descripton', aliases=['h'], )
     async def on_help(self, event):
-        # get commands by category
-        commands = {}
+        # get all commands and sort them by category
+        commandsByCat = {}
         for command in self.bot.walk_commands():
-            if command.cog_name not in commands:
-                commands[command.cog_name] = []
-            commands[command.cog_name].append(command)
-            print(command.cog_name)
-        help = f"""```properties
-        ```"""
+            if command.cog_name not in commandsByCat:
+                commandsByCat[command.cog_name] = []
+            commandsByCat[command.cog_name].append(command)
+        # sort categories by key
+        commandsByCat = dict(sorted(commandsByCat.items()))
+        # sort commands by name alphabetically in each category
+        for cat in commandsByCat:
+            commandsByCat[cat] = sorted(
+                commandsByCat[cat], key=lambda x: x.name)
+        # create help message
+        help = (f"```properties\n"
+                f"prefix {self.bot.command_prefix}\n")
+        # add category and commands to the message
+        for cat in commandsByCat:
+            # example : "category : "
+            help += f"\n{cat} : \n"
+            for command in commandsByCat[cat]:
+                # examle : "    command [alias] : help"
+                aliases = f'''{' ' + str(command.aliases).replace("'", "") if command.aliases != [] else ''}'''
+                msg = f'\n    > {command.help}' if command.help != None else ''
+                help += f"  {command.name}{aliases}{msg}\n"
+        help += "```"
         await event.channel.send(help)
-
-    # async def on_help(self, event):
-    #     HELP = str(f"```diff\n\nprefix : {BOT_PREFIX}\n\n")
-    #     # Obtenir la chaine la plus longe pour ensuite center la fleche (->)
-    #     c = GetMaxCommandSize(bot_instance.walk_commands())
-    #     for command in bot_instance.walk_commands():  # pour chaque commandes
-    #         fullcmd = (command.name+(" ("+",".join(command.aliases) +
-    #                                  ") " if (command.aliases != []) else ""))
-    #         _offset = (c["size"] - fullcmd.__len__()) + \
-    #             1  # centrage de la flèche (->)
-    #         if (command.name and command.help):
-    #             fullcmd += (" "*_offset) + "-> "+command.help
-    #             if (command.description in [*c["type"].keys()]):
-    #                 # Ajout la command à la description actuel (About, Presentation, No Category)
-    #                 c["type"][command.description].append(fullcmd)
-    #     for category in c["type"]:  # prépare le text final qui sera afficher
-    #         HELP += category+":"  # ajout la cqtégory
-    #         # pour chaque command dans la catégory qlors on l'ajout au text final (HELP)
-    #         for help in c["type"][category]:
-    #             HELP += "\n"+"\t"+help
-    #         HELP += "\n\n"
-    #     HELP += f"Entrez $help commande pour plus d'info sur une commande.\nVous pouvez aussi entrer $help categorie pour plus d'info sur une catégorie.```"
-    #     await event.channel.send(HELP)
 
 
 async def setup(bot):
+    # remove old help
+    bot.remove_command('help')
     await bot.add_cog(Base(bot))
 
 
