@@ -35,7 +35,7 @@ intent.members = True
 intent.messages = True
 intent.message_content = True  # v2
 
-bot = BOT_BASE(command_prefix=BOT_PREFIX, intents=intent)  # build bot
+bot = BOT_BASE(command_prefix=BOT_PREFIX, intents=intent, case_insensitive=True)  # build bot
 
 groups = {}
 

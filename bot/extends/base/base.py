@@ -10,8 +10,10 @@ VERSION = os.getenv('BOT_BASE_VERSION')
 
 sys.path.append('..')
 
+# class base with case insensitive
 
-class Base(commands.Cog, name='base'):
+
+class Base(commands.Cog, name='Base'):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
         self._last_member = None
@@ -77,8 +79,8 @@ class Base(commands.Cog, name='base'):
                         print(e)
         await event.send(txt)
 
-    @commands.command(name="help", help='affiche les commandes, aliases, et descripton', aliases=['h'], )
-    async def on_help(self, event):
+    @commands.command(name="help", help='affiche les commandes, aliases, et descripton', aliases=['h', '?'])
+    async def _help(self, event):
         # get all commands and sort them by category
         commandsByCat = {}
         for command in self.bot.walk_commands():
@@ -92,17 +94,17 @@ class Base(commands.Cog, name='base'):
             commandsByCat[cat] = sorted(
                 commandsByCat[cat], key=lambda x: x.name)
         # create help message
-        help = (f"```properties\n"
-                f"prefix {self.bot.command_prefix}\n")
+        help = (f"```ansi\n"
+                f"[2;34;4mprefix[0m [2;31m{self.bot.command_prefix}[0m\n")
         # add category and commands to the message
         for cat in commandsByCat:
             # example : "category : "
-            help += f"\n{cat} : \n"
+            help += f"\n[2;34;4m{cat}[0m : \n"
             for command in commandsByCat[cat]:
                 # examle : "    command [alias] : help"
                 aliases = f'''{' ' + str(command.aliases).replace("'", "") if command.aliases != [] else ''}'''
-                msg = f'\n    > {command.help}' if command.help != None else ''
-                help += f"  {command.name}{aliases}{msg}\n"
+                msg = f' -- [2;36m{command.help}[0m' if command.help != None else ''
+                help += f"  [2;33m{command.name}[0m{aliases}[0m{msg}\n"
         help += "```"
         await event.channel.send(help)
 
