@@ -12,7 +12,7 @@ sys.path.append('..')
 
 
 class Base(commands.Cog, name='base'):
-    def __init__(self, bot):
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
         self._last_member = None
 
@@ -77,8 +77,39 @@ class Base(commands.Cog, name='base'):
                         print(e)
         await event.send(txt)
 
+    @commands.command(name="help", help='affiche les commandes, aliases, et descripton', aliases=['h'], )
+    async def on_help(self, event):
+        # get all commands and sort them by category
+        commandsByCat = {}
+        for command in self.bot.walk_commands():
+            if command.cog_name not in commandsByCat:
+                commandsByCat[command.cog_name] = []
+            commandsByCat[command.cog_name].append(command)
+        # sort categories by key
+        commandsByCat = dict(sorted(commandsByCat.items()))
+        # sort commands by name alphabetically in each category
+        for cat in commandsByCat:
+            commandsByCat[cat] = sorted(
+                commandsByCat[cat], key=lambda x: x.name)
+        # create help message
+        help = (f"```properties\n"
+                f"prefix {self.bot.command_prefix}\n")
+        # add category and commands to the message
+        for cat in commandsByCat:
+            # example : "category : "
+            help += f"\n{cat} : \n"
+            for command in commandsByCat[cat]:
+                # examle : "    command [alias] : help"
+                aliases = f'''{' ' + str(command.aliases).replace("'", "") if command.aliases != [] else ''}'''
+                msg = f'\n    > {command.help}' if command.help != None else ''
+                help += f"  {command.name}{aliases}{msg}\n"
+        help += "```"
+        await event.channel.send(help)
+
 
 async def setup(bot):
+    # remove old help
+    bot.remove_command('help')
     await bot.add_cog(Base(bot))
 
 
