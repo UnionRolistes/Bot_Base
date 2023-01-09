@@ -8,4 +8,4 @@ done
 cd Bot_Base
 docker-compose $tmp config > conf-build-docker-compose.yml
 #docker-desktop force restart of all containers of the stack
-docker-compose -f conf-build-docker-compose.yml restart
+docker-compose -f conf-build-docker-compose.yml up -d --remove-orphans --force-recreate --build
