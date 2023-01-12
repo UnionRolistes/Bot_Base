@@ -1,4 +1,5 @@
 import asyncio
+import traceback
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -37,6 +38,7 @@ def load_all_extensions():
                 except Exception as e:
                     print("Failed to load import {0}.".format(file))
                     print(e)
+                    print(''.join(traceback.format_exception(None, e, e.__traceback__)))
 
 
 load_all_extensions()
