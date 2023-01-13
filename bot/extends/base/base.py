@@ -6,7 +6,6 @@ from discord.ext import commands
 from dotenv import load_dotenv
 
 load_dotenv()
-VERSION = os.getenv('BOT_BASE_VERSION')
 
 sys.path.append('..')
 
@@ -54,7 +53,7 @@ class Base(commands.Cog, name='Base'):
     # send version of the bot
     @commands.command(name="version", help='affiche la version du bot', aliases=['v'], )
     async def _version(self, event):
-        txt = f'URBot_base version : {VERSION}'
+        txt = version()
         # get directory path
         pwd = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         # for each directory
@@ -115,5 +114,8 @@ async def setup(bot):
     await bot.add_cog(Base(bot))
 
 
-# def version():
-#     return f'URBot_base version : {VERSION}'
+def version():
+    #read file
+    with open('version.txt', 'r') as f:
+        VERSION = f.read()
+        return f'URBot_base version : {VERSION}'

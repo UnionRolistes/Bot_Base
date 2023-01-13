@@ -6,10 +6,9 @@ services:
     build: ./bot #utilise le dockerfile pour cree le container a utiliser
     container_name: bot_base
     restart: always #redemarre le container si il s'eteint
-    environment:
-      - DISCORD_TOKEN=--------------------------------------- #token pour comm avec discord
-      - BOT_PREFIX=$ #prefix pour les commandes
-      - BOT_BASE_VERSION=x.x.x #version du bot
+    env_file:
+      - ./env/token.env
+      - ./env/bot.env
     volumes:
       - ./Bot/extends/base:/app/extends/base #dossier ou est l'extension de la base
   api:
@@ -19,9 +18,9 @@ services:
       - "3000:3000"
     restart: always #redemarre le container si il s'eteint
     environment:
-      #reuse les variables d'environnement du container bot_base
-      - DISCORD_TOKEN=---------------------------------------
       - PYTHONUNBUFFERED=1 #get print of python
+    env_file:
+      - ./env/token.env # get token
   php:
     image: php:8-apache
     build: ./apache #utilise le dockerfile pour cree le container a utiliser

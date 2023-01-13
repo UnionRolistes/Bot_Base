@@ -1,4 +1,9 @@
 test.yml
-.env
 
-docker-compose.yml
+__pycache__/
+
+.env
+# not load env file
+env/*
+#invert to keep default .env (keep the default.*)
+!env/default*
