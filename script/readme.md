@@ -1,39 +1,28 @@
-
 # script
 
 ## config.sh
 
-## EXT script
+il permet de mettre a jour tout les env sans avoir a tripatouiller les fichiers .env
 
-<https://github.com/bashup/dotenv>
+## config_all.sh
 
-### dotenv cli
+il permet de mettre a jour tout les env sans avoir a tripatouiller les fichiers (met aussi a jour les env de toutes les extension).env
 
-    $ dotenv --help
-        Usage:
-        dotenv [-f|--file FILE] COMMAND [ARGS...]
-        dotenv -h|--help
+## build_all.sh
 
-        Options:
-        -f, --file FILE          Use a file other than .env
+il construit tout le docker-compose avec la base et toutes les extensions
 
-        Read Commands:
-        get KEY                  Get raw value of KEY (or fail)
-        parse [KEY...]           Get trimmed KEY=VALUE lines for named keys (or all)
-        export [KEY...]          Export the named keys (or all) in shell format
+## start
 
-        Write Commands:
-        set [+]KEY[=VALUE]...    Set or unset values (in-place w/.bak); + sets default
-        puts STRING              Append STRING to the end of the file
-        generate KEY [CMD...]    Set KEY to the output of CMD unless it already exists;
-                                return the new or existing value.
+lance le docker-compose \
+(il faut avoir construit le docker-compose avant) \
+(les services serotn temporairement inacessible moins de 10s)
 
-        $ echo '  # This is my .env file' >prod.env
-        $ echo '  FOO=bar  ' >>prod.env
+## usage
 
-        $ cat prod.env
-        # This is my .env file
-        FOO=bar
-
-        $ dotenv -f prod.env get FOO
-        bar
+```bash
+    # pwd = /xxxxxxxxxxxxx/union_des_rolistes/Bot_Base
+    ./config_all.sh
+    ./build_all.sh
+    ./start.sh
+```
