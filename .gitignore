@@ -1,4 +1,4 @@
 test.yml
-bot/.env
+.env
 
 docker-compose.yml
