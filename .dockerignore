@@ -1,3 +1,4 @@
 .env
 # Bot/.env
 extends
+.pyc
