@@ -42,3 +42,4 @@ pour travailler en local penser a faire mentir le dns de votre machine pour que 
 
 - windows : `C:\WINDOWS\system32\drivers\etc\hosts`
 - linux : `/etc/hosts`
+
