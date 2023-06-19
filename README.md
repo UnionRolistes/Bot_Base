@@ -42,3 +42,8 @@ pour travailler en local penser a faire mentir le dns de votre machine pour que 
 
 - windows : `C:\WINDOWS\system32\drivers\etc\hosts`
 - linux : `/etc/hosts`
+
+
+L'utilisation du lien symbolique est la meilleur solution dans ce cas.
+car copier-coler a chaque fois ou git submodule sont des solution plus compliquer a tester pour dev.
+Cette méthode est conseillée quand on travaille sur un plugin.
