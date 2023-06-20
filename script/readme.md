@@ -26,3 +26,11 @@ lance le docker-compose \
     ./build_all.sh
     ./start.sh
 ```
+## clone bot and plug-in
+```bash
+cd Bot-Base
+./script/config_all.sh 
+./script/build_all.sh
+./script/start.sh
+./update.sh (normalemnt pas besoin)
+...
