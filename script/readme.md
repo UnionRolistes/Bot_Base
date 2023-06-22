@@ -34,3 +34,22 @@ cd Bot-Base
 ./script/start.sh
 ./update.sh (normalemnt pas besoin)
 ...
+```
+## installation et paramétrage de Docker et WSL
+
+pour windows:
+installer wsl -> https://learn.microsoft.com/fr-fr/windows/wsl/install 
+installer docker -> https://docs.docker.com/engine/install/
+
+pour linux:
+installer docker -> https://docs.docker.com/engine/install/ubuntu/
+liste des commandes:
+1-sudo apt-get install docker.io 
+2-sudo systemctl 
+3-start docker
+4-sudo usermod -aG docker your_username
+5-docker version 
+6-mkdir dossier
+7-cd dossier
+8-git clone lien-site_
+9-docker-compose -f docker-compose.yml ../Bot_Planning_python/bot/docker-compose.yml config > conf-build-docker-compose.yml
