@@ -115,7 +115,10 @@ async def setup(bot):
 
 
 def version():
-    #read file
-    with open('version.txt', 'r') as f:
-        VERSION = f.read()
+    try:
+        # Lecture du fichier
+        with open('version.txt', 'r') as f:
+            VERSION = f.read()
         return f'URBot_base version : {VERSION}'
+    except Exception as e:
+        return f'Erreur de lecture du fichier : {str(e)}'
