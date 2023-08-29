@@ -1,5 +1,6 @@
 test.yml
 compose-build.yml
+docker-compose-merge.yml
 
 __pycache__/
 
