@@ -1,0 +1,102 @@
+name: union-des-rolistes
+services:
+  api:
+    build:
+      context: /home/y/Dev/UnionRolistes-Dev/Bot_Base/api
+      dockerfile: Dockerfile
+    container_name: api_base
+    environment:
+      DISCORD_TOKEN: MTA1Mjg4MzYwOTc1MDYwNTg5NQ.GCydkL.NEVRD-PQ2xQyqVokMQomUer86K8WzTLoDJj4tU
+      PREZ_CHANNEL: "457225906075729921"
+      PYTHONUNBUFFERED: "1"
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 3000
+      published: "3000"
+      protocol: tcp
+    restart: always
+    volumes:
+    - type: bind
+      source: /home/y/Dev/UnionRolistes-Dev/Bot_Base/../Bot_Presentation/api/extends/
+      target: /app/extends/prez
+      read_only: true
+      bind:
+        create_host_path: true
+  bot:
+    build:
+      context: /home/y/Dev/UnionRolistes-Dev/Bot_Base/bot
+      dockerfile: Dockerfile
+    container_name: bot_base
+    environment:
+      BOT_BASE_VERSION: x.x.x
+      BOT_PREFIX: $$
+      BOT_PREZ_VERSION: 1.0.0
+      DISCORD_TOKEN: MTA1Mjg4MzYwOTc1MDYwNTg5NQ.GCydkL.NEVRD-PQ2xQyqVokMQomUer86K8WzTLoDJj4tU
+      URL_SITE_PRESENTATION: http://presentation.unionrolistes.fr
+    networks:
+      default: null
+    restart: always
+    volumes:
+    - type: bind
+      source: /home/y/Dev/UnionRolistes-Dev/Bot_Base/bot/extends/base
+      target: /app/extends/base
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /home/y/Dev/UnionRolistes-Dev/Bot_Base/../Bot_Presentation/bot/extends/
+      target: /app/extends/prez
+      read_only: true
+      bind:
+        create_host_path: true
+  php:
+    build:
+      context: /home/y/Dev/UnionRolistes-Dev/Bot_Base/apache
+      dockerfile: Dockerfile
+    container_name: php_base
+    depends_on:
+      api:
+        condition: service_started
+        required: true
+      bot:
+        condition: service_started
+        required: true
+    environment:
+      CLIENT_ID: "1025006085272260658"
+      CLIENT_SECRET: ylKQ8_6e0WMm_xE-jefOLipebncjativ
+      REDIRECT_URI: /php/get_token.php 
+      URL_SITE_PRESENTATION: http://presentation.unionrolistes.fr
+    image: php:8-apache
+    links:
+    - api
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: "80"
+      protocol: tcp
+    restart: always
+    volumes:
+    - type: bind
+      source: /home/y/Dev/UnionRolistes-Dev/Bot_Base/apache/vhost/000_api.conf
+      target: /etc/apache2/sites-enabled/000_api.conf
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /home/y/Dev/UnionRolistes-Dev/Bot_Base/../Bot_Presentation/web/vhost/200-UR_Prez.conf
+      target: /etc/apache2/sites-enabled/200-UR_Prez.conf
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /home/y/Dev/UnionRolistes-Dev/Bot_Base/../Bot_Presentation/web/www/
+      target: /var/www/html/Web_Presentation
+      read_only: true
+      bind:
+        create_host_path: true
+networks:
+  default:
+    name: union-des-rolistes_default

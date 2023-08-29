@@ -10,8 +10,6 @@ load_dotenv()
 sys.path.append('..')
 
 # class base with case insensitive
-
-
 class Base(commands.Cog, name='Base'):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
@@ -50,32 +48,35 @@ class Base(commands.Cog, name='Base'):
                 print(e)
         await event.send(credits+'```')
 
-    # send version of the bot
     @commands.command(name="version", help='affiche la version du bot', aliases=['v'], )
     async def _version(self, event):
-        txt = version()
-        # get directory path
-        pwd = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        # for each directory
-        for directory in os.listdir(pwd):
-            # for each file in the directory
-            for file in os.listdir(f'{pwd}/{directory}'):
-                # if the file is a python file
-                if file.endswith('.py') and not file.startswith('__'):
-                    # get the file name without the extension
-                    file_name = file[:-3]
-                    # try import the function version in the file
-                    try:
-                        print(
-                            f'try run : extends.{directory}.{file_name}.version()')
-                        module = importlib.import_module(
-                            f'extends.{directory}.{file_name}').version()
-                        try:
-                            txt += f'\n{module}'
-                        except Exception as e:
-                            print(e)
-                    except Exception as e:
-                        print(e)
+        txt = "```properties\n"
+
+        # Get the directory of the base.py file
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+
+        # Load version from version.txt file
+        try:
+            with open(os.path.join(base_dir, 'version.txt'), 'r') as f:
+                version = f.read().strip()
+            txt += f'URBot_base version : {version}\n'
+        except FileNotFoundError:
+            txt += 'Erreur : le fichier version.txt est introuvable.\n'
+        except Exception as e:
+            txt += f'Erreur lors de la lecture du fichier : {str(e)}\n'
+
+        # Get versions from other directories
+        for directory in os.listdir(base_dir):
+            try:
+                with open(os.path.join(base_dir, directory, 'version.txt'), 'r') as f:
+                    version = f.read().strip()
+                txt += f'{directory} version : {version}\n'
+            except FileNotFoundError:
+                pass  # Ignore if file doesn't exist
+            except Exception as e:
+                print(e)
+
+        txt += "```"
         await event.send(txt)
 
     @commands.command(name="help", help='affiche les commandes, aliases, et descripton', aliases=['h', '?'])
@@ -112,15 +113,3 @@ async def setup(bot):
     # remove old help
     bot.remove_command('help')
     await bot.add_cog(Base(bot))
-
-
-def version():
-    try:
-        # Lecture du fichier
-        with open('version.txt', 'r') as f:
-            VERSION = f.read()
-        return f'URBot_base version : {VERSION}'
-    except FileNotFoundError:
-        return 'Erreur : le fichier version.txt est introuvable.'
-    except Exception as e:
-        return f'Erreur lors de la lecture du fichier : {str(e)}'
