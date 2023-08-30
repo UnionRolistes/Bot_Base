@@ -48,33 +48,29 @@ class Base(commands.Cog, name='Base'):
                 print(e)
         await event.send(credits+'```')
 
-    @commands.command(name="version", help='affiche la version du bot', aliases=['v'], )
+    @commands.command(name="version", help="affiche la version du bot", aliases=["v"], )
     async def _version(self, event):
         txt = "```properties\n"
 
-        # Get the directory of the base.py file
-        base_dir = os.path.dirname(os.path.abspath(__file__))
+        # Obtenir le répertoire parent du fichier base.py
+        parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-        # Load version from version.txt file
-        try:
-            with open(os.path.join(base_dir, 'version.txt'), 'r') as f:
-                version = f.read().strip()
-            txt += f'URBot_base version : {version}\n'
-        except FileNotFoundError:
-            txt += 'Erreur : le fichier version.txt est introuvable.\n'
-        except Exception as e:
-            txt += f'Erreur lors de la lecture du fichier : {str(e)}\n'
-
-        # Get versions from other directories
-        for directory in os.listdir(base_dir):
-            try:
-                with open(os.path.join(base_dir, directory, 'version.txt'), 'r') as f:
-                    version = f.read().strip()
-                txt += f'{directory} version : {version}\n'
-            except FileNotFoundError:
-                pass  # Ignore if file doesn't exist
-            except Exception as e:
-                print(e)
+        # Parcourir les répertoires dans le répertoire parent
+        for directory in os.listdir(parent_dir):
+            # Construire le chemin vers le fichier version.txt
+            version_file_path = os.path.join(parent_dir, directory, 'version.txt')
+            
+            # Vérifier si le fichier version.txt existe
+            if os.path.exists(version_file_path):
+                try:
+                    # Lire la version depuis le fichier version.txt
+                    with open(version_file_path, 'r') as f:
+                        version = f.read().strip()
+                    txt += f"Version de {directory} : {version}\n"
+                except Exception as e:
+                    print(e)
+            else:
+                txt += f"Version de {directory} : Fichier introuvable\n"
 
         txt += "```"
         await event.send(txt)
