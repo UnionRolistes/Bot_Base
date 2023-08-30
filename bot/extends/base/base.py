@@ -48,32 +48,49 @@ class Base(commands.Cog, name='Base'):
                 print(e)
         await event.send(credits+'```')
 
-    @commands.command(name="version", help="affiche la version du bot", aliases=["v"], )
+
+    @commands.command(name="version", help='affiche la version du bot', aliases=['v'], )
     async def _version(self, event):
         txt = "```properties\n"
 
         # Obtenir le répertoire parent du fichier base.py
         parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+        # Correspondance des noms de répertoires aux noms souhaités
+        directory_names = {
+            'base': 'Bot_Base',
+            'prez': 'Bot_Presentation',
+            'planing': 'Bot_Planning'
+        }
+
         # Parcourir les répertoires dans le répertoire parent
         for directory in os.listdir(parent_dir):
-            # Construire le chemin vers le fichier version.txt
+            # Construire le chemin du fichier version.txt
             version_file_path = os.path.join(parent_dir, directory, 'version.txt')
-            
+
             # Vérifier si le fichier version.txt existe
             if os.path.exists(version_file_path):
                 try:
                     # Lire la version depuis le fichier version.txt
                     with open(version_file_path, 'r') as f:
                         version = f.read().strip()
-                    txt += f"Version de {directory} : {version}\n"
+                    
+                    # Obtenir le nom souhaité à partir de la correspondance
+                    directory_name = directory_names.get(directory, directory)
+
+                    txt += f'Version {directory_name} : {version}\n'
                 except Exception as e:
                     print(e)
             else:
-                txt += f"Version de {directory} : Fichier introuvable\n"
+                # Obtenir le nom souhaité à partir de la correspondance
+                directory_name = directory_names.get(directory, directory)
+
+                txt += f'Version {directory_name} : Fichier introuvable\n'
 
         txt += "```"
         await event.send(txt)
+
+
 
     @commands.command(name="help", help='affiche les commandes, aliases, et descripton', aliases=['h', '?'])
     async def _help(self, event):
