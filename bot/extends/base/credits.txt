@@ -4,3 +4,4 @@ URBot_base Le bot discord de l'Union des Rôlistes
     - Eὔδοξος#2170
     - Lyss#4053
     - Maestro#8364
+    - phrixus#7269
