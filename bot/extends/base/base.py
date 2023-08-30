@@ -60,7 +60,8 @@ class Base(commands.Cog, name='Base'):
         directory_names = {
             'base': 'Bot_Base',
             'prez': 'Bot_Presentation',
-            'planing': 'Bot_Planning'
+            'planing': 'Bot_Planning',
+            'site': 'Web_Site'
         }
 
         # Parcourir les répertoires dans le répertoire parent
