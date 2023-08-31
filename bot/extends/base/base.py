@@ -85,7 +85,7 @@ class Base(commands.Cog, name='Base'):
         directory_names = {
             'base': 'Bot_Base',
             'prez': 'Bot_Presentation',
-            'planing': 'Bot_Planning',
+            'planning': 'Bot_Planning',
             'site': 'Web_Site'
         }
         for directory in directory_names:
