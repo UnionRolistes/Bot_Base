@@ -1,126 +1,156 @@
-import sys
-import asyncio
-import importlib
 import os
+import asyncio
 from discord.ext import commands
 from dotenv import load_dotenv
 
 load_dotenv()
-
-sys.path.append('..')
-
-# class base with case insensitive
-
 
 class Base(commands.Cog, name='Base'):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
         self._last_member = None
 
-    async def cog_load(self):  # called when the cog is loaded
-        print(self.__class__.__name__ + " is loaded")
+    # Chargement initial du Cog
+    async def cog_load(self):
+        print(f"{self.__class__.__name__} est chargée")
 
-    @commands.command(name="ping", help='ping pong with the bot', aliases=['pong', 'p'], )
+    # Commande de ping
+    @commands.command(name="ping", help='ping pong avec le bot', aliases=['pong', 'p'])
     @commands.guild_only()
-    async def _ping(self, event):
-        await asyncio.gather(  # concurent await
-            event.message.add_reaction('🏓'),
-            event.send('Pong! 🏓 {0} ms'.format(
-                round(self.bot.latency, 3) * 1000))
+    async def _ping(self, ctx):
+        await self._send_pong_response(ctx)
+
+    # Commande d'affichage des crédits
+    @commands.command(name="credits", help='affiche les crédits', aliases=['credit', 'c'])
+    async def _credits(self, ctx):
+        credits = await self._get_credits()
+        if credits:
+            await ctx.send(credits)
+        else:
+            await ctx.send("Aucune information de crédits disponible.")
+
+    # Commande d'affichage des versions
+    @commands.command(name="version", help='affiche la version du bot', aliases=['v'])
+    async def _version(self, ctx):
+        versions = await self._get_versions()
+        if versions:
+            await ctx.send(versions)
+        else:
+            await ctx.send("Aucune information de versions disponible.")
+
+    # Commande d'aide
+    @commands.command(name="help", help='affiche les commandes, alias et description', aliases=['h', '?'])
+    async def _help(self, ctx):
+        help_msg = await self._generate_help_message()
+        await ctx.send(help_msg)
+
+    # Envoie une réponse "Pong !" avec le temps de latence du bot
+    async def _send_pong_response(self, ctx):
+        latency = round(self.bot.latency, 3) * 1000
+        await asyncio.gather(
+            ctx.message.add_reaction('🏓'),
+            ctx.send(f'Pong ! 🏓 {latency} ms')
         )
 
-    @commands.command(name="credits", help='affiche les credits', aliases=['credit', 'c'], )
-    async def _credits(self, event):
-        credits = "```properties\n"
-        # get directory path
-        pwd = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        # load local credits first
-        try:
-            with open(f'{pwd}/credits.txt', 'r') as f:
-                credits += f.read()
-        except Exception as e:
-            print(e)
-        # for each directory
-        for directory in os.listdir(pwd):
-            # read credits file
-            try:
-                with open(f'{pwd}/{directory}/credits.txt', 'r') as f:
-                    credits += '\n' + f.read()
-            except Exception as e:
-                print(e)
-        await event.send(credits+'```')
+    # Récupère les informations de crédits depuis les fichiers
+    async def _get_credits(self):
+        credits = ""
+        parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        for directory in os.listdir(parent_dir):
+            credits_file_path = os.path.join(parent_dir, directory, 'credits.txt')
+            if os.path.exists(credits_file_path):
+                try:
+                    with open(credits_file_path, 'r') as f:
+                        credits += f.read() + '\n\n'
+                except Exception as e:
+                    print(e)
+        if credits:
+            credits_lines = credits.splitlines()
+            formatted_credits = (
+                f"```ansi\n"
+                f"\x1b[1;34m{credits_lines[0]}\x1b[0m\n"  # Titre en bleu foncé
+                f"\x1b[1;32m{credits_lines[1]}\x1b[0m\n"  # Ligne en vert clair
+            )
+            for line in credits_lines[2:]:
+                formatted_credits += f"\x1b[1;36m{line}\x1b[0m\n"  # Lignes en cyan clair
+            formatted_credits += "```"
+            return formatted_credits
+        else:
+            return None
 
-    # send version of the bot
-    @commands.command(name="version", help='affiche la version du bot', aliases=['v'], )
-    async def _version(self, event):
-        txt = version()
-        # get directory path
-        pwd = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        # for each directory
-        for directory in os.listdir(pwd):
-            # for each file in the directory
-            for file in os.listdir(f'{pwd}/{directory}'):
-                # if the file is a python file
-                if file.endswith('.py') and not file.startswith('__'):
-                    # get the file name without the extension
-                    file_name = file[:-3]
-                    # try import the function version in the file
-                    try:
-                        print(
-                            f'try run : extends.{directory}.{file_name}.version()')
-                        module = importlib.import_module(
-                            f'extends.{directory}.{file_name}').version()
-                        try:
-                            txt += f'\n{module}'
-                        except Exception as e:
-                            print(e)
-                    except Exception as e:
-                        print(e)
-        await event.send(txt)
+    # Récupère les informations de versions depuis les fichiers
+    async def _get_versions(self):
+        versions = ""
+        parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        directory_names = {
+            'base': 'Bot_Base',
+            'prez': 'Bot_Presentation',
+            'planing': 'Bot_Planning',
+            'site': 'Web_Site'
+        }
+        for directory in directory_names:
+            version_file_path = os.path.join(parent_dir, directory, 'version.txt')
+            if os.path.exists(version_file_path):
+                try:
+                    with open(version_file_path, 'r') as f:
+                        version = f.read().strip()
+                    formatted_version = (
+                        f"```ansi\n"
+                        f"\x1b[1;34m{directory_names[directory]}\x1b[0m : \x1b[1;37mVersion \x1b[1;33m{version}\x1b[0m\n"
+                        f"```"
+                    )
+                    versions += formatted_version
+                except Exception as e:
+                    print(e)
+            else:
+                formatted_version = (
+                    f"```ansi\n"
+                    f"\x1b[1;34m{directory_names[directory]}\x1b[0m : \x1b[1;31mVersion introuvable\x1b[0m\n"
+                    f"```"
+                )
+                versions += formatted_version
+        if versions:
+            return versions
+        else:
+            return None
 
-    @commands.command(name="help", help='affiche les commandes, aliases, et descripton', aliases=['h', '?'])
-    async def _help(self, event):
-        # get all commands and sort them by category
-        commandsByCat = {}
+    # Génère un message d'aide avec les commandes triées par catégorie
+    async def _generate_help_message(self):
+        commands_by_category = self._get_commands_by_category()
+        help_msg = (
+            f"```ansi\n"
+            f"\x1b[2;34;4mPréfixe\x1b[0m \x1b[2;31m{self.bot.command_prefix}\x1b[0m\n\n"
+        )
+        for cat in commands_by_category:
+            category_commands = commands_by_category[cat]
+            command_list = self._get_command_list(category_commands)
+            help_msg += f"\x1b[2;34;4m{cat}\x1b[0m :\n{command_list}\n"
+        help_msg += "```"
+        return help_msg
+
+    # Trie les commandes par catégorie
+    def _get_commands_by_category(self):
+        commands_by_category = {}
         for command in self.bot.walk_commands():
-            if command.cog_name not in commandsByCat:
-                commandsByCat[command.cog_name] = []
-            commandsByCat[command.cog_name].append(command)
-        # sort categories by key
-        commandsByCat = dict(sorted(commandsByCat.items()))
-        # sort commands by name alphabetically in each category
-        for cat in commandsByCat:
-            commandsByCat[cat] = sorted(
-                commandsByCat[cat], key=lambda x: x.name)
-        # create help message
-        help = (f"```ansi\n"
-                f"[2;34;4mprefix[0m [2;31m{self.bot.command_prefix}[0m\n")
-        # add category and commands to the message
-        for cat in commandsByCat:
-            # example : "category : "
-            help += f"\n[2;34;4m{cat}[0m : \n"
-            for command in commandsByCat[cat]:
-                # examle : "    command [alias] : help"
-                aliases = f'''{' ' + str(command.aliases).replace("'", "") if command.aliases != [] else ''}'''
-                msg = f' -- [2;36m{command.help}[0m' if command.help != None else ''
-                help += f"  [2;33m{command.name}[0m{aliases}[0m{msg}\n"
-        help += "```"
-        await event.channel.send(help)
+            if command.cog_name not in commands_by_category:
+                commands_by_category[command.cog_name] = []
+            commands_by_category[command.cog_name].append(command)
+        return dict(sorted(commands_by_category.items()))
 
+    # Génère la liste de commandes pour une catégorie
+    def _get_command_list(self, commands):
+        command_list = ""
+        for command in commands:
+            aliases = self._get_command_aliases(command)
+            msg = f' -- \x1b[2;36m{command.help}\x1b[0m' if command.help is not None else ''
+            command_list += f"\x1b[2;33m{command.name}\x1b[0m{aliases}{msg}\n"
+        return command_list
 
+    # Récupère les alias d'une commande
+    def _get_command_aliases(self, command):
+        return f'''{' ' + str(command.aliases).replace("'", "") if command.aliases != [] else ''}'''
+
+# Fonction d'initialisation du Cog
 async def setup(bot):
-    # remove old help
     bot.remove_command('help')
     await bot.add_cog(Base(bot))
-
-
-def version():
-    try:
-        # Lecture du fichier
-        with open('version.txt', 'r') as f:
-            VERSION = f.read()
-        return f'URBot_base version : {VERSION}'
-    except FileNotFoundError:
-        return 'Erreur : le fichier version.txt est introuvable.'
-    except Exception as e:
-        return f'Erreur lors de la lecture du fichier : {str(e)}'
