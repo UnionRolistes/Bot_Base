@@ -1,0 +1,39 @@
+version: '3'
+name: union-des-rolistes
+
+services:
+  bot:
+    build: ${PWD}/bot #utilise le dockerfile pour cree le container a utiliser
+    container_name: bot_base
+    restart: always #redemarre le container si il s'eteint
+    env_file:
+      - ${PWD}/env/token.env
+      - ${PWD}/env/bot.env
+    volumes:
+      - ${PWD}/bot/extends/base:/app/extends/base #dossier ou est l'extension de la base
+  api:
+    build: ${PWD}/api #utilise le dockerfile pour cree le container a utiliser
+    container_name: api_base
+    ports:
+      - "3000:3000"
+    restart: always #redemarre le container si il s'eteint
+    environment:
+      - PYTHONUNBUFFERED=1 #get print of python
+    env_file:
+      - ${PWD}/env/token.env # get token
+  php:
+    image: php:8-apache
+    build: ${PWD}/apache #utilise le dockerfile pour cree le container a utiliser
+    container_name: php_base
+    volumes:
+      #  - ./apache/default-httpd.conf:/etc/apache2/apache2.conf:ro # si besoin de modifier le fichier de conf apache (normalement pas besoin)
+      - ${PWD}/apache/vhost/000_api.conf:/etc/apache2/sites-enabled/000_api.conf:ro #fichier de conf apache pour l'api
+    ports:
+      - "80:80"
+    links:
+      - api
+    restart: always
+    depends_on:
+      # attend le lancement de ces containers avant de lancer le container
+      - bot
+      - api

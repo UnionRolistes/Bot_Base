@@ -1,0 +1,2 @@
+httpd.conf doit obligatoirement etre en `UTF-8`et line ending en `LF` (Unix)
+sinon apache bug. (cat peut transformé l'encodage et les line ending)

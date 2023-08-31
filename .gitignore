@@ -1,6 +1,11 @@
-__pycache__
-src/bot/cogs/
+test.yml
+compose-build.yml
+docker-compose-merge.yml
 
-src/bot/.idea/
+__pycache__/
 
-src/urpy/.idea/
+.env
+# not load env file
+env/*
+#invert to keep default .env (keep the default.*)
+!env/default*
