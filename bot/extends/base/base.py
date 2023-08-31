@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# class base with case insensitive
 class Base(commands.Cog, name='Base'):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
