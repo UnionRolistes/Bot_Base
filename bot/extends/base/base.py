@@ -10,8 +10,6 @@ load_dotenv()
 sys.path.append('..')
 
 # class base with case insensitive
-
-
 class Base(commands.Cog, name='Base'):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
@@ -50,33 +48,50 @@ class Base(commands.Cog, name='Base'):
                 print(e)
         await event.send(credits+'```')
 
-    # send version of the bot
+
     @commands.command(name="version", help='affiche la version du bot', aliases=['v'], )
     async def _version(self, event):
-        txt = version()
-        # get directory path
-        pwd = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        # for each directory
-        for directory in os.listdir(pwd):
-            # for each file in the directory
-            for file in os.listdir(f'{pwd}/{directory}'):
-                # if the file is a python file
-                if file.endswith('.py') and not file.startswith('__'):
-                    # get the file name without the extension
-                    file_name = file[:-3]
-                    # try import the function version in the file
-                    try:
-                        print(
-                            f'try run : extends.{directory}.{file_name}.version()')
-                        module = importlib.import_module(
-                            f'extends.{directory}.{file_name}').version()
-                        try:
-                            txt += f'\n{module}'
-                        except Exception as e:
-                            print(e)
-                    except Exception as e:
-                        print(e)
+        txt = "```properties\n"
+
+        # Obtenir le répertoire parent du fichier base.py
+        parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+        # Correspondance des noms de répertoires aux noms souhaités
+        directory_names = {
+            'base': 'Bot_Base',
+            'prez': 'Bot_Presentation',
+            'planing': 'Bot_Planning',
+            'site': 'Web_Site'
+        }
+
+        # Parcourir les répertoires dans le répertoire parent
+        for directory in os.listdir(parent_dir):
+            # Construire le chemin du fichier version.txt
+            version_file_path = os.path.join(parent_dir, directory, 'version.txt')
+
+            # Vérifier si le fichier version.txt existe
+            if os.path.exists(version_file_path):
+                try:
+                    # Lire la version depuis le fichier version.txt
+                    with open(version_file_path, 'r') as f:
+                        version = f.read().strip()
+                    
+                    # Obtenir le nom souhaité à partir de la correspondance
+                    directory_name = directory_names.get(directory, directory)
+
+                    txt += f'Version {directory_name} : {version}\n'
+                except Exception as e:
+                    print(e)
+            else:
+                # Obtenir le nom souhaité à partir de la correspondance
+                directory_name = directory_names.get(directory, directory)
+
+                txt += f'Version {directory_name} : Fichier introuvable\n'
+
+        txt += "```"
         await event.send(txt)
+
+
 
     @commands.command(name="help", help='affiche les commandes, aliases, et descripton', aliases=['h', '?'])
     async def _help(self, event):
@@ -112,15 +127,3 @@ async def setup(bot):
     # remove old help
     bot.remove_command('help')
     await bot.add_cog(Base(bot))
-
-
-def version():
-    try:
-        # Lecture du fichier
-        with open('version.txt', 'r') as f:
-            VERSION = f.read()
-        return f'URBot_base version : {VERSION}'
-    except FileNotFoundError:
-        return 'Erreur : le fichier version.txt est introuvable.'
-    except Exception as e:
-        return f'Erreur lors de la lecture du fichier : {str(e)}'
