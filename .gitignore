@@ -1,6 +1,20 @@
+<<<<<<< HEAD
 __pycache__
 src/bot/cogs/
 
 src/bot/.idea/
 
 src/urpy/.idea/
+=======
+test.yml
+compose-build.yml
+.docker-compose-merge.yml
+
+__pycache__/
+
+.env
+# not load env file
+env/*
+#invert to keep default .env (keep the default.*)
+!env/default*
+>>>>>>> parent of 268b102... test
