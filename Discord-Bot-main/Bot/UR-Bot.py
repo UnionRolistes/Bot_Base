@@ -35,10 +35,11 @@ bot.remove_command('help')
 
 
 
-@bot.command(name="ping")
+@bot.command()
 @commands.guild_only()
 async def ping(ctx):
-    await  DebugBot.debug_on_ping(ctx)
+    latency = round(bot.latency * 1000)
+    await ctx.send(f"Pong ! {latency}ms")
 
 
 
