@@ -7,26 +7,29 @@ Vous trouverez ci-dessous les informations importantes concernant les bots disco
 ├─ SOMMAIRE
 │ 
 ├─ LE PROJET
-├──── Développement
 │
 ├─ BOT_BASE
-├──── Fonction
-├──── Astuce
+│  ├─ Fonction
+│  └─ Astuce
 │
 ├─ BOT_PLANNING
-├──── Utilisation
+│  └─ Utilisation
 │
 ├─ BOT_PRESENTATION
-├──── Utilisation
+│  └─ Utilisation
 │
 ├─ INSTALLER ET CONFIGURER LE PROJET EN ENTIER
-├──── Prérequis
-├──── Démarche
-├─────── 1. Créer, personnaliser et configurer tous les bots
-├─────── 2. Installer un environnement d'hébergerment (avec une machine Linux-Ubuntu)
-├─────── 3. Initialiser le bot
+│  ├─ Prérequis
+│  └─ Démarche
+│     ├─ 1. Créer, personnaliser et configurer tous les bots
+│     ├─ 2. Installer un environnement d'hébergerment (avec une machine Linux-Ubuntu)
+│     └─ 3. Initialiser le bot
 │  
 ├─ MAINTENANCE
+│   
+├─ DÉVELOPPEMENT
+│  ├─ Grafcet Bot_Planning
+│  └─ Grafcet Bot_Presentation
 │  
 ├─ CRÉDITS, PARTICIPANTS ET ORGANISATION
 ```
@@ -36,16 +39,7 @@ Vous trouverez ci-dessous les informations importantes concernant les bots disco
 ---
 ## Le projet
 Le projet regroupe trois bots discord, qui sont Bot_Base, Bot_Planning et Bot_Presentation. Ils ont chacun un but précis, que vous pouvez trouver en défilant un peu plus la page. L'ensemble conformise les présentations des utilisateurs et facilite l'annonce d'un évènement.
-      
 
-### Développement :
-Vous désirez nous venir en aide ? Merci ! Alors vous trouverez ci-après les liens vers les dépôts GitHub de [Bot_Planning](https://github.com/UnionRolistes/Bot_Planning_python) et [Bot_Presentation](https://github.com/UnionRolistes/Bot_Presentation).
-Le projet s'organise aussi autour d'une to-do list, que vous pouvez accéder à partir d'[ici](https://github.com/orgs/UnionRolistes/projects/1/views/1).
-
-Le projet fonctionne grâce à langages, qui sont **Python**, **XML** (eXtensible Markup Language), **HTML** (HyperText Markup Language), **CSS** (Cascading Style Sheets) et **Bash**.
-
-Une question particulière ? L'association Union des Rôlistes est disponible aux adresses mentionnées à la dernière section du fichier.
-                           
 
 ---
 ## Bot_Base
@@ -147,6 +141,27 @@ Pour se faire, accédez au terminal et entrez les commandes suivantes :
 En cas de souci, ou si vous désirez suggérer une amélioration au programme, 
 l'association Union des Rôlistes est disponible aux adresses mentionnées à la dernière section. 
 
+
+---
+---
+## Développement :
+Vous désirez nous venir en aide ? Merci ! Alors vous trouverez ci-après les liens vers les dépôts GitHub de [Bot_Planning](https://github.com/UnionRolistes/Bot_Planning_python) et [Bot_Presentation](https://github.com/UnionRolistes/Bot_Presentation).
+Le projet s'organise aussi autour d'une to-do list, que vous pouvez accéder à partir d'[ici](https://github.com/orgs/UnionRolistes/projects/1/views/1).
+
+Le projet fonctionne grâce à langages, qui sont **Python**, **XML** (eXtensible Markup Language), **HTML** (HyperText Markup Language), **CSS** (Cascading Style Sheets) et **Bash**.
+
+Une question particulière ? L'association Union des Rôlistes est disponible aux adresses mentionnées à la dernière section du fichier.
+   
+
+---
+### Grafcet Bot_Planning :
+![Grafcet Bot_Planning](https://cdn.discordapp.com/attachments/652207483552792587/857014008309743666/Grafcet-Planning.png?ex=666cba7e&is=666b68fe&hm=9d5bc552064ad06b98879649a7e8e233297b226e411b770e0b35dd9234e57f0b&)
+
+
+---
+### Grafcet Bot_Presentation :
+![Grafcet_P1 Bot_Presentation](https://cdn.discordapp.com/attachments/724373214993842260/872082895370588180/BotPresentation_Grafcet-page-001.jpg?ex=666cd63c&is=666b84bc&hm=0c04332eb4025dec868e083b8fe8487307d7ec78076569f097793354e4788f6d&)
+![Grafcet_P2 Bot_Presentation](https://cdn.discordapp.com/attachments/923359004086910997/1251106506556969000/BotPrez_grafcet-p2.jpg?ex=666d5f3b&is=666c0dbb&hm=ae4788958200848ed97ff7cd02d273ad85d6b7eb4062ef8011e64d9aa7e48685&)
 
 ---
 ---
