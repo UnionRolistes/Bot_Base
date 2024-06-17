@@ -37,7 +37,7 @@
 
 
 ## Description
-> Le BotPresentation(Python3.7) permet à un utilisateur d'accéder à un formulaire de présentation via la commande $prez. Les informations saisies sont ensuite mises en forme et postées sur le discord de l'union des Rôlistes via un Webhook dans la section #presentation
+> Le BotPresentation(Python3.8) permet à un utilisateur d'accéder à un formulaire de présentation via la commande $prez. Les informations saisies sont ensuite mises en forme et postées sur le discord de l'union des Rôlistes via un Webhook dans la section #presentation
 
 ## Languages utilisés
  - Py ( Python )
@@ -80,7 +80,7 @@ Il permet de simplifier l'installation d'un ou plusieurs éléments.
 #  2.1) Bot-Prez
 
   ######  https://github.com/UnionRolistes/Bot_Presentation
-  Le BotPresentation(Python3.7) permet à un utilisateur d'accéder à un formulaire de présentation via la commande $prez. Les informations saisies sont ensuite mises en forme et postées sur le discord de l'union des Rôlistes via un Webhook dans la section #presentation
+  Le BotPresentation(Python3.8) permet à un utilisateur d'accéder à un formulaire de présentation via la commande $prez. Les informations saisies sont ensuite mises en forme et postées sur le discord de l'union des Rôlistes via un Webhook dans la section #presentation
   
    ![](https://github.com/UnionRolistes/Bot_Base/blob/main/img/BotPresentation_Grafcet-page-001.jpg?raw=true)
    ![](https://github.com/UnionRolistes/Bot_Base/blob/main/img/BotPresentation_Grafcet-page-002.jpg?raw=true)
@@ -98,7 +98,7 @@ Il permet de simplifier l'installation d'un ou plusieurs éléments.
 #  3.1) Bot-planning
    >  - ###### https://github.com/UnionRolistes/Bot_Planning_python
    
-   >  - Le BotPlanning(Python3.7) et FormulaireJdR (HTML CSS PHP) est un projet lancé a l'initiative de l'Union des Rôlistes (**http://unionrolistes.fr**) un bot discord capable de générer des messages correctement mis en forme, annoncant de prochaine partie de JdR, quel soit physique ou a distance. actuellement les message finaux sont visible sur le discord de l'union des Rôlistes via un Webhook dans la section #Planning-JdR .
+   >  - Le BotPlanning(Python3.8) et FormulaireJdR (HTML CSS PHP) est un projet lancé a l'initiative de l'Union des Rôlistes (**http://unionrolistes.fr**) un bot discord capable de générer des messages correctement mis en forme, annoncant de prochaine partie de JdR, quel soit physique ou a distance. actuellement les message finaux sont visible sur le discord de l'union des Rôlistes via un Webhook dans la section #Planning-JdR .
    
  ### Installation
 	    
