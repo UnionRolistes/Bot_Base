@@ -13,7 +13,7 @@ bot_pckg="$src/$bot_pckg_name"
 urpy_pckg="$src/urpy"
 # TODO better variables
 
-python='python3.7'
+python='python3.8'
 venv='/opt/virtualenv/URBot'
 bin="$venv/bin/"
 service='Bot_Base.service'

@@ -68,7 +68,7 @@ Il suffit à l'administrateur du bot de l'initialiser avec la commande **$set <i
 ## Bot_Planning
 ### Utilisation :
 1. L'utilisateur écrit la commande **$cal**. 
-En message privé, il reçoit un lien web vers un formulaire adapté à la création d'événement. 
+En message privé, il reçoit un lien web vers un formulaire adapté à la création d'événement.
 
 
 2. Après avoir reçu les informations renseignées, le bot les met en forme et les publie dans le salon "planning".
@@ -174,6 +174,7 @@ section "Installation" et créez un lien d'invitation.
            
 
 ---
+
 ---
 ## Maintenance :
 À des fins de sécurité et de performances, il est important de mettre à jour votre système et le projet.
