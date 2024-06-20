@@ -2,36 +2,37 @@
 
 **Vous trouverez ci-dessous les informations importantes concernant les bots Discord de l'association [Union des Rôlistes](http://unionrolistes.fr) :)**
 
-
+---
 ## Sommaire
-├─ [SOMMAIRE](#sommaire)
-│ 
-├─ [LE PROJET](#le-projet)
-│
-├─ [BOT_BASE](#bot_base)
-│  ├─ [Fonction](#fonction--)
-│  └─ [Astuce](#astuce-)
-│
-├─ [BOT_PLANNING](#bot_planning)
-│  └─ [Utilisation](#utilisation-)
-│
-├─ [BOT_PRESENTATION](#bot_presentation)
-│  └─ [Utilisation](#utilisation--1)
-│
-├─ [INSTALLER ET CONFIGURER LE PROJET EN ENTIER](#installer-et-configurer-le-projet-en-entier)
-│  ├─ [Prérequis](#prérequis-)
-│  └─ [Démarche](#démarche-)
-│     ├─ [1. Créer, personnaliser et configurer tous les bots](#1-créer-personnaliser-et-configurer-tous-les-bots-)
-│     ├─ [2. Installer un environnement d'hébergerment (avec une machine Linux-Ubuntu)](#2-installer-un-environnement-dhébergement-avec-une-machine-linux-ubuntu-)
-│     └─ [3. Initialiser le bot](#3-initialiser-le-bot-)
-│  
-├─ [MAINTENANCE](#maintenance-)
-│   
-├─ [DÉVELOPPEMENT](#développement-)
-│  ├─ [Grafcet Bot_Planning](#grafcet-bot_planning-)
-│  └─ [Grafcet Bot_Presentation](#grafcet-bot_presentation-)
-│  
-└─ [CRÉDITS, PARTICIPANTS ET ORGANISATION](#crédits-participants-et-organisation)
+1. [LE PROJET](#le-projet)
+
+2.1 [BOT_BASE](#bot_base) 
+- 2.1.1 [Fonction](#fonction--)
+- 2.1.2 [Astuce](#astuce-)
+
+2.2 [BOT_PLANNING](#bot_planning)
+- 2.2.1 [Utilisation](#utilisation-)
+
+2.3 [BOT_PRESENTATION](#bot_presentation)
+- 2.2.2 [Utilisation](#utilisation--1)
+
+3. [INSTALLER ET CONFIGURER LE PROJET EN ENTIER](#installer-et-configurer-le-projet-en-entier)
+- 3.1 [Prérequis](#prérequis-)
+- 3.2 [Démarche](#démarche-)
+  - 3.2.1 [Créer, personnaliser et configurer tous les bots](#1-créer-personnaliser-et-configurer-tous-les-bots-)
+  - 3.2.2 [Installer un environnement d'hébergement (avec une machine Linux-Ubuntu)](#2-installer-un-environnement-dhébergement-avec-une-machine-linux-ubuntu-)
+  - 3.2.3 [Initialiser le bot](#3-initialiser-le-bot-)
+
+4. [MAINTENANCE](#maintenance-)
+
+5. [DÉVELOPPEMENT](#développement-)
+- 5.1 [Grafcet Bot_Planning](#grafcet-bot_planning-)
+- 5.2 [Grafcet Bot_Presentation](#grafcet-bot_presentation-)
+
+6. [CRÉDITS, PARTICIPANTS ET ORGANISATION](#crédits-participants-et-organisation)
+
+
+
 
 
 ---
