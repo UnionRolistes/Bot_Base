@@ -1,6 +1,6 @@
-**Bonjour, vous lisez ce message car vous vous intéressez à ce projet. Merci ! 
+[![forthebadge](https://forthebadge.com/images/badges/cc-nc-sa.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-markdown.svg)](https://forthebadge.com) ![](https://img.shields.io/badge/Made%20For-DISCORD-blue)
 
-Vous trouverez ci-dessous les informations importantes concernant les bots Discord. Bon code ! :)**
+**Vous trouverez ci-dessous les informations importantes concernant les bots Discord de l'association [Union des Rôlistes](http://unionrolistes.fr) :)**
 
 
 ## Sommaire
@@ -136,21 +136,21 @@ De plus, quiconque possédant cet identifiant unique, garde le contrôle total s
 À partir du système Ubuntu, ouvrir le terminal et installer toutes les mises à jour disponibles et les dépendances nécessaires, soit : 
    - Nettoyer et mettre à jour le système :
 
-> sudo apt update ; sudo apt upgrade -y ; sudo apt full-upgrade -y ; sudo apt autoremove -y ; sudo apt clean
+``` sudo apt update ; sudo apt upgrade -y ; sudo apt full-upgrade -y ; sudo apt autoremove -y ; sudo apt clean ```
 
    - Apache2 et Git : 
 
-> sudo apt install apache2 -y ; sudo apt install git -y
+``` sudo apt install apache2 -y ; sudo apt install git -y ```
 
    - Python3.8 (version spécifique au projet) : 
 
-> sudo apt install software-properties-common ; sudo add-apt-repository ppa:deadsnakes/ppa ; sudo apt install python3.8
+``` sudo apt install software-properties-common ; sudo add-apt-repository ppa:deadsnakes/ppa ; sudo apt install python3.8 ```
 
 
 ### 3. Initialiser le bot :
 - Dans le terminal, cloner le projet avec la commande suivante :
 
-> cd /usr/local/src && sudo git clone  https://github.com/UnionRolistes/Bot_Base  && cd Bot_Base && sudo bash updateBot.sh
+``` cd /usr/local/src && sudo git clone  https://github.com/UnionRolistes/Bot_Base  && cd Bot_Base && sudo bash updateBot.sh ```
 
 
 - Quand le programme vous le demande : récupérez le token du bot (précédemment noté) et entrez-le seul au terminal.
@@ -181,9 +181,9 @@ section "Installation" et créez un lien d'invitation.
 
 Pour ce faire, accédez au terminal et entrez les commandes suivantes : 
 
-> sudo apt update ; sudo apt upgrade -y ; sudo apt full-upgrade -y ; sudo apt autoremove -y ; sudo apt clean
+``` sudo apt update ; sudo apt upgrade -y ; sudo apt full-upgrade -y ; sudo apt autoremove -y ; sudo apt clean ```
 
-> cd /usr/local/src/Bot_Base && sudo git checkout . && sudo git pull && sudo bash updateBot.sh
+``` cd /usr/local/src/Bot_Base && sudo git checkout . && sudo git pull && sudo bash updateBot.sh ```
 
 En cas de souci, ou si vous désirez suggérer une amélioration au programme, 
 l'association Union des Rôlistes est disponible aux adresses mentionnées à la dernière section. 
@@ -195,8 +195,6 @@ l'association Union des Rôlistes est disponible aux adresses mentionnées à la
 Vous désirez nous venir en aide ? Merci ! 
 
 Alors, vous trouverez ci-après les liens vers les dépôts GitHub de [Bot_Planning](https://github.com/UnionRolistes/Bot_Planning_python) et [Bot_Presentation](https://github.com/UnionRolistes/Bot_Presentation).
-
-Le projet s'organise aussi autour d'une to-do list, que vous pouvez accéder à partir d'[ici](https://github.com/orgs/UnionRolistes/projects/1/views/1).
 
 Le projet fonctionne grâce à cinq langages, qui sont **Python**, **XML** (eXtensible Markup Language), **HTML** (HyperText Markup Language), **CSS** (Cascading Style Sheets) et **Bash**.
 
@@ -216,12 +214,12 @@ Une question particulière ? L'association Union des Rôlistes est disponible au
 ---
 ---
 ## Crédits, participants et organisation
-**Le projet est encadré par l'équipe de développement de l'association Union-Rôlistes.** 
-
+**Le projet est encadré par l'équipe de développement de l'association Union-Rôlistes, qui garde une to-do list, 
+dont le contenu est accessible à partir de [ce lien](https://github.com/orgs/UnionRolistes/projects/1/views/1).**
 **Ci-après les crédits pour [Bot_Base](https://github.com/UnionRolistes/Bot_Base/blob/main/credits.md), 
 [Bot_Planning](https://github.com/UnionRolistes/Bot_Planning_python/blob/master/src/cog_planning/info/credits.txt) et
 [Bot_Presentation](https://github.com/UnionRolistes/Bot_Presentation/blob/master/src/cog_presentation/info/credits.txt).**
 
 **Retrouvons-nous sur [ce site web](https://site.unionrolistes.fr), [sur facebook](https://www.facebook.com/union.rolistes/) 
-ou grâce au [serveur discord de l'association](https://discord.com/invite/rxqqBS8).**
+ou grâce au [serveur discord de l'association](http://unionrolistes.fr).**
 ### À bientôt !
