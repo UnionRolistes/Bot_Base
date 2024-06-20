@@ -88,21 +88,16 @@ HELP_DATA = {
         },
     }
 
-};
+}
 
 
 def GetMaxStrSizeInArray(array:dict,callback=None):
-    _size=0;
+    _size=0
     for cmd in array:
         _r = callback(cmd)
         if(_r > _size):
            _size = _r
     return _size
-
-
-async def on_ping(event):
-        await event.author.send("pong");
-
         
 
 async def on_message(event,*args,**kwargs):
@@ -142,6 +137,6 @@ async def on_help(event,*args):
 
     embed.set_footer(text="Union Roliste commands helper.", icon_url="https://avatars.githubusercontent.com/u/62179928?s=200&v=4")
 
-    embed.set_thumbnail(url="https://avatars.githubusercontent.com/u/62179928?s=200&v=4") # set le logo en haut a droit
+    embed.set_thumbnail(url="https://avatars.githubusercontent.com/u/62179928?s=200&v=4")  # set le logo en haut a droit
 
-    await event.channel.send(embed=embed);
+    await event.channel.send(embed=embed)
