@@ -1,128 +1,226 @@
 [![forthebadge](https://forthebadge.com/images/badges/cc-nc-sa.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-markdown.svg)](https://forthebadge.com) ![](https://img.shields.io/badge/Made%20For-DISCORD-blue)
-## Bot Python (UR-Bot)
 
-[TOCM]
+**Vous trouverez ci-dessous les informations importantes concernant les bots Discord de l'association [Union des Rôlistes](http://unionrolistes.fr) :)**
 
-[TOC]
-
-
-```
-├── Description du projet 
-├── Languages utilisés
-├── Credit , participant, organisation
-|
-├── 1) Bot Base
-│	├── - But
-│	├── -Installation
-│	└── - Usage
-|
-├── 2.1) Bot-Prez
-│ 	├── - But
-│	├── - Installation
-│	└── - Usage
-|
-├── 2.2) WebPrez
-|
-├── 3.1) Bot-planning
-|   ├── - But
-|   ├── - Installation
-|   └── - Usage
-|
-├── 3.2) Web-Planning
-├── - But
-├── - Installation
-└── - Usage
-```
-
-
-
-## Description
-> Le BotPresentation(Python3.8) permet à un utilisateur d'accéder à un formulaire de présentation via la commande $prez. Les informations saisies sont ensuite mises en forme et postées sur le discord de l'union des Rôlistes via un Webhook dans la section #presentation
-
-## Languages utilisés
- - Py ( Python )
- - XML (  eXtensible Markup Language )
- - HTML (  eXtensible Markup Language )
- - CSS (  eXtensible Markup Language )
- - sh (  Bash )
-
-
-Credits -> [credits.md](https://github.com/UnionRolistes/Bot_Base/blob/main/credits.md)
-
-  
-#  1) Bot Base
-
-######  https://github.com/UnionRolistes/Bot_Base
- Bot_Base est un repo commun aux autres projet.
-Il permet de simplifier l'installation d'un ou plusieurs éléments.
-  ### Installation         
-   **Pour une 1ère installation** : ``` "cd /usr/local/src && sudo git clone https://github.com/UnionRolistes/Bot_Base && cd Bot_Base && sudo bash updateBot.sh" ``` 
-			
-   **Pour une mise à jour** : ``` "cd /usr/local/src/Bot_Base && sudo git checkout . && sudo git pull && sudo bash updateBot.sh" ```	 
-   
- How to setup URbot - The discord bot for managing servers dedicated to rpgs 
- ---
-  ##### - 1 )   Install a linux based OS (we'll be using Debian as a reference)
-
-  ##### - 2 )  Install git
-
- ##### - 3 )  ``` "cd /usr/local/src && sudo git clone  https://github.com/UnionRolistes/Bot_Base  && cd Bot_Base && sudo bash updateBot.sh" ```
-
-  **It installs the bot and the 2 sub features** : 
-
-   1. Bot_Planning and Web_Planning 
-   2. Bot_Presentation and Web_Presentation
-				 
-   ##### - 4 )  If you want to choose the features to install --> ```"cd /usr/local/src/Bot_Base && sudo git pull && sudo bash install.sh" Then "sudo bash " ```
-
-   ##### - 5 )  Start the bot and the web sites with "cd/usr/local/src/Bot_Base && sudo bash start.sh && sudo service apache2 restart "
-
-#  2.1) Bot-Prez
-
-  ######  https://github.com/UnionRolistes/Bot_Presentation
-  Le BotPresentation(Python3.8) permet à un utilisateur d'accéder à un formulaire de présentation via la commande $prez. Les informations saisies sont ensuite mises en forme et postées sur le discord de l'union des Rôlistes via un Webhook dans la section #presentation
-  
-   ![](https://github.com/UnionRolistes/Bot_Base/blob/main/img/BotPresentation_Grafcet-page-001.jpg?raw=true)
-   ![](https://github.com/UnionRolistes/Bot_Base/blob/main/img/BotPresentation_Grafcet-page-002.jpg?raw=true)
- 
-   ### Installation
-            
-  **Pour une 1ère installation** : ``` "cd /usr/local/src && sudo git clone      https://github.com/UnionRolistes/Bot_Base && cd Bot_Base && sudo bash updateBot.sh" ```
-			
 ---
-			
-- **Pour une mise à jour** : ``` "cd /usr/local/src/Bot_Base && sudo git checkout . && sudo git pull && sudo bash updateBot.sh" ```
+## Sommaire
+1. [LE PROJET](#le-projet)
 
-#  2.2) WebPrez
+2.1 [BOT_BASE](#bot_base) 
+- 2.1.1 [Fonction](#fonction--)
+- 2.1.2 [Astuce](#astuce-)
 
-#  3.1) Bot-planning
-   >  - ###### https://github.com/UnionRolistes/Bot_Planning_python
+2.2 [BOT_PLANNING](#bot_planning)
+- 2.2.1 [Utilisation](#utilisation-)
+
+2.3 [BOT_PRESENTATION](#bot_presentation)
+- 2.2.2 [Utilisation](#utilisation--1)
+
+3. [INSTALLER ET CONFIGURER LE PROJET EN ENTIER](#installer-et-configurer-le-projet-en-entier)
+- 3.1 [Prérequis](#prérequis-)
+- 3.2 [Démarche](#démarche-)
+  - 3.2.1 [Créer, personnaliser et configurer tous les bots](#1-créer-personnaliser-et-configurer-tous-les-bots-)
+  - 3.2.2 [Installer un environnement d'hébergement (avec une machine Linux-Ubuntu)](#2-installer-un-environnement-dhébergement-avec-une-machine-linux-ubuntu-)
+  - 3.2.3 [Initialiser le bot](#3-initialiser-le-bot-)
+
+4. [MAINTENANCE](#maintenance-)
+
+5. [DÉVELOPPEMENT](#développement-)
+- 5.1 [Grafcet Bot_Planning](#grafcet-bot_planning-)
+- 5.2 [Grafcet Bot_Presentation](#grafcet-bot_presentation-)
+
+6. [CRÉDITS, PARTICIPANTS ET ORGANISATION](#crédits-participants-et-organisation)
+
+
+
+
+
+---
+---
+## Le projet
+Le projet regroupe trois bots Discord, qui sont Bot_Base, Bot_Planning et Bot_Presentation. 
+
+Ils ont chacun un but précis, que vous pouvez trouver en défilant un peu plus la page. 
+
+L'ensemble conformise les présentations des utilisateurs et facilite l'annonce d'un évènement.
+
+
+---
+## Bot_Base
+### Fonction : 
+Ce programme **regroupe les développements** communs à [Bot_Planning](https://github.com/UnionRolistes/Bot_Planning_python) et [Bot_Presentation](https://github.com/UnionRolistes/Bot_Presentation). 
+
+II **facilite** ainsi **l'installation et la maintenance** des bots.
+
+### Astuce :
+Il est à noter que [Bot_Planning](#bot_planning) et [Bot_Presentation](#bot_presentation) fonctionnent tous deux de la manière suivante :
+
+ - Un utilisateur entre une commande, qui lui retournera un formulaire en ligne auquel il doit se connecter via discord pour remplir les informations qu'il souhaite.
+
+
+ - Les données entrées sont envoyé (via webhook) au bot en question, qui met les informations renseignées en forme et les envoie ensuite dans le salon approprié. 
+
+
+ - De la même manière, le formulaire envoyé par chaque bot est constitué sur la base d'un message déjà envoyé. 
+Il suffit à l'administrateur du bot de l'initialiser avec la commande **$set <id-message-exemple>**. 
+     
+
+---
+## Bot_Planning
+### Utilisation :
+1. L'utilisateur écrit la commande **$cal**. 
+En message privé, il reçoit un lien web vers un formulaire adapté à la création d'événement.
+
+
+2. Après avoir reçu les informations renseignées, le bot les met en forme et les publie dans le salon "planning".
+
+
+3. Une fois publique, l'annonce est encore modifiable ; il suffit d'y répondre sur discord avec la commande **$edit**.
+
+
+---
+## Bot_Presentation
+### Utilisation :
+1. L'utilisateur écrit la commande **$prez**.
+En message privé, il reçoit un lien web vers un formulaire figurant des questions sur son âge, ses passions, sa profession, etc.
+
+
+2. Le bot met en forme les informations reçues par webhook et les publie dans le salon "presentation".
+
+
+3. Une fois publique, la présentation est encore modifiable ; il suffit d'y répondre sur discord avec la commande **$edit**.
    
-   >  - Le BotPlanning(Python3.8) et FormulaireJdR (HTML CSS PHP) est un projet lancé a l'initiative de l'Union des Rôlistes (**http://unionrolistes.fr**) un bot discord capable de générer des messages correctement mis en forme, annoncant de prochaine partie de JdR, quel soit physique ou a distance. actuellement les message finaux sont visible sur le discord de l'union des Rôlistes via un Webhook dans la section #Planning-JdR .
+
+---
+---
+## Installer et configurer le projet en entier
+## Prérequis :
+- Posséder un système Linux-Ubuntu. Si vous possédez un système Windows, alors vous devrez [créer une machine virtuelle](https://www.youtube.com/watch?v=1kZmKhWJtcE) (tuto réalisé par [Numelion-IT](https://www.youtube.com/@numelionIT))
+avec une image iso telle téléchargeable [ici](https://www.ubuntu-fr.org/download/).
+
+
+- Posséder un serveur où héberger les bots.
+
+```
+P.s : L'accès aux programmes est gratuit tant que vous l'hébergez vous-même.
+À contrario, l'association Union des Rôlistes est prête à vous fournir ce service pour un euro mensuel.
+Si tel est le cas, contactez l'administrateur de l'association (mentions en bas de page) sans suivre ce tutoriel.
+```
+
+
+- Posséder un bot discord (démarche expliquée dans la section ci-dessous)
+
+
+---
+## Démarche :
+### 1. Créer, personnaliser et configurer tous les bots :
+- Rendez-vous sur [ce lien](https://discord.com/developers/applications) et connectez-vous à Discord. 
+
+
+- Cliquez en haut à droite sur le bouton "New Application". 
+
+
+- Donnez un nom à votre bot. Lisez et accepter les licences qui vous sont données.
+
+
+- Configurez votre bot à vos envies et vos besoins.
+
+
+- Chercher le token unique à votre bot. Pour se faire : cliquez à gauche sur la section "Bot" et ensuite sur "Reset Token". Acceptez et noter la longue suite de caractères (vous en aurez besoin à l'étape 3). 
+
+```
+P.s : À noter qu'en perdant le token, vous devrez le reset à nouveau !
+De plus, quiconque possédant cet identifiant unique, garde le contrôle total sur le bot. Faîte donc attention !
+```
+
+### 2. Installer un environnement d'hébergement (avec une machine Linux-Ubuntu) :
+À partir du système Ubuntu, ouvrir le terminal et installer toutes les mises à jour disponibles et les dépendances nécessaires, soit : 
+   - Nettoyer et mettre à jour le système :
+
+``` sudo apt update ; sudo apt upgrade -y ; sudo apt full-upgrade -y ; sudo apt autoremove -y ; sudo apt clean ```
+
+   - Apache2 et Git : 
+
+``` sudo apt install apache2 -y ; sudo apt install git -y ```
+
+   - Python3.8 (version spécifique au projet) : 
+
+``` sudo apt install software-properties-common ; sudo add-apt-repository ppa:deadsnakes/ppa ; sudo apt install python3.8 ```
+
+
+### 3. Initialiser le bot :
+- Dans le terminal, cloner le projet avec la commande suivante :
+
+``` cd /usr/local/src && sudo git clone  https://github.com/UnionRolistes/Bot_Base  && cd Bot_Base && sudo bash updateBot.sh ```
+
+
+- Quand le programme vous le demande : récupérez le token du bot (précédemment noté) et entrez-le seul au terminal.
+
+
+- Une fois que vous lisez "Success!", invitez le bot - que vous aviez créée - sur le(s) serveur(s) de votre choix. 
+
+
+- Pour ce faire, retournez sur [votre espace Discord-Développeurs](https://discord.com/developers/applications/),
+section "Installation" et créez un lien d'invitation. 
+
+
+- Accédez à ce dernier, choisissez la destination du bot et autorisez les permissions nécessaires.
+
+
+- Enfin, véfiez que les permissions suivantes lui ont bien été attribuées : 
+**Voir les salons**, **Gérer les webhooks**, **Envoyer des messages** et **Voir les anciens messages**.
+
+
+### Félicitations ! Tous vos bots sont désormais prêts à l'emploi.
+           
+
+---
+
+---
+## Maintenance :
+À des fins de sécurité et de performances, il est important de mettre à jour votre système et le projet.
+
+Pour ce faire, accédez au terminal et entrez les commandes suivantes : 
+
+``` sudo apt update ; sudo apt upgrade -y ; sudo apt full-upgrade -y ; sudo apt autoremove -y ; sudo apt clean ```
+
+``` cd /usr/local/src/Bot_Base && sudo git checkout . && sudo git pull && sudo bash updateBot.sh ```
+
+En cas de souci, ou si vous désirez suggérer une amélioration au programme, 
+l'association Union des Rôlistes est disponible aux adresses mentionnées à la dernière section. 
+
+
+---
+---
+## Développement :
+Vous désirez nous venir en aide ? Merci ! 
+
+Alors, vous trouverez ci-après les liens vers les dépôts GitHub de [Bot_Planning](https://github.com/UnionRolistes/Bot_Planning_python) et [Bot_Presentation](https://github.com/UnionRolistes/Bot_Presentation).
+
+Le projet fonctionne grâce à cinq langages, qui sont **Python**, **XML** (eXtensible Markup Language), **HTML** (HyperText Markup Language), **CSS** (Cascading Style Sheets) et **Bash**.
+
+Une question particulière ? L'association Union des Rôlistes est disponible aux adresses mentionnées à la dernière section du fichier.
    
- ### Installation
-	    
-   **Pour une 1ère installation** : "cd /usr/local/src && sudo git clone **https://github.com/UnionRolistes/Bot_Base** && cd Bot_Base && sudo bash updateBot.sh"
 
-**Pour une mise à jour** : "cd /usr/local/src/Bot_Base && sudo git checkout . && sudo git pull && sudo bash updateBot.sh"
+---
+### Grafcet Bot_Planning :
+![Grafcet Bot_Planning](img/Grafcet-Planning.png)
 
-**how to use (in discord)** une fois sur votre serveur discord, et apres avoir vérifier que le bot (ou role des bot) pouvais ecrire dans le canal où vous vous trouvez ecrivez $cal la commande s'effacera, puis vous receverez un message privé avec les instruction.
 
-#  3.2) Web-Planning
+---
+### Grafcet Bot_Presentation :
+![Grafcet_P1 Bot_Presentation](img/BotPresentation_Grafcet-page-001.jpg)
+![Grafcet_P2 Bot_Presentation](img/BotPrez_grafcet-p2.jpg)
 
-   ###### https://github.com/UnionRolistes/Web_Planning
-   #### Web_Planning : Formulaire de création de partie
-   Le formulaire permet a un animateur (MJ) de proposer une session de JdR sur un serveur discord. Via la commande $jdr, il recoit un lien vers un formulaire, avec diverses entrées. Une fois le formulaire completé et validé, celui ci est envoyé vers le discord, et l'annonce mise en forme est alors disponible sur le discord dans le canal #planning-jdr, les joueurs potentiels peuvent alors lire et réagir pour s'y inscrire. Ensuite le MJ peut les contacter pour les informations supplémentaires, telles que la creation de personnage. 
-	 
-   #### Web_Planning : Calendrier
-   Calendrier web affichant les parties prévues. Via la commande $cal l'utilisateur reçoit le lien du calendrier Ce calendrier affiche horizontalement les parties prévues, par semaine ou par mois. Cliquer sur un événement donnera accès à plus de détails sur la partie, ainsi qu'un lien vers le message discord pour pouvoir s'y inscrire. Les administrateurs ont accès à une section permettant de pré remplir le formulaire avec les données d'une partie déjà existante, afin de la dupliquer. Ils peuvent aussi afficher tous les détails d'une partie selon une mise en forme leur permettant de copier facilement le texte pour une exportation sur les réseaux sociaux
-	 
-   ### Installation
-   **Pour une 1ère installation** : ``` "cd /usr/local/src && sudo git clone https://github.com/UnionRolistes/Bot_Base && cd Bot_Base && sudo bash updateBot.sh" sudo nano /var/www/html/Web_Planning/php/config.php.default" ``` --> Remplir ce fichier avec le Client ID, Secret ID et Redirect_URI du Bot, trouvable sur Discord developer (**https://discord.com/developers/applications**)
+---
+---
+## Crédits, participants et organisation
+**Le projet est encadré par l'équipe de développement de l'association Union-Rôlistes, qui garde une to-do list, 
+dont le contenu est accessible à partir de [ce lien](https://github.com/orgs/UnionRolistes/projects/1/views/1).**
+**Ci-après les crédits pour [Bot_Base](https://github.com/UnionRolistes/Bot_Base/blob/main/credits.md), 
+[Bot_Planning](https://github.com/UnionRolistes/Bot_Planning_python/blob/master/src/cog_planning/info/credits.txt) et
+[Bot_Presentation](https://github.com/UnionRolistes/Bot_Presentation/blob/master/src/cog_presentation/info/credits.txt).**
 
-``` sudo nano /etc/apache2/sites-available/100-UR_Planning.conf``` --> Remplacer "serverName planning.unionrolistes.fr" (ligne 9) par la redirection saisie sur votre hébergeur en ligne
-
-**Pour une mise à jour** :  ``` "cd /usr/local/src/Bot_Base && sudo git checkout . && sudo git pull && sudo bash updateBot.sh"```
-
-# TODO
-https://github.com/orgs/UnionRolistes/projects/1/views/1
+**Retrouvons-nous sur [ce site web](https://site.unionrolistes.fr), [sur facebook](https://www.facebook.com/union.rolistes/) 
+ou grâce au [serveur discord de l'association](http://unionrolistes.fr).**
+### À bientôt !

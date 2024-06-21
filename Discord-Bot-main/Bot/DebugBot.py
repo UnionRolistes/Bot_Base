@@ -35,9 +35,6 @@ def update_all_modules(func):
 async def debug_on_message(*args,**kwargs):
     return await event.on_message(*args,**kwargs)
 
-async def debug_on_ping(*args,**kwargs):
-    return await event.on_ping(*args,**kwargs)
-
 async def debug_on_prez(*args,**kwargs):
     return await event.on_prez(*args,**kwargs)    
 

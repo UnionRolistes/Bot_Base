@@ -52,6 +52,7 @@ bot = UR_BOT(command_prefix=DebugBot.event.BOT_PREFIX, intents=intent)
 bot.remove_command('help')
 
 
+
 # Commande pour changer le pseudo du bot
 @bot.command()
 async def name(ctx, *, new_name: str):
@@ -107,13 +108,21 @@ async def pfp(ctx, *, url: commands.clean_content):
                     await bot.user.edit(avatar=data)
                     await ctx.send("Photo de profil mise à jour. Redémarrez le bot pour voir le résultat.")
         else:
-            await ctx.send("Impossible de trouver le serveur discord spécifié. Veuillez contactez un administrateur.")
+            # Attraper toutes les erreurs possibles.
+            await ctx.send("Impossible de trouver le serveur discord spécifié. Veuillez contactez les développeurs du projet.")
     except aiohttp.InvalidURL:
         await ctx.send("L'URL fournie est invalide. Veuillez vérifier qu'elle ne contient pas de guillemet, "
                        "ni d'apostrophe et réessayer.")
     except Exception as e:
         await ctx.send(f"Une erreur s'est produite : {str(e)} Vérifiez votre configuration du bot ou contactez "
-                       f"les développeurs du projet pour remédier au problème.")
+                       f"les développeurs du projet.")
+
+
+@bot.command()
+@commands.guild_only()
+async def ping(ctx):
+    latency = round(bot.latency * 1000)
+    await ctx.send(f"Pong ! {latency}ms")
 
 
 @bot.command(name="help")
