@@ -140,4 +140,8 @@ async def on_help(event):
             command_list += f"`{cmd['cmd']}` : {cmd['help']}\n"
         embed.add_field(name=category, value=command_list, inline=False)
 
+        embed.add_field(name="",
+                        value="**─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─**\n\nEntrez **$help <commande>** pour plus "
+                              "d'informations concernant la commande renseignée.")
+
     await event.channel.send(embed=embed)
