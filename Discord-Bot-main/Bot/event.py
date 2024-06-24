@@ -104,6 +104,7 @@ async def on_message(event,*args,**kwargs):
     if event.content.startswith('hi'):
         await event.channel.send(f'Hello! Mis a jour : {args}')
 
+
 async def on_prez(event,*args,**kwargs):
     embed = discord.Embed(url="http://presentation.unionrolistes.fr/?webhook=https://discord.com/api/webhooks/875068900612665396/DJusy0eGs9Xyx2os-dodBVfWia2fbhfBzfmnDM9g-30ozoFYAuZBHVXaD9TKaC1wwBwg", description="⬆️ Here is the link to create your presentation.", title="Union Roliste - Presentation", color= 0x0CC1EE)
     embed.set_author(name=event.author.display_name, icon_url=event.author.avatar_url)
@@ -117,26 +118,30 @@ async def on_prez(event,*args,**kwargs):
 
     await event.author.send(embed=embed) # envoie un message de presentation privée à l'auteur qui a fait a commandes
 
-async def on_help(event,*args):
-    embed = discord.Embed(title="URBOT - helper", color= 0x0CC1EE) 
-    embed.set_author(name="UR-BOT", icon_url="https://cdn.discordapp.com/avatars/1040275175687606372/33d5a8782c1d658caeeae59799e722b0.webp?size=32")
-    
-    HELP = str(f"**prefix :    {BOT_PREFIX}**\n\n\t```diff\n")
-    for x in HELP_DATA.items():
-            HELP += f"\r+ {x[0]}\n\n\t"
-            c = GetMaxStrSizeInArray(x[1].items(),lambda a : a[1]['cmd'].__len__()) # Obtenir la chaine la plus longe pour ensuite center la fleche (->)
-            for cmd in x[1].items():
-                _offset = (c - cmd[1]["cmd"].__len__())+1 # centrage de lq flèche (->)
-                HELP += cmd[1]["cmd"]+ (" "*_offset) + "-> "+cmd[1]["help"]+"\n\t" # Ecrit la command -> description
 
-    HELP += f"\n```"
+async def on_help(event):
+    embed = discord.Embed(title="Assistance UR-Bot", color=0x000000)
+    embed.set_author(name="Union des Rôlistes", icon_url="https://cdn.discordapp.com/avatars/1040275175687606372/33d5a8782c1d658caeeae59799e722b0.webp?size=32")
+    embed.set_footer(text="Soutenez le JDR, Soutenez l'UR !")
+    embed.set_thumbnail(url="https://avatars.githubusercontent.com/u/62179928?s=200&v=4")  # Initialiser le logo de l'UR en haut à droite
 
-    embed.add_field(name="**\n**", value="**───────────────────────────────**", inline=False)
+    first_category = True  # Voir le bloc if/else pour comprendre
+    for category, commands in HELP_DATA.items():
+        # Si l'écriture de l'embed n'en est pas à sa première catégorie (About, General, Présentation, etc.), alors :
+        if not first_category:
+            # Ajouter une ligne qui sépare les catégories entre-elles.
+            embed.add_field(name="", value="**─ ─ ─ ─ ─**")
+        # Si ce n'est pas le cas, alors ne pas écrire de séparateur (meilleur rendu) :
+        else:
+            first_category = False
 
-    embed.add_field(name="**\n**", value=HELP, inline=False)
+        command_list = ""
+        for cmd in commands.values():
+            command_list += f"`{cmd['cmd']}` : {cmd['help']}\n"
+        embed.add_field(name=category, value=command_list, inline=False)
 
-    embed.set_footer(text="Union Roliste commands helper.", icon_url="https://avatars.githubusercontent.com/u/62179928?s=200&v=4")
-
-    embed.set_thumbnail(url="https://avatars.githubusercontent.com/u/62179928?s=200&v=4")  # set le logo en haut a droit
+        embed.add_field(name="",
+                        value="**─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─**\n\nEntrez **$help <commande>** pour plus "
+                              "d'informations concernant la commande renseignée.")
 
     await event.channel.send(embed=embed)
