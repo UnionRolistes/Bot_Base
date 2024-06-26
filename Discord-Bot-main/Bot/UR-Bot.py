@@ -1,61 +1,88 @@
-import discord
 from dotenv import load_dotenv
 import DebugBot
-from discord.ext import commands
 import os
+import discord
+from discord.ext import commands
 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
 
-class UR_BOT(commands.Bot):
+class UrBot(commands.Bot):
+    """
+    Classe initialisée à chaque lancement du BOT.
+    """
     async def on_ready(self):
+        """
+        Éxécution d'une action au lancement du BOT.
+        """
         print('--- We have successfully logged in as {0.user}'.format(self))
 
     async def on_message(self, message):
+        """
+        Est une méthode qui permet :
+            - d'ignorer les messages envoyés par le BOT lui-même ;
+            - d'appeler une fonction de débogage pour chaque message entrant ;
+            - de traiter et d'exécuter les commandes des utilisateurs.
+        """
         if message.author == self.user:
             return
 
         await DebugBot.debug_on_message(message)
 
-        return await bot.process_commands(message)
+        return await BOT.process_commands(message)
 
 
-intent = discord.Intents.default()
-intent.members = True
-intent.messages = True
+INTENT = discord.Intents.default()
+INTENT.members = True
+INTENT.messages = True
+BOT = UrBot(command_prefix=DebugBot.event.BOT_PREFIX, intents=INTENT)
+BOT.remove_command('help')
 
-bot = UR_BOT(command_prefix=DebugBot.event.BOT_PREFIX, intents=intent)
-bot.remove_command('help')
 
-
-@bot.command()
+@BOT.command()
 @commands.guild_only()
 async def ping(ctx):
-    latency = round(bot.latency * 1000)
+    """
+    Calcul de la latence de l'utilisateur (additionnée à celle des serveurs discord) et renvoie de cette dernière.
+    """
+    latency = round(BOT.latency * 1000)
     await ctx.send(f"Pong ! {latency}ms")
 
 
-@bot.command(name="help")
+@BOT.command(name="help")
 async def help(ctx):
+    """
+    Appel d'une méthode quand la commande est reçue.
+    """
     await DebugBot.debug_on_help(ctx)
 
 
-@bot.command(name="prez")
+@BOT.command(name="prez")
 async def prez(ctx):
+    """
+    Appel d'une méthode quand la commande est reçue.
+    """
     await DebugBot.debug_on_prez(ctx)
 
 
+# Fonction utilisée dans "reload_module".
 @DebugBot.update_all_modules
-async def reload_module():
+async def reload_all_modules():
+    """
+    Retourne 0.
+    """
     return 0
 
 
-@bot.command(aliases=['reload', 'rld'])
+# Commande Discord pour recharger les modules
+@BOT.command(aliases=['reload', 'rld'])
 async def reload_module(ctx):
-    await reload_module()
-    await ctx.channel.send("The scripts has been reloaded.")
+    """
+    Appel d'une méthode quand la commande est reçue.
+    """
+    await reload_all_modules()
+    await ctx.channel.send("The scripts have been reloaded.")
     return 0
 
-
-bot.run(TOKEN)
+BOT.run(TOKEN)
