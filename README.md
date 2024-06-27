@@ -204,13 +204,30 @@ Une question particulière ? L'association Union des Rôlistes est disponible au
 
 ---
 ### Grafcet Bot_Planning :
-![Grafcet Bot_Planning](img/Grafcet-Planning.png)
+<img src="img/Grafcet_Planning_Simple.png" alt="Grafcet simple pour Bot_Planning" width="325"/>
+<details open>
+<summary>Cliquer pour voir le grafcet en détail.</summary>
+<br>
+<img src="img/Grafcet_Planning_Details.png" alt="Grafcet détaillé pour Bot_Planning" height="650"/>
+</details>
+
+
+### Diagramme de classe Bot_Planning :
+<img src="img/unknown_2.png" alt="Diagramme de classe pour Bot_Planning" height="600">
 
 
 ---
 ### Grafcet Bot_Presentation :
-![Grafcet_P1 Bot_Presentation](img/BotPresentation_Grafcet-page-001.jpg)
-![Grafcet_P2 Bot_Presentation](img/BotPrez_grafcet-p2.jpg)
+<img src="img/Grafcet_Presentation_Simple.jpg" alt="Grafcet simple pour Bot_Presentation" height="550"/>
+<details open>
+<summary>Cliquer pour voir le grafcet en détail.</summary>
+<br>
+<img src="img/Grafcet_Presentation_Details.jpg" alt="Grafcet détaillé pour Bot_Presentation" height="600"/>
+</details>
+
+
+### Diagramme de classe Bot_Presentation
+<img src ="img/BotPresentation_ClassDiagram-page-001.jpg" alt="Diagramme de classe pour Bot_Presentation" height="550"/>
 
 ---
 ---
