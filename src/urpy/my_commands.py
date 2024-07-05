@@ -31,8 +31,41 @@ class VersionNCreditInterface(ABC):
 
 
 class MyBot(commands.Bot, VersionNCreditInterface):
+    """
+    A custom bot class that extends commands.Bot and VersionNCreditInterface
+
+    Parameters
+    ----------
+    command_prefix : str, optional
+        The prefix for bot commands (default is '$')
+    *args : tuple
+        Variable length argument list
+    **kwargs : dict
+        Arbitrary keyword arguments
+
+    Returns
+    -------
+    None
+    """
+
     @abstractmethod
     def __init__(self, command_prefix='$', *args, **kwargs):
+        """
+        Initialize the MyBot class with a command prefix and additional arguments
+
+        Parameters
+        ----------
+        command_prefix : str, optional
+            The prefix for bot commands (default is '$')
+        *args : tuple
+            Variable length argument list
+        **kwargs : dict
+            Arbitrary keyword arguments
+
+        Returns
+        -------
+        None
+        """
         super(MyBot, self).__init__(command_prefix=command_prefix, *args, **kwargs)
 
 class MyCogMeta(type(commands.Cog), VersionNCreditInterface, ABCMeta):
@@ -40,12 +73,52 @@ class MyCogMeta(type(commands.Cog), VersionNCreditInterface, ABCMeta):
 
 # TODO: shaky code, needs to be cleaned
 class MyCog(commands.Cog, VersionNCreditInterface, metaclass=MyCogMeta):
+    """
+    Initialize the MyCog class with the bot instance and domain
+
+    Parameters
+    ----------
+    bot : commands.Bot
+        The bot instance this cog is being added to
+    domain : str
+        The domain specific to this cog's functionality
+
+    Returns
+    -------
+    None
+    """
+
     def __init__(self, bot, domain):
+        """
+        Initialize the MyCog class with the bot instance and domain
+
+        Parameters
+        ----------
+        bot : commands.Bot
+            The bot instance this cog is being added to
+        domain : str
+            The domain specific to this cog's functionality
+
+        Returns
+        -------
+        None
+        """
         self.bot = bot
         self.domain = domain
 
     @commands.Cog.listener()
     async def on_ready(self):
+        """
+        Handle the event when the bot is ready
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        None
+        """
         print(f"\t| {self.qualified_name} started.")
 
 # TODO: à améliorer

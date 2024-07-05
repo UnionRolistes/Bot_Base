@@ -72,11 +72,36 @@ class URBot(urpy.MyBot):
         error_log("We have logged in as {}!".format(self.user))
 
     async def invoke(self, ctx: commands.Context):
+        """
+        Invoke a command within the context provided
+
+        Parameters
+        ----------
+        ctx : commands.Context
+            The context in which the command is being invoked
+
+        Returns
+        -------
+        None
+        """
         self.localization.set_current_user(ctx.author.id)
         await super(URBot, self).invoke(ctx)
 
     async def on_command_error(self, context, exception: commands.CommandError):
-        """ Listener to the on_command_error event. """  # TODO better docstring
+        """
+        Handle errors raised when invoking a command
+
+        Parameters
+        ----------
+        context : commands.Context
+            The context in which the command was invoked
+        exception : commands.CommandError
+            The exception that was raised during command invocation
+
+        Returns
+        -------
+        None
+        """
         if isinstance(exception, commands.UserInputError):
             await context.send(_("{err_msg}\nIncorrect usage ☹ Check help of the command for more information.").format(
                 err_msg=code_block(exception)))
@@ -94,7 +119,6 @@ class URBot(urpy.MyBot):
         """
         self.cog_general.add_to_command(command, *callbacks)
 
-
 if debug:
     cogs_path = os.path.abspath('cogs')
     token_path = '../../../bot_token'
@@ -104,6 +128,17 @@ else:
 
 
 def main():
+    """
+    Main function to initialize and run the bot
+
+    Parameters
+    ----------
+    None
+
+    Returns
+    -------
+    None
+    """
     logging.basicConfig(level=logging.INFO)
     ur_bot = URBot()
     log("Loading cogs...")
