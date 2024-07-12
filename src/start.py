@@ -1,5 +1,5 @@
 #!/opt/virtualenv/ur_bot/bin/python
-from bot.URbot import main
+from bot.urbot import main
 
 if __name__ == '__main__':
     """

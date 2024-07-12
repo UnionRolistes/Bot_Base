@@ -1,28 +1,29 @@
 from discord.ext import commands
-from bot import templates
-from bot import _, strings
-import urpy
-from urpy.utils import *
+from Bot_Base.src.bot import templates
+from Bot_Base.src.urpy.my_commands import MyBot, MyCog
+from Bot_Base.src.urpy.utils import *
+import strings
 
-#UR_Bot © 2020 by "Association Union des Rôlistes & co" is licensed under Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA)
-#To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/
-#Ask a derogation at Contact.unionrolistes@gmail.com
+
+# UR_Bot © 2020 by "Association Union des Rôlistes & co" is licensed under Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA)
+# To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/
+# Ask a derogation at Contact.unionrolistes@gmail.com
 
 class About(commands.Cog):
     """ This cog contains commands used to get general information about the bot. """
-    __doc__ = strings.About_descr
+    __doc__ = strings.ABOUT_DESCR
 
-    def __init__(self, owner: urpy.MyBot):
-        """ Creates an about cog. """
+    def __init__(self, owner: MyBot):
+        """ Creates an 'about cog'. """
         super(About, self).__init__()
         self.bot = owner
 
-    @commands.command(brief=strings.version_brief, help=strings.version_help)
+    @commands.command(brief=strings.VERSION_BRIEF, help=strings.VERSION_HELP)
     async def version(self, ctx: commands.Context):
         """ Displays the version numbers. """
         await self.send_info_msg(ctx)
 
-    @commands.command(brief=strings.credit_brief, help=strings.credit_help)
+    @commands.command(brief=strings.CREDIT_BRIEF, help=strings.CREDIT_HELP)
     async def credit(self, ctx: commands.Context):
         """ Displays the credits. """
         await self.send_info_msg(ctx, with_credits=True)
@@ -36,7 +37,7 @@ class About(commands.Cog):
                                version=cog.get_version(),
                                credits=cog.get_credits() if with_credits else "")
 
-            for name, cog in self.bot.cogs.items() if isinstance(cog, urpy.MyCog)
+            for name, cog in self.bot.cogs.items() if isinstance(cog, MyCog)
         )
 
         # sends the message
