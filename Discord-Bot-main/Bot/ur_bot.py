@@ -1,4 +1,4 @@
-import DebugBot
+import debug_bot
 import os
 import discord
 from discord.ext import commands
@@ -26,7 +26,7 @@ class UrBot(commands.Bot):
         if message.author == self.user:
             return
 
-        await DebugBot.debug_on_message(message)
+        await debug_bot.debug_on_message(message)
 
         return await BOT.process_commands(message)
 
@@ -34,7 +34,7 @@ class UrBot(commands.Bot):
 INTENT = discord.Intents.default()
 INTENT.members = True
 INTENT.messages = True
-BOT = UrBot(command_prefix=DebugBot.event.BOT_PREFIX, intents=INTENT)
+BOT = UrBot(command_prefix=debug_bot.event.BOT_PREFIX, intents=INTENT)
 BOT.remove_command('help')
 
 
@@ -53,7 +53,7 @@ async def _help(ctx):   # Ajouter un underscore évite l'erreur "Shadows built-i
     """
     Appel d'une méthode quand la commande est reçue.
     """
-    await DebugBot.debug_on_help(ctx)
+    await debug_bot.debug_on_help(ctx)
 
 
 @BOT.command(name="prez")
@@ -61,11 +61,11 @@ async def prez(ctx):
     """
     Appel d'une méthode quand la commande est reçue.
     """
-    await DebugBot.debug_on_prez(ctx)
+    await debug_bot.debug_on_prez(ctx)
 
 
 # Fonction utilisée dans "reload_module".
-@DebugBot.update_all_modules
+@debug_bot.update_all_modules
 async def reload_all_modules():
     """
     Retourne 0.
