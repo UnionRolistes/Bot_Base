@@ -1,8 +1,13 @@
-from urpy.localization import lcl
+"""
+Ce module contient les chaînes de caractères utilisées pour les messages
+et les descriptions envoyés par le bot Discord.
+"""
 
-bot_title = lcl('URbot - The discord bot of "l\'Union des Rôlistes"')
-lang_brief = lcl('Switches to specified language')
-lang_help = lcl(
+from Bot_Base.src.urpy.localization import lcl
+
+BOT_TITLE = lcl('URbot - The discord bot of "l\'Union des Rôlistes"')
+LANG_BRIEF = lcl('Switches to specified language')
+LANG_HELP = lcl(
     """\
 Switches to specified language
 
@@ -11,15 +16,15 @@ Available languages :
     - fr
     - special-rp\
 """)
-done_brief = lcl('Confirms the current action')
-done_help = lang_brief
-edit_brief = lcl('Edits a message')
-edit_help = edit_brief
-cancel_brief = lcl('Cancels the current action')
-cancel_help = cancel_brief
-version_brief = lcl('Displays the version numbers')
-version_help = version_brief
-credit_brief = lcl('Displays the credits')
-credit_help = credit_brief
-About_descr = lcl('This category groups various commands to display general information about the bot.')
-General_descr = lcl('This category groups various commands whose utility depends on the context.')
+DONE_BRIEF = lcl('Confirms the current action')
+DONE_HELP = LANG_BRIEF
+EDIT_BRIEF = lcl('Edits a message')
+EDIT_HELP = EDIT_BRIEF
+CANCEL_BRIEF = lcl('Cancels the current action')
+CANCEL_HELP = CANCEL_BRIEF
+VERSION_BRIEF = lcl('Displays the version numbers')
+VERSION_HELP = VERSION_BRIEF
+CREDIT_BRIEF = lcl('Displays the credits')
+CREDIT_HELP = CREDIT_BRIEF
+ABOUT_DESCR = lcl('This category groups various commands to display general information about the bot.')
+GENERAL_DESCR = lcl('This category groups various commands whose utility depends on the context.')
