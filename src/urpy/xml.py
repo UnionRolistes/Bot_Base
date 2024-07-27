@@ -1,59 +1,60 @@
-import pickle
-from pathlib import Path
 
-import discord
-from discord import Webhook, AsyncWebhookAdapter
-from aiohttp import ClientSession
-from lxml import etree as et
 import cgi
-from urpy.utils import error_log, log
-from urpy.localization import lcl, Localization
+from pickle import load
 import re
 from datetime import datetime
 
-#UR_Bot © 2020 by "Association Union des Rôlistes & co" is licensed under Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA)
-#To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/
-#Ask a derogation at Contact.unionrolistes@gmail.com
+from aiohttp import ClientSession
+from discord import AllowedMentions, Embed, Webhook  # , AsyncWebhookAdapter
+from lxml import etree as et
+
+from Bot_Base.src.urpy.localization import lcl, Localization
+from Bot_Base.src.urpy.utils import error_log, log
 
 
-game_tag = 'partie'
-title_tag = 'titre'
-max_players_tag = 'capacite'
-min_players_tag = 'minimum'
-nb_joined_tag = 'inscrits'
-date_tag = 'date'
-time_tag = 'heure'
-length_tag = 'duree'
-type_tag = 'type'
-mj_tag = 'mj'
-system_tag = 'systeme'
-minors_allowed_tag = 'pjMineur'
-platforms_tag = 'plateformes'
-details_tag = 'details'
-link_tag = 'lien'
+# UR_Bot © 2020 by "Association Union des Rôlistes & co" is licensed under Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA)
+# To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/
+# Ask a derogation at Contact.unionrolistes@gmail.com
 
-tags = [title_tag, max_players_tag, min_players_tag, nb_joined_tag,
-        date_tag, time_tag, length_tag, type_tag, mj_tag, system_tag,
-        minors_allowed_tag, platforms_tag, details_tag, link_tag]
+GAME_TAG = 'partie'
+TITLE_TAG = 'titre'
+MAX_PLAYER_TAG = 'capacite'
+MIN_PLAYER_TAG = 'minimum'
+NB_JOINED_TAG = 'inscrits'
+DATE_TAG = 'date'
+TIME_TAG = 'heure'
+LENGTH_TAG = 'duree'
+TYPE_TAG = 'type'
+MJ_TAG = 'mj'
+SYSTEM_TAG = 'systeme'
+MINORS_ALLOWED_TAG = 'pjMineur'
+PLATFORMS_TAG = 'plateformes'
+DETAILS_TAG = 'details'
+LINK_TAG = 'lien'
 
-tags_to_form = {
-    title_tag: 'jdr_title',
-    max_players_tag: 'maxJoueurs',
-    min_players_tag: 'minJoueurs',
-    #date_tag: 'jdr_date', car on ne veut pas que celui là s'écrive automatiquement. On veut d'abord séparer la date et l'heure et faire le mettre sous la forme Y-M-D
-    length_tag: 'jdr_length',
-    type_tag: 'jdr_type',
-    system_tag: 'jdr_system',
-    minors_allowed_tag: 'jdr_pj',
-    details_tag: 'jdr_details',
+TAGS = [TITLE_TAG, MAX_PLAYER_TAG, MIN_PLAYER_TAG, NB_JOINED_TAG,
+        DATE_TAG, TIME_TAG, LENGTH_TAG, TYPE_TAG, MJ_TAG, SYSTEM_TAG,
+        MINORS_ALLOWED_TAG, PLATFORMS_TAG, DETAILS_TAG, LINK_TAG]
+
+TAGS_TO_FORM = {
+    TITLE_TAG: 'jdr_title',
+    MAX_PLAYER_TAG: 'maxJoueurs',
+    MIN_PLAYER_TAG: 'minJoueurs',
+    # date_tag: 'jdr_date', car on ne veut pas que celui-là s'écrive automatiquement. ↓
+    # On veut d'abord séparer la date et l'heure et faire le mettre sous la forme Y-M-D
+    LENGTH_TAG: 'jdr_length',
+    TYPE_TAG: 'jdr_type',
+    SYSTEM_TAG: 'jdr_system',
+    MINORS_ALLOWED_TAG: 'jdr_pj',
+    DETAILS_TAG: 'jdr_details',
 }
 
-tags_to_lambda = {
-    nb_joined_tag: lambda f: '0',
-    #time_tag: lambda f: '15h00',
-    mj_tag: lambda f: f"&lt;@{f.getvalue('user_id')}&gt; [{f.getvalue('pseudo')}]",
-    platforms_tag: lambda f: " ".join(f.getlist('platform')),
-    link_tag: lambda f: 'https://discord.com/channels/TODO'
+TAGS_TO_LAMBDA = {
+    NB_JOINED_TAG: lambda f: '0',
+    # time_tag: lambda f: '15h00',
+    MJ_TAG: lambda f: f"&lt;@{f.getvalue('user_id')}&gt; [{f.getvalue('pseudo')}]",
+    PLATFORMS_TAG: lambda f: " ".join(f.getlist('platform')),
+    LINK_TAG: lambda f: 'https://discord.com/channels/TODO'
 }
 
 _ = lcl
@@ -61,7 +62,7 @@ _ = lcl
 
 class Calendar:
     """
-    This class allows updating an xml file that contains the data of an event calendar.
+    This class allows updating a xml file that contains the data of an event calendar.
     """
     creators_to_webhook = {}
 
@@ -72,11 +73,11 @@ class Calendar:
         @fp path to xml file
         """
         self.fp = fp
-        import os
-        from urpy import utils
-        #utils.html_header_content_type()
-        #print(os.listdir("/usr/share/urbot/"))
-        #print(open("/usr/share"))
+        # import os
+        # from Bot_Base.src.urpy import utils
+        # utils.html_header_content_type()
+        # print(os.listdir("/usr/share/urbot/"))
+        # print(open("/usr/share"))
         self.tree: et.ElementTree = et.parse(self.fp, et.XMLParser(remove_blank_text=True))
         if localization is not None:
             global _
@@ -94,63 +95,71 @@ class Calendar:
 
     def find_last_id(self) -> int:
         return max(map(lambda e: int(e.attrib['id']), self.tree.getroot()))
+
     # TODO check Publish
 
-    async def add_event(self, form: cgi.FieldStorage, embed: discord.Embed):
+    async def add_event(self, form: cgi.FieldStorage, embed: Embed):
         """ Add an event to the calendar. """
 
         print('Debug: Chargement du webhook...')
-        with open(f'/usr/local/src/URbot/wh', 'rb') as f:  # TODO clean up
-            d = pickle.load(f)
+        with open('/usr/local/src/URbot/wh', 'rb') as f:  # TODO clean up
+            d = load(f)
             print('Debug: Webhook chargé !')
-            
+
         wh_url, guild_id, channel_id = d[int(form.getvalue('user_id'))]
 
-        async with ClientSession() as client:
-            webhook: Webhook = Webhook.from_url(wh_url, adapter=AsyncWebhookAdapter(client))
+        async with ClientSession():
+            webhook: Webhook = Webhook.from_url(wh_url)  # , adapter=AsyncWebhookAdapter(client))
 
-            msg = await webhook.send("", wait=True, embed=embed, allowed_mentions=discord.AllowedMentions(users=True))
-       
+            msg = await webhook.send("", wait=True, embed=embed, allowed_mentions=AllowedMentions(users=True))
+
         try:
             root = self.tree.getroot()
             root.set('last_id', str(int(root.get('last_id')) + 1))
-            parent = et.SubElement(self.tree.getroot(), game_tag, id=root.get('last_id'))
+            parent = et.SubElement(self.tree.getroot(), GAME_TAG, id=root.get('last_id'))
 
-            for tag in tags:
+            for tag in TAGS:
                 new_elmnt = et.SubElement(parent, tag)
-                if tag in tags_to_form:
-                    new_elmnt.text = form.getvalue(tags_to_form[tag], 'NotFound')
-                elif tag == link_tag:
+                if tag in TAGS_TO_FORM:
+                    new_elmnt.text = form.getvalue(TAGS_TO_FORM[tag], 'NotFound')
+                elif tag == LINK_TAG:
                     new_elmnt.text = f"https://discord.com/channels/{guild_id}/{channel_id}/{msg.id}"
-                elif tag == date_tag:
+                elif tag == DATE_TAG:
 
-                    date_string = form.getvalue(tags_to_form[date_tag]) #On récupére la date en string (actuellement sous la forme 10/08/2021 11:00)
-                    date = datetime.strptime(date_string, "%d/%m/%Y %H:%M") #On transforme ce string en objet (Doit avoir la même mise en forme / / / : que le string cité ci-dessus)
-                    date = date.strftime("%Y-%m-%d")#On récupère uniquement la date sous la forme 2021-08-10, pour la compatibilité dans le calendrier web
-                    #Ces changements de format ne concernent pas le message Discord, déjà posté, mais l'écriture dans le xml. Le calendrier php a besoin d'une date et heure sous ce format pour fonctionner
+                    date_string = form.getvalue(TAGS_TO_FORM[
+                                                    DATE_TAG])  # On récupère la date en string (actuellement sous la forme 10/08/2021 11:00)
+                    date = datetime.strptime(date_string,
+                                             "%d/%m/%Y %H:%M")  # On transforme ce string en objet (Doit avoir la même mise en forme / / / : que le string cité ci-dessus)
+                    date = date.strftime(
+                        "%Y-%m-%d")  # On récupère uniquement la date sous la forme 2021-08-10, pour la compatibilité dans le calendrier web
+                    # Ces changements de format ne concernent pas le message Discord, déjà posté, mais l'écriture dans le xml. Le calendrier php a besoin d'une date et heure sous ce format pour fonctionner
 
                     new_elmnt.text = date
-                elif tag == time_tag:
+                elif tag == TIME_TAG:
 
-                    date_string = form.getvalue(tags_to_form[date_tag]) #On récupére la date en string (actuellement sous la forme 10/08/2021 11:00)
-                    date2 = datetime.strptime(date_string, "%d/%m/%Y %H:%M") #On transforme ce string en objet (Doit avoir la même mise en forme / / / : que le string cité ci-dessus)
-                    heure = date2.strftime("%Hh%M") #On récupère uniquement l'heure, sous la forme 12h00
+                    date_string = form.getvalue(TAGS_TO_FORM[
+                                                    DATE_TAG])  # On récupère la date en string (actuellement sous la forme 10/08/2021 11:00)
+                    date2 = datetime.strptime(date_string,
+                                              "%d/%m/%Y %H:%M")  # On transforme ce string en objet (Doit avoir la même mise en forme / / / : que le string cité ci-dessus)
+                    heure = date2.strftime("%Hh%M")  # On récupère uniquement l'heure, sous la forme 12h00
                     new_elmnt.text = heure
                 else:
-                    new_elmnt.text = tags_to_lambda[tag](form)
+                    new_elmnt.text = TAGS_TO_LAMBDA[tag](form)
         except Exception as e:
-            print("Problème lors de l'écriture dans le XML") #Si l'écriture dans le xml ne marche pas, il ne faut pas que cela empêche de poster le message sur Discord
+            print(
+                f"Problème lors de l'écriture dans le XML. Erreur : {e}")
+            # Si l'écriture dans le xml ne marche pas, il ne faut pas que cela empêche de poster le message sur Discord
 
-    def remove_event(self, id, show_errors=True):  # TODO better name for show_errors
+    def remove_event(self, ref, show_errors=True):  # TODO better name for show_errors
         root = self.tree.getroot()
 
         try:
-            root.remove(next(e for e in root if e.get('id') == str(id)))
+            root.remove(next(e for e in root if e.get('id') == str(ref)))
         except StopIteration:
             if show_errors:
-                error_log(f"Attempt to remove an event that doesn't exist. Event id : {id}")
+                error_log(f"Attempt to remove an event that doesn't exist. Event id : {ref}")
         else:
-            log(f"Event with id {id} successfully removed.")
+            log(f"Event with id {ref} successfully removed.")
 
     def remove_events(self, ids: str):
         """
@@ -164,10 +173,10 @@ class Calendar:
             if group.isnumeric():
                 self.remove_event(group)
             elif re.match("^[0-9]*-[0-9]*$", group):
-                start, end = (int(id) for id in group.split('-'))
+                start, end = (int(single_id) for single_id in group.split('-'))
                 assert start <= end
-                for id in range(start, end):
-                    self.remove_event(id, show_errors=False)
+                for single_id in range(start, end):
+                    self.remove_event(single_id, show_errors=False)
             else:
                 raise ValueError("Incorrect format of the ids' string.")
 

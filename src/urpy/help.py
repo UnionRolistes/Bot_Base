@@ -1,11 +1,11 @@
 import discord
 from discord.ext import commands
 
-#UR_Bot © 2020 by "Association Union des Rôlistes & co" is licensed under Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA)
-#To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/
-#Ask a derogation at Contact.unionrolistes@gmail.com
+# UR_Bot © 2020 by "Association Union des Rôlistes & co" is licensed under Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA)
+# To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/
+# Ask a derogation at Contact.unionrolistes@gmail.com
 
-from urpy.localization import lcl
+from Bot_Base.src.urpy.localization import lcl
 
 _ = lcl
 
@@ -17,7 +17,7 @@ class MyHelpCommand(commands.DefaultHelpCommand):
             commands_heading=lcl('Commands:'),
             no_category=lcl('No Category'), **options)  # TODO 'No Category' in french
         global _
-        # This check is necessary cause HelpCommand is deep copied every time in discord api. """
+        # This check is necessary cause HelpCommand is deeply copied every time in discord api. """
         if _ is lcl:
             _ = localization.gettext
 
@@ -35,10 +35,11 @@ class MyHelpCommand(commands.DefaultHelpCommand):
 
         signature = self.get_command_signature(command)
         self.paginator.add_line(signature, empty=True)
-        domain = getattr(command.cog, 'domain', None)
+        # 'domain = getattr(command.cog, 'domain', None)' ; la variable n'est jamais utilisée. À laisser au cas où ça
+        # servirait un futur développeur.
         if command.help:
             try:
-                self.paginator.add_line(_(command.help, domain), empty=True)
+                self.paginator.add_line(_(command.help), empty=True)
             except RuntimeError:
                 for line in command.help.splitlines():
                     self.paginator.add_line(line)  # TODO localization here
@@ -47,32 +48,35 @@ class MyHelpCommand(commands.DefaultHelpCommand):
     def get_ending_note(self):
         """:class:`str`: Returns help command's ending note. This is mainly useful to override for i18n purposes."""
         command_name = self.invoked_with
-        return _("Type {0}{1} command for more info on a command.\n"
-                 "You can also type {0}{1} category for more info on a category.").format(self.clean_prefix,
-                                                                                          command_name)
+        return _(f"Type {self.clean_prefix}{command_name} command for more info on a command.\n"
+                 f"You can also type {self.clean_prefix}{command_name} category for more info on a category.")
+        # Une erreur se produit sur 'self.clean_prefix'.
+        # En effet, l'IDE demande la création de cette méthode dans la classe.
 
-    def add_indented_commands(self, commands, *, heading, max_size=None):
-        if not commands:
+    def add_indented_commands(self, instructions, *, heading, max_size=None):
+        if not instructions:
             return
         if heading.startswith('\u200b'):
             heading = _(heading[1:-1]) + ':'
         self.paginator.add_line(_(heading[:-1]) + heading[-1])
-        max_size = max_size or self.get_max_size(commands)
+        max_size = max_size or self.get_max_size(instructions)
 
-        get_width = discord.utils._string_width
-        for command in commands:
-            domain = getattr(command.cog, 'domain', None)
+        get_width = discord.utils._string_width  # Erreur : 'Access to a protected member _string_width of a module'.
+        for command in instructions:
+            # domain = getattr(command.cog, 'domain', None) ; la variable n'est jamais utilisée. À laisser au cas où ça
+            # servirait un futur développeur.
             name = command.name
             width = max_size - (get_width(name) - len(name))
-            entry = '{0}{1:<{width}} {2}'.format(self.indent * ' ', name, _(command.short_doc, domain), width=width)
+            entry = '{0}{1:<{width}} {2}'.format(self.indent * ' ', name, _(command.short_doc), width=width)
             self.paginator.add_line(self.shorten_text(entry))
 
     async def send_cog_help(self, cog):
-        domain = getattr(cog, 'domain', None)
+        # 'domain = getattr(cog, 'domain', None)' ; la variable n'est jamais utilisée. À laisser au cas où ça
+        # servirait un futur développeur.
         if cog.description:
-            self.paginator.add_line(_(cog.description, domain), empty=True)
+            self.paginator.add_line(_(cog.description), empty=True)
         filtered = await self.filter_commands(cog.get_commands(), sort=self.sort_commands)
-        self.add_indented_commands(filtered, heading=_(self.commands_heading, domain))
+        self.add_indented_commands(filtered, heading=_(self.commands_heading))
 
         note = self.get_ending_note()
         if note:

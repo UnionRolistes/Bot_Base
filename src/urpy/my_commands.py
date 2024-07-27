@@ -1,14 +1,12 @@
-from functools import partial
-from types import MethodType
+from abc import ABC, ABCMeta, abstractmethod
 
-import discord
 from discord.ext import commands
-from importlib import resources
-from abc import ABC, abstractmethod, ABCMeta
 
-#UR_Bot © 2020 by "Association Union des Rôlistes & co" is licensed under Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA)
-#To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/
-#Ask a derogation at Contact.unionrolistes@gmail.com
+
+# UR_Bot © 2020 by "Association Union des Rôlistes & co" is licensed under Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA)
+# To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/
+# Ask a derogation at Contact.unionrolistes@gmail.com
+
 
 class VersionNCreditInterface(ABC):
     @staticmethod
@@ -35,11 +33,13 @@ class MyBot(commands.Bot, VersionNCreditInterface):
     def __init__(self, command_prefix='$', *args, **kwargs):
         super(MyBot, self).__init__(command_prefix=command_prefix, *args, **kwargs)
 
-class MyCogMeta(type(commands.Cog), VersionNCreditInterface, ABCMeta):
+
+class MyCogMeta(type(commands.Cog), VersionNCreditInterface, ABCMeta, ABC):
     pass
 
+
 # TODO: shaky code, needs to be cleaned
-class MyCog(commands.Cog, VersionNCreditInterface, metaclass=MyCogMeta):
+class MyCog(commands.Cog, VersionNCreditInterface, ABC, metaclass=MyCogMeta):
     def __init__(self, bot, domain):
         self.bot = bot
         self.domain = domain
@@ -48,8 +48,9 @@ class MyCog(commands.Cog, VersionNCreditInterface, metaclass=MyCogMeta):
     async def on_ready(self):
         print(f"\t| {self.qualified_name} started.")
 
+
 # TODO: à améliorer
-from functools import wraps
+# from functools import wraps
 
 
 # def add_to_comm(name):
@@ -62,7 +63,7 @@ from functools import wraps
 #     return decorator
 
 
-    # args[0].bot.add_to_command(name, partial(func, args[0]))
+# args[0].bot.add_to_command(name, partial(func, args[0]))
 #
 # class Test:
 #     def __init__(self, name):
