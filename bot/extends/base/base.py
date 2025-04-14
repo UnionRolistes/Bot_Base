@@ -1,9 +1,7 @@
 import os
 import asyncio
 from discord.ext import commands
-from dotenv import load_dotenv
 
-load_dotenv()
 
 class Base(commands.Cog, name='Base'):
     def __init__(self, bot: commands.Bot):
@@ -21,11 +19,11 @@ class Base(commands.Cog, name='Base'):
         await self._send_pong_response(ctx)
 
     # Commande d'affichage des crédits
-    @commands.command(name="credits", help='affiche les crédits', aliases=['credit', 'c'])
+    @commands.command(name="credentials", help='affiche les crédits', aliases=['credit', 'c'])
     async def _credits(self, ctx):
-        credits = await self._get_credits()
-        if credits:
-            await ctx.send(credits)
+        credentials = await self._get_credits()
+        if credentials:
+            await ctx.send(credentials)
         else:
             await ctx.send("Aucune information de crédits disponible.")
 
@@ -53,19 +51,20 @@ class Base(commands.Cog, name='Base'):
         )
 
     # Récupère les informations de crédits depuis les fichiers
-    async def _get_credits(self):
-        credits = ""
+    @staticmethod
+    async def _get_credits():
+        credentials = ""
         parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         for directory in os.listdir(parent_dir):
             credits_file_path = os.path.join(parent_dir, directory, 'credits.txt')
             if os.path.exists(credits_file_path):
                 try:
                     with open(credits_file_path, 'r') as f:
-                        credits += f.read() + '\n\n'
+                        credentials += f.read() + '\n\n'
                 except Exception as e:
                     print(e)
-        if credits:
-            credits_lines = credits.splitlines()
+        if credentials:
+            credits_lines = credentials.splitlines()
             formatted_credits = (
                 f"```ansi\n"
                 f"\x1b[1;34m{credits_lines[0]}\x1b[0m\n"  # Titre en bleu foncé
@@ -79,7 +78,8 @@ class Base(commands.Cog, name='Base'):
             return None
 
     # Récupère les informations de versions depuis les fichiers
-    async def _get_versions(self):
+    @staticmethod
+    async def _get_versions():
         versions = ""
         parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         directory_names = {
@@ -138,17 +138,19 @@ class Base(commands.Cog, name='Base'):
         return dict(sorted(commands_by_category.items()))
 
     # Génère la liste de commandes pour une catégorie
-    def _get_command_list(self, commands):
+    def _get_command_list(self, instructions):
         command_list = ""
-        for command in commands:
+        for command in instructions:
             aliases = self._get_command_aliases(command)
             msg = f' -- \x1b[2;36m{command.help}\x1b[0m' if command.help is not None else ''
             command_list += f"\x1b[2;33m{command.name}\x1b[0m{aliases}{msg}\n"
         return command_list
 
     # Récupère les alias d'une commande
-    def _get_command_aliases(self, command):
+    @staticmethod
+    def _get_command_aliases(command):
         return f'''{' ' + str(command.aliases).replace("'", "") if command.aliases != [] else ''}'''
+
 
 # Fonction d'initialisation du Cog
 async def setup(bot):

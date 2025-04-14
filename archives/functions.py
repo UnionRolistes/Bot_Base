@@ -2,7 +2,7 @@
 Ci-dessous se trouvent les trois commandes qui étaient demandées dans un ticket. Voici une description de ces dernières :
     • name : change le nickname du bot sur le serveur où est tapée la commande. Le nom initial (qui apparaît sur chaque serveur) ne change pas.
 Pourtant, il est possible de changer ce dernier. Cependant, Discord y impose une limite (deux changements par heure).
---> Faudrait-il garder la première option ou coder la deuxième ; faire les deux ?
+→ Faudrait-il garder la première option ou coder la deuxième ; faire les deux ?
 
     • description : change le message d'état de présence du bot.
 On ne peut malheureusement pas changer la section "À propos de moi" par une commande.

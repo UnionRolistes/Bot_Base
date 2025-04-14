@@ -1,10 +1,11 @@
 import gettext
 
-#UR_Bot © 2020 by "Association Union des Rôlistes & co" is licensed under Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA)
-#To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/
-#Ask a derogation at Contact.unionrolistes@gmail.com
 
-def lcl(s: str, domain=None):
+# UR_Bot © 2020 by "Association Union des Rôlistes & co" is licensed under Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA)
+# To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/
+# Ask a derogation at Contact.unionrolistes@gmail.com
+
+def lcl(s: str):
     """ Marks a string for localization. """
     return s
 
@@ -21,7 +22,7 @@ class Localization:  # TODO default localedir
         # TODO add handling of several domains (context manager)
         # TODO autoload
 
-    def add_translation(self, domain, codes, *aliases):  # TODO make aliases
+    def add_translation(self, domain, codes):  # TODO make aliases et ajouter ici le paramètre '*aliases'
         language = gettext.translation(domain, self._localedir, codes, fallback=True)
         if codes[0] not in self.languages:
             self.languages[codes[0]] = {}

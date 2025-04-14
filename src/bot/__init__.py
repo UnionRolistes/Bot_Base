@@ -1,6 +1,5 @@
-import gettext
 
-from urpy import Localization
+from Bot_Base.src.urpy.localization import Localization
 
 import platform
 
