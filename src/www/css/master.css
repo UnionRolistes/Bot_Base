@@ -1,37 +1,40 @@
-
-
-/*Police et taille d'écriture : */
+/* Police et taille d'écriture : */
 html {
+  /* 3 */
+  color: white;
   /* 1 */
- font-size: 16px;
+  font-size: 16px;
   font-weight: normal;
   line-height: 1.5;
   /* 2 */
+  -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  /* 3 */
-  color: white;
 }
-body{
-padding: 20px;
-overflow: auto;
-background-color: #23272A;
+
+body {
+  background-color: #23272A;
+  overflow: auto;
+  padding: 20px;
 }
-.titleCenter{ /*!IMPORTANT, utilisé dans plusieurs pages*/
-text-align: center;
+
+.titleCenter { /* !IMPORTANT, utilisé dans plusieurs pages*/
+  text-align: center;
 }
-.divCenter{
+
+.divCenter {
   margin: 0 auto;
 }
 
-
-/*Cadre : */
+/* Cadre : */
 #UR {
-  padding: 1.2em;
-  width: 85%; /*Taille horizontale du formulaire*/
-  margin-left: 7%;
-  border : 1px solid #000;
+  background: #2c2f33;
+  border: 1px solid #000;
   box-shadow: 5px 8px 6px black;
-  background: #2C2F33;
+  margin-left: 7%;
+  padding: 1.2em;
+  width: 85%; /* Taille horizontale du formulaire */
 }
 
-a{ text-decoration: none; }
+a {
+  text-decoration: none;
+}
