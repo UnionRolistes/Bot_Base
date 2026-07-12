@@ -39,7 +39,7 @@ class URBot(MyBot):
         """
         Creates an instance of URBot. Use the run method to start it.
         """
-        self.localization = localization  # TODO move localization to urpy
+        self.localization = localization.Localization()
         super(URBot, self).__init__(settings.COMMAND_PREFIX, help_command=MyHelpCommand(self.localization))
         self.cog_general = General(self)
 
@@ -69,8 +69,7 @@ class URBot(MyBot):
         error_log("We have logged in as {}!".format(self.user))
 
     async def invoke(self, ctx: commands.Context):
-        localisation = localization.Localization()
-        self.localization.Localization.set_current_user(localisation, ctx.author.id)
+        self.localization.set_current_user(ctx.author.id)
         await super(URBot, self).invoke(ctx)
 
     async def on_command_error(self, context, exception: commands.CommandError):
@@ -149,9 +148,12 @@ def main():
                         f"The package \'{dir_entry.name}\' does not contain a module named \'cog.py\' (in {dir_entry.path}. //{e}")
 
                 else:
-                    # retrieves all discord.Cog based classes
+                    # retrieves all discord.Cog based classes actually defined in this module
+                    # (not just imported into its namespace, e.g. MyCog pulled in via `from
+                    # ...my_commands import *`, which would otherwise get instantiated too)
                     cog_classes = filter(
-                        lambda member: inspect.isclass(member[1]) and issubclass(member[1], commands.Cog),
+                        lambda member: inspect.isclass(member[1]) and issubclass(member[1], commands.Cog)
+                        and member[1].__module__ == module.__name__,
                         inspect.getmembers(module))
                     for cog in cog_classes:
                         # adds cog to the bot

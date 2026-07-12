@@ -1,0 +1,11 @@
+services:
+  urbot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: urbot
+    restart: unless-stopped
+    volumes:
+      # Secret jamais committé ni copié dans l'image : monté au runtime,
+      # exactement comme config.json pour le bot rolelist.
+      - ./.bot_token:/usr/local/src/URbot/.bot_token:ro
