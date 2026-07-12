@@ -18,3 +18,6 @@ env/*
 #invert to keep default .env (keep the default.*)
 !env/default*
 >>>>>>> parent of 268b102... test
+
+# Données runtime de l'API planning (events.xml, webhooks.json)
+api-data/

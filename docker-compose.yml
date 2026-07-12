@@ -9,3 +9,20 @@ services:
       # Secret jamais committé ni copié dans l'image : monté au runtime,
       # exactement comme config.json pour le bot rolelist.
       - ./.bot_token:/usr/local/src/URbot/.bot_token:ro
+    environment:
+      # Base URL de l'API planning, jointe via le réseau Docker interne du stack.
+      - PLANNING_API_BASE_URL=http://planning-api:3000
+
+  planning-api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: planning-api
+    restart: unless-stopped
+    ports:
+      # Publié sur l'hôte car le CGI de Web_Planning tourne nativement sous Apache
+      # sur le VPS (pas dans un conteneur), il appelle donc http://localhost:3000.
+      - "3000:3000"
+    volumes:
+      # events.xml + webhooks.json : données réelles, persistées hors du conteneur.
+      - ./api-data:/data
