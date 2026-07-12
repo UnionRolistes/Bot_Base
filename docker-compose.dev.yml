@@ -1,0 +1,19 @@
+################################################################
+# Instance de dev/test d'URbot — même code, jeton et cible différents.
+# Ne lance pas planning-api (pas besoin pour tester des commandes de
+# base, et éviterait un conflit de port avec l'instance de prod).
+################################################################
+services:
+  urbot-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: urbot-dev
+    restart: unless-stopped
+    volumes:
+      - ./.bot_token:/usr/local/src/URbot/.bot_token:ro
+    environment:
+      # Salon Discord auquel restreindre les réponses du bot (voir
+      # src/bot/urbot.py) — laisser vide/absent pour un comportement
+      # normal (tous les salons, comme la prod).
+      - RESTRICT_TO_CHANNEL_ID=1526011382418641079
