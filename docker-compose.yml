@@ -21,8 +21,9 @@ services:
     restart: unless-stopped
     ports:
       # Publié sur l'hôte car le CGI de Web_Planning tourne nativement sous Apache
-      # sur le VPS (pas dans un conteneur), il appelle donc http://localhost:3000.
-      - "3000:3000"
+      # sur le VPS (pas dans un conteneur), il appelle donc http://localhost:3001.
+      # 3001 et non 3000 : le port 3000 est déjà pris par le conteneur MillstoneSteam.
+      - "3001:3000"
     volumes:
       # events.xml + webhooks.json : données réelles, persistées hors du conteneur.
       - ./api-data:/data
