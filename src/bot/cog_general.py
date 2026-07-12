@@ -16,7 +16,7 @@ _ = gettext.gettext
 
 class General(commands.Cog):
     """Cog contenant des commandes générales pour le bot."""
-    __doc__ = strings.General_descr
+    __doc__ = strings.GENERAL_DESCR
 
     def __init__(self, ur_bot: MyBot):
         """Initialise une instance spécifiée plus haut."""
@@ -33,22 +33,22 @@ class General(commands.Cog):
         for callback in self.callbacks[command]:
             await callback(ctx)
 
-    @commands.command(brief=strings.edit_brief, help=strings.edit_help)
+    @commands.command(brief=strings.EDIT_BRIEF, help=strings.EDIT_HELP)
     async def edit(self, ctx):
         """Call callbacks bound to the edit command."""
         await self.call_callbacks('edit', ctx)
 
-    @commands.command(brief=strings.done_brief, help=strings.done_help)
+    @commands.command(brief=strings.DONE_BRIEF, help=strings.DONE_HELP)
     async def done(self, ctx):
         """Call callbacks bound to the done command."""
         await self.call_callbacks('done', ctx)
 
-    @commands.command(brief=strings.cancel_brief)
+    @commands.command(brief=strings.CANCEL_BRIEF)
     async def cancel(self, ctx):
         """Call callbacks bound to the cancel command."""
         await self.call_callbacks('cancel', ctx)
 
-    @commands.command(brief=strings.lang_brief, help=strings.lang_help)
+    @commands.command(brief=strings.LANG_BRIEF, help=strings.LANG_HELP)
     async def lang(self, ctx: commands.Context, language):
         """Switches to specified language"""
         if self.localization.set_user_language(ctx.author.id):
