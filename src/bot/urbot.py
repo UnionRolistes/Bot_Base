@@ -127,6 +127,21 @@ def main():
 
     logging.basicConfig(level=logging.INFO)
     ur_bot = URBot()
+
+    # Restreint le bot à un seul salon si RESTRICT_TO_CHANNEL_ID est défini
+    # (instance de dev/test) ; n'affecte pas la prod, qui ne définit pas
+    # cette variable. Vérification globale : s'applique à toutes les
+    # commandes de tous les cogs, sans toucher à leur code.
+    restrict_channel_id = os.environ.get('RESTRICT_TO_CHANNEL_ID')
+    if restrict_channel_id:
+        restrict_channel_id = int(restrict_channel_id)
+
+        @ur_bot.check
+        def restrict_to_channel(ctx):
+            return ctx.channel.id == restrict_channel_id
+
+        log(f"Restreint au salon {restrict_channel_id}")
+
     log("Loading cogs...")
     # adds the "cogs" folder to the import path
     sys.path.append(COGS_PATH)
