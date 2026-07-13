@@ -40,25 +40,27 @@ class MyHelpCommand(commands.DefaultHelpCommand):
         """
 
         if command.description:
-            self.paginator.add_line(_(command.description), empty=True)
+            self.paginator.add_line(f'{DESCRIPTION_COLOR}{_(command.description)}{RESET_COLOR}', empty=True)
 
         signature = self.get_command_signature(command)
-        self.paginator.add_line(signature, empty=True)
+        self.paginator.add_line(f'{COMMAND_COLOR}{signature}{RESET_COLOR}', empty=True)
         # 'domain = getattr(command.cog, 'domain', None)' ; la variable n'est jamais utilisée. À laisser au cas où ça
         # servirait un futur développeur.
         if command.help:
             try:
-                self.paginator.add_line(_(command.help), empty=True)
+                self.paginator.add_line(f'{DESCRIPTION_COLOR}{_(command.help)}{RESET_COLOR}', empty=True)
             except RuntimeError:
+                self.paginator.add_line(DESCRIPTION_COLOR)
                 for line in command.help.splitlines():
                     self.paginator.add_line(line)  # TODO localization here
-                self.paginator.add_line()
+                self.paginator.add_line(RESET_COLOR)
 
     def get_ending_note(self):
         """:class:`str`: Returns help command's ending note. This is mainly useful to override for i18n purposes."""
         command_name = self.invoked_with
-        return _(f"Type {self.clean_prefix}{command_name} command for more info on a command.\n"
+        note = _(f"Type {self.clean_prefix}{command_name} command for more info on a command.\n"
                  f"You can also type {self.clean_prefix}{command_name} category for more info on a category.")
+        return f'{DESCRIPTION_COLOR}{note}{RESET_COLOR}'
         # Une erreur se produit sur 'self.clean_prefix'.
         # En effet, l'IDE demande la création de cette méthode dans la classe.
 
@@ -88,7 +90,7 @@ class MyHelpCommand(commands.DefaultHelpCommand):
         # 'domain = getattr(cog, 'domain', None)' ; la variable n'est jamais utilisée. À laisser au cas où ça
         # servirait un futur développeur.
         if cog.description:
-            self.paginator.add_line(_(cog.description), empty=True)
+            self.paginator.add_line(f'{DESCRIPTION_COLOR}{_(cog.description)}{RESET_COLOR}', empty=True)
         filtered = await self.filter_commands(cog.get_commands(), sort=self.sort_commands)
         self.add_indented_commands(filtered, heading=_(self.commands_heading))
 
