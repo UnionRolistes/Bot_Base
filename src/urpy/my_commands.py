@@ -1,5 +1,6 @@
 from abc import ABC, ABCMeta, abstractmethod
 
+import discord
 from discord.ext import commands
 
 
@@ -117,5 +118,11 @@ class MyContext(commands.Context):
         if 'delete_after' not in kwargs:
             kwargs['delete_after'] = self.delete_after
 
-        await self.message.delete(delay=kwargs['delete_after'])
+        try:
+            # supprimer le message d'origine est cosmetique : si le bot n'a pas la
+            # permission "Gerer les messages" sur ce salon, on renonce plutot que de
+            # laisser l'exception avorter la commande avant l'envoi de la reponse.
+            await self.message.delete(delay=kwargs['delete_after'])
+        except discord.HTTPException:
+            pass
         await super().send(content, **kwargs)
