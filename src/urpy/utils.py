@@ -58,8 +58,30 @@ async def get_informations(msg: discord.Message):
     return infos
 
 
+# Couleurs "dim" (2;3x) rendues par le client Discord dans un code block ```ansi.
+HEADING_COLOR = '\x1b[2;34;4m'  # bleu, souligne
+COMMAND_COLOR = '\x1b[2;33m'  # jaune
+DESCRIPTION_COLOR = '\x1b[2;36m'  # cyan
+SUCCESS_COLOR = '\x1b[2;32m'  # vert
+ERROR_COLOR = '\x1b[2;31m'  # rouge
+RESET_COLOR = '\x1b[0m'
+
+
 def code_block(s):
     return f"```{s}```"
+
+
+def ansi_block(s):
+    return f"```ansi\n{s}```"
+
+
+def colorize(s, color=DESCRIPTION_COLOR):
+    return f'{color}{s}{RESET_COLOR}'
+
+
+def colored_message(s, color=SUCCESS_COLOR):
+    """Wraps a plain bot message in a colored ```ansi code block."""
+    return ansi_block(colorize(s, color))
 
 
 def edit_fmt(s):

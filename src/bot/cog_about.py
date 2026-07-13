@@ -34,15 +34,17 @@ class About(commands.Cog):
         services = "\n\n".join(
             formatted_template(templates, 'service_template.txt',
                                name=cog.get_name(),
-                               version=cog.get_version(),
-                               credits=cog.get_credits() if with_credits else "")
+                               version=colorize(cog.get_version(), COMMAND_COLOR),
+                               credits=colorize(cog.get_credits(), DESCRIPTION_COLOR) if with_credits else "")
 
             for name, cog in self.bot.cogs.items() if isinstance(cog, MyCog)
         )
 
-        # sends the message
-        await ctx.send(code_block(formatted_template(templates, 'version_template.txt',
-                                                     version=self.bot.get_version(),
+        # sends the message. Le nom du bot et des services reste non colore : le padding des
+        # soulignements '====='/'-----' de formatted_template se calcule sur ces lignes, et des
+        # codes ANSI y fausseraient la longueur visible.
+        await ctx.send(ansi_block(formatted_template(templates, 'version_template.txt',
+                                                     version=colorize(self.bot.get_version(), COMMAND_COLOR),
                                                      name=self.bot.get_name(),
                                                      services=services,
-                                                     credits=self.bot.get_credits() if with_credits else "")))
+                                                     credits=colorize(self.bot.get_credits(), DESCRIPTION_COLOR) if with_credits else "")))

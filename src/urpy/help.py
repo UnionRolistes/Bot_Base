@@ -6,15 +6,9 @@ from discord.ext import commands
 # Ask a derogation at Contact.unionrolistes@gmail.com
 
 from Bot_Base.src.urpy.localization import lcl
+from Bot_Base.src.urpy.utils import HEADING_COLOR, COMMAND_COLOR, DESCRIPTION_COLOR, RESET_COLOR
 
 _ = lcl
-
-
-# Couleurs "dim" (2;3x) rendues par le client Discord dans un code block ```ansi.
-HEADING_COLOR = '\x1b[2;34;4m'  # bleu, souligné
-COMMAND_COLOR = '\x1b[2;33m'  # jaune
-DESCRIPTION_COLOR = '\x1b[2;36m'  # cyan
-RESET_COLOR = '\x1b[0m'
 
 
 class MyHelpCommand(commands.DefaultHelpCommand):

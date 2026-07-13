@@ -2,6 +2,7 @@ import gettext
 from discord.ext import commands
 from Bot_Base.src.urpy.localization import Localization
 from Bot_Base.src.urpy.my_commands import MyBot
+from Bot_Base.src.urpy.utils import colored_message, SUCCESS_COLOR, ERROR_COLOR
 import strings
 
 # UR_Bot © 2020 by "Association Union des Rôlistes & co" is licensed under Attribution-NonCommercial-ShareAlike 4.0
@@ -52,9 +53,11 @@ class General(commands.Cog):
     async def lang(self, ctx: commands.Context, language):
         """Switches to specified language"""
         if self.localization.set_user_language(ctx.author.id):
-            await ctx.send(_("Your language has successfully been set to {language}!").format(language=language))
+            await ctx.send(colored_message(
+                _("Your language has successfully been set to {language}!").format(language=language),
+                SUCCESS_COLOR))
         else:
-            await ctx.send(_("Sorry, I don't know this language!"))
+            await ctx.send(colored_message(_("Sorry, I don't know this language!"), ERROR_COLOR))
 
     def add_to_command(self, command: str, *callbacks):
         """Adds a callback to the specified command. It will be called on command invocation."""
