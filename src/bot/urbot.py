@@ -128,19 +128,54 @@ def main():
     logging.basicConfig(level=logging.INFO)
     ur_bot = URBot()
 
-    # Restreint le bot à un seul salon si RESTRICT_TO_CHANNEL_ID est défini
-    # (instance de dev/test) ; n'affecte pas la prod, qui ne définit pas
-    # cette variable. Vérification globale : s'applique à toutes les
-    # commandes de tous les cogs, sans toucher à leur code.
-    restrict_channel_id = os.environ.get('RESTRICT_TO_CHANNEL_ID')
-    if restrict_channel_id:
-        restrict_channel_id = int(restrict_channel_id)
+    # Restreint le bot à un ensemble de salons et/ou à une catégorie si
+    # RESTRICT_TO_CHANNEL_ID et/ou RESTRICT_TO_CATEGORY_ID sont définis
+    # (instance de dev/test) ; n'affecte pas la prod, qui ne définit ni
+    # l'une ni l'autre de ces variables. Vérification globale : s'applique
+    # à toutes les commandes de tous les cogs, sans toucher à leur code.
+    #
+    # RESTRICT_TO_CHANNEL_ID accepte une liste de salons séparés par des
+    # virgules (un seul identifiant, sans virgule, reste valide).
+    # RESTRICT_TO_CATEGORY_ID désigne une catégorie Discord : tout salon
+    # qui y est rangé est autorisé, ce qui permet d'ajouter de nouveaux
+    # salons de dev/test sans redéployer ni reconfigurer le bot.
+    # Si les deux variables sont définies, un salon est autorisé s'il
+    # correspond à l'une OU l'autre condition.
+    restrict_channel_ids_raw = os.environ.get('RESTRICT_TO_CHANNEL_ID')
+    restrict_category_id_raw = os.environ.get('RESTRICT_TO_CATEGORY_ID')
+
+    restrict_channel_ids = None
+    if restrict_channel_ids_raw:
+        restrict_channel_ids = {
+            int(channel_id.strip())
+            for channel_id in restrict_channel_ids_raw.split(',')
+            if channel_id.strip()
+        }
+
+    restrict_category_id = None
+    if restrict_category_id_raw:
+        restrict_category_id = int(restrict_category_id_raw)
+
+    if restrict_channel_ids or restrict_category_id is not None:
 
         @ur_bot.check
         def restrict_to_channel(ctx):
-            return ctx.channel.id == restrict_channel_id
+            if restrict_channel_ids and ctx.channel.id in restrict_channel_ids:
+                return True
+            if restrict_category_id is not None:
+                # ctx.channel peut être un DMChannel, qui n'a pas de
+                # category_id : on échoue simplement le test au lieu de
+                # planter.
+                if getattr(ctx.channel, 'category_id', None) == restrict_category_id:
+                    return True
+            return False
 
-        log(f"Restreint au salon {restrict_channel_id}")
+        restriction_desc = []
+        if restrict_channel_ids:
+            restriction_desc.append(f"salons {sorted(restrict_channel_ids)}")
+        if restrict_category_id is not None:
+            restriction_desc.append(f"catégorie {restrict_category_id}")
+        log(f"Restreint aux {' et '.join(restriction_desc)}")
 
     log("Loading cogs...")
     # adds the "cogs" folder to the import path

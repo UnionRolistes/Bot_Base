@@ -13,7 +13,14 @@ services:
     volumes:
       - ./.bot_token:/usr/local/src/URbot/.bot_token:ro
     environment:
-      # Salon Discord auquel restreindre les réponses du bot (voir
-      # src/bot/urbot.py) — laisser vide/absent pour un comportement
-      # normal (tous les salons, comme la prod).
-      - RESTRICT_TO_CHANNEL_ID=1526011382418641079
+      # Catégorie Discord dont tous les salons sont autorisés (voir
+      # src/bot/urbot.py) — laisser vide/absent pour un comportement normal
+      # (tous les salons, comme la prod). Les nouveaux salons de dev/test
+      # ajoutés à cette catégorie deviennent utilisables sans redéployer
+      # ni reconfigurer le bot.
+      - RESTRICT_TO_CATEGORY_ID=1526025031384301599
+      # Salon(s) Discord supplémentaires autorisés même hors de la
+      # catégorie ci-dessus, séparés par des virgules si plusieurs.
+      # Optionnel, indépendant de RESTRICT_TO_CATEGORY_ID. Exemple
+      # (désactivé) :
+      # - RESTRICT_TO_CHANNEL_ID=1526011382418641079,1526011382418641080
