@@ -58,8 +58,30 @@ async def get_informations(msg: discord.Message):
     return infos
 
 
+# Couleurs "dim" (2;3x) rendues par le client Discord dans un code block ```ansi.
+HEADING_COLOR = '\x1b[2;34;4m'  # bleu, souligne
+COMMAND_COLOR = '\x1b[2;33m'  # jaune
+DESCRIPTION_COLOR = '\x1b[2;36m'  # cyan
+SUCCESS_COLOR = '\x1b[2;32m'  # vert
+ERROR_COLOR = '\x1b[2;31m'  # rouge
+RESET_COLOR = '\x1b[0m'
+
+
 def code_block(s):
     return f"```{s}```"
+
+
+def ansi_block(s):
+    return f"```ansi\n{s}```"
+
+
+def colorize(s, color=DESCRIPTION_COLOR):
+    return f'{color}{s}{RESET_COLOR}'
+
+
+def colored_message(s, color=SUCCESS_COLOR):
+    """Wraps a plain bot message in a colored ```ansi code block."""
+    return ansi_block(colorize(s, color))
 
 
 def edit_fmt(s):
@@ -90,7 +112,18 @@ def formatted_template(template_pckg, template_name, **kwargs):
                 if match.group(4):
                     new_line += match.group(4)[0] * size_last_line
                 # formats text that doesn't symbolize an underline
-                new_line += match.group(5).format(**kwargs)
+                formatted = match.group(5).format(**kwargs)
+                # une valeur substituee (ex: credits multi-auteurs) peut contenir plusieurs
+                # lignes ; sans reappliquer l'indentation de la ligne du template a chacune
+                # d'elles, seule la premiere serait indentee. Le saut de ligne final de la
+                # ligne elle-meme (pas celui d'une valeur substituee) est laisse de cote pour
+                # ne pas indenter ce qui suit sur la ligne suivante du template.
+                indent = match.group(1)
+                if '\n' in formatted:
+                    has_trailing_newline = formatted.endswith('\n')
+                    body = formatted[:-1] if has_trailing_newline else formatted
+                    formatted = body.replace('\n', '\n' + indent) + ('\n' if has_trailing_newline else '')
+                new_line += formatted
 
             size_last_line = len(new_line.strip())
 

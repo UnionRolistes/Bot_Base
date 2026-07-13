@@ -16,6 +16,8 @@
 2.3 [BOT_PRESENTATION](#bot_presentation)
 - 2.2.2 [Utilisation](#utilisation--1)
 
+2.4 [CONFIGURATION DES COMMANDES](#configuration-des-commandes)
+
 3. [INSTALLER ET CONFIGURER LE PROJET EN ENTIER](#installer-et-configurer-le-projet-en-entier)
 - 3.1 [Prérequis](#prérequis-)
 - 3.2 [Démarche](#démarche-)
@@ -90,6 +92,22 @@ En message privé, il reçoit un lien web vers un formulaire figurant des questi
 
 3. Une fois publique, la présentation est encore modifiable ; il suffit d'y répondre sur discord avec la commande **$edit**.
    
+
+---
+## Configuration des commandes
+Certaines commandes nécessitent un salon Discord au nom précis, muni d'un webhook, ainsi que des permissions particulières pour le bot. Sans cette configuration, la commande échoue avec un message d'erreur explicite dans le salon ou en MP.
+
+| Commande | Salon requis | Configurable dans | Permission Discord nécessaire |
+|---|---|---|---|
+| **$jdr**, **$edit** (annonces de partie) | Un salon nommé exactement `planning-jdr`, muni d'au moins un webhook | `Bot_Planning_python/src/cog_planning/settings.py` (`announcement_channel`) | *Gérer les webhooks* sur ce salon |
+| **$prez** | Un salon nommé exactement `presentation`, muni d'au moins un webhook | `Bot_Presentation/src/cog_presentation/settings.py` (`announcement_channel`) | *Gérer les webhooks* sur ce salon |
+| **$cal**, **$site** | Aucun (le bot envoie un lien fixe en MP) | URLs `calendar_url`/`site_url` dans `cog_planning/settings.py` | Aucune |
+| Toutes | — | — | *Gérer les messages* recommandée : sans elle, les messages temporaires (confirmations envoyées dans le salon) ne s'autodétruisent plus après quelques secondes, mais les commandes continuent de fonctionner normalement |
+
+Le nom du salon attendu (`announcement_channel`) est fixé dans le code : créez un salon portant exactement ce nom, ou modifiez la valeur dans le `settings.py` correspondant avant de builder l'image.
+
+Voir aussi la section [Démarche](#démarche-) ci-dessous pour la liste complète des permissions à accorder au bot lors de son invitation sur un serveur.
+
 
 ---
 ---

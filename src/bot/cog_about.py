@@ -33,16 +33,18 @@ class About(commands.Cog):
         # generates the descriptions for all the subservices of the bot
         services = "\n\n".join(
             formatted_template(templates, 'service_template.txt',
-                               name=cog.get_name(),
-                               version=cog.get_version(),
-                               credits=cog.get_credits() if with_credits else "")
+                               name=colorize(cog.get_name(), HEADING_COLOR),
+                               version=colorize(cog.get_version(), COMMAND_COLOR),
+                               credits=colorize(cog.get_credits(), DESCRIPTION_COLOR) if with_credits else "")
 
             for name, cog in self.bot.cogs.items() if isinstance(cog, MyCog)
         )
 
-        # sends the message
-        await ctx.send(code_block(formatted_template(templates, 'version_template.txt',
-                                                     version=self.bot.get_version(),
-                                                     name=self.bot.get_name(),
+        # sends the message. Les titres sont colores+soulignes via ANSI (HEADING_COLOR inclut
+        # deja le code de soulignement) plutot que via des '====='/'-----' litteraux : les
+        # templates ne calculent donc plus de longueur de soulignement a partir de ces lignes.
+        await ctx.send(ansi_block(formatted_template(templates, 'version_template.txt',
+                                                     version=colorize(self.bot.get_version(), COMMAND_COLOR),
+                                                     name=colorize(self.bot.get_name(), HEADING_COLOR),
                                                      services=services,
-                                                     credits=self.bot.get_credits() if with_credits else "")))
+                                                     credits=colorize(self.bot.get_credits(), DESCRIPTION_COLOR) if with_credits else "")))

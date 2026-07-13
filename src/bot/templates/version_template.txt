@@ -1,5 +1,4 @@
 {name}
-======
     ->  Version : {version}
     {credits}
 
