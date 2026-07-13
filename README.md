@@ -26,8 +26,9 @@
 4. [MAINTENANCE](#maintenance-)
 
 5. [DÉVELOPPEMENT](#développement-)
-- 5.1 [Grafcet Bot_Planning](#grafcet-bot_planning-)
-- 5.2 [Grafcet Bot_Presentation](#grafcet-bot_presentation-)
+- 5.1 [Instance de dev/test](#instance-de-devtest-)
+- 5.2 [Grafcet Bot_Planning](#grafcet-bot_planning-)
+- 5.3 [Grafcet Bot_Presentation](#grafcet-bot_presentation-)
 
 6. [CRÉDITS, PARTICIPANTS ET ORGANISATION](#crédits-participants-et-organisation)
 
@@ -201,6 +202,15 @@ Le projet fonctionne grâce à cinq langages, qui sont **Python**, **XML** (eXte
 
 Une question particulière ? L'association Union des Rôlistes est disponible aux adresses mentionnées à la dernière section du fichier.
    
+
+---
+### Instance de dev/test :
+Pour tester des changements sans impacter la prod, une instance de dev/test peut être lancée via `docker-compose.dev.yml` avec un jeton Discord distinct. Cette instance peut être restreinte à un sous-ensemble de salons grâce à deux variables d'environnement, toutes deux facultatives et indépendantes (voir `src/bot/urbot.py`) :
+
+- `RESTRICT_TO_CHANNEL_ID` : un ou plusieurs identifiants de salon Discord, séparés par des virgules (ex: `123456789012345678,987654321098765432`). Un seul identifiant, sans virgule, reste valide.
+- `RESTRICT_TO_CATEGORY_ID` : l'identifiant d'une catégorie Discord. Tout salon rangé dans cette catégorie est autorisé, en plus de ceux listés dans `RESTRICT_TO_CHANNEL_ID`. Cela permet d'ajouter de nouveaux salons de dev/test à la catégorie sans avoir à redéployer ou reconfigurer le bot.
+
+Si aucune des deux variables n'est définie (cas de la prod), le bot répond normalement dans tous les salons. Si les deux sont définies, un salon est autorisé s'il correspond à l'une **ou** l'autre condition.
 
 ---
 ### Grafcet Bot_Planning :
