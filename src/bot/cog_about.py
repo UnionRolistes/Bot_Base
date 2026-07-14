@@ -30,15 +30,22 @@ class About(commands.Cog):
 
     async def send_info_msg(self, ctx, with_credits=False):
         """ Sends a message containing the names, version numbers [and credits] of all the services. """
-        # generates the descriptions for all the subservices of the bot
-        services = "\n\n".join(
-            formatted_template(templates, 'service_template.txt',
-                               name=colorize(cog.get_name(), HEADING_COLOR),
-                               version=colorize(cog.get_version(), COMMAND_COLOR),
-                               credits=colorize(cog.get_credits(), DESCRIPTION_COLOR) if with_credits else "")
-
-            for name, cog in self.bot.cogs.items() if isinstance(cog, MyCog)
-        )
+        # generates the descriptions for all the subservices of the bot ; un cog en erreur
+        # (template manquant, get_version()/get_credits() casse...) ne doit pas empecher
+        # l'affichage des autres cogs qui fonctionnent normalement
+        service_entries = []
+        for name, cog in self.bot.cogs.items():
+            if not isinstance(cog, MyCog):
+                continue
+            try:
+                service_entries.append(formatted_template(templates, 'service_template.txt',
+                                   name=colorize(cog.get_name(), HEADING_COLOR),
+                                   version=colorize(cog.get_version(), COMMAND_COLOR),
+                                   credits=colorize(cog.get_credits(), DESCRIPTION_COLOR) if with_credits else ""))
+            except Exception as e:
+                error_log(f"Impossible d'afficher les informations du service '{name}' :", e)
+                service_entries.append(colorize(f"{name} : indisponible", ERROR_COLOR))
+        services = "\n\n".join(service_entries)
 
         # sends the message. Les titres sont colores+soulignes via ANSI (HEADING_COLOR inclut
         # deja le code de soulignement) plutot que via des '====='/'-----' litteraux : les
