@@ -32,7 +32,7 @@ WORKDIR /usr/local/src
 # processus d'assemblage réel plutôt que de dépendre d'un contexte de build
 # local qui devrait déjà contenir les 3 repos en sous-dossiers.
 ARG GIT_ORG=https://github.com/UnionRolistes
-RUN git clone --depth 1 -b fix/version-cmd-error-handling ${GIT_ORG}/Bot_Base.git Bot_Base \
+RUN git clone --depth 1 ${GIT_ORG}/Bot_Base.git Bot_Base \
  && git clone --depth 1 ${GIT_ORG}/Bot_Planning_python.git Bot_Planning_python \
  && git clone --depth 1 ${GIT_ORG}/Bot_Presentation.git Bot_Presentation
 
