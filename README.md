@@ -56,13 +56,14 @@ Ce programme **regroupe les développements** communs à [Bot_Planning](https://
 II **facilite** ainsi **l'installation et la maintenance** des bots.
 
 ### Astuce :
-Il est à noter que [Bot_Planning](#bot_planning) et [Bot_Presentation](#bot_presentation) fonctionnent tous deux de la manière suivante :
+Il est à noter que [Bot_Planning](#bot_planning) et [Bot_Presentation](#bot_presentation) fonctionnent tous deux sur le même principe de départ :
 
- - Un utilisateur entre une commande, qui lui retournera un formulaire en ligne auquel il doit se connecter via discord pour remplir les informations qu'il souhaite.
+ - Un utilisateur entre une commande, qui lui renvoie en message privé un lien vers un formulaire web, auquel il se connecte via Discord (OAuth2) pour remplir les informations qu'il souhaite.
 
+Ce qui se passe ensuite diffère entre les deux bots :
 
- - Les données entrées sont envoyé (via webhook) au bot en question, qui met les informations renseignées en forme et les envoie ensuite dans le salon approprié. 
-
+ - **Bot_Presentation** : le CGI du formulaire met en forme les informations reçues et les poste directement sur Discord, via le webhook enregistré par `$prez`.
+ - **Bot_Planning** : depuis le passage à `planning-api` (service HTTP interne à Bot_Base), le formulaire transmet les informations à cette API, qui se charge de poster l'annonce sur Discord (via le webhook enregistré par `$jdr`) et de la persister dans `events.xml`. Le CGI de Web_Planning n'est plus qu'un relais vers l'API, il ne parle plus à Discord lui-même.
 
  - De la même manière, le formulaire envoyé par chaque bot est constitué sur la base d'un message déjà envoyé. 
 Il suffit à l'administrateur du bot de l'initialiser avec la commande **$set <id-message-exemple>**. 
@@ -71,11 +72,11 @@ Il suffit à l'administrateur du bot de l'initialiser avec la commande **$set <i
 ---
 ## Bot_Planning
 ### Utilisation :
-1. L'utilisateur écrit la commande **$cal**. 
+1. L'utilisateur écrit la commande **$jdr** dans le salon d'annonce.
 En message privé, il reçoit un lien web vers un formulaire adapté à la création d'événement.
 
 
-2. Après avoir reçu les informations renseignées, le bot les met en forme et les publie dans le salon "planning".
+2. Après avoir reçu les informations renseignées, `planning-api` les met en forme et les publie dans le salon "planning-jdr" (via le webhook enregistré par `$jdr`).
 
 
 3. Une fois publique, l'annonce est encore modifiable ; il suffit d'y répondre sur discord avec la commande **$edit**.
@@ -88,7 +89,7 @@ En message privé, il reçoit un lien web vers un formulaire adapté à la créa
 En message privé, il reçoit un lien web vers un formulaire figurant des questions sur son âge, ses passions, sa profession, etc.
 
 
-2. Le bot met en forme les informations reçues par webhook et les publie dans le salon "presentation".
+2. Le CGI du formulaire met en forme les informations reçues et les poste directement sur Discord, via le webhook enregistré par `$prez` (pas d'API intermédiaire, contrairement à Bot_Planning).
 
 
 3. Une fois publique, la présentation est encore modifiable ; il suffit d'y répondre sur discord avec la commande **$edit**.
