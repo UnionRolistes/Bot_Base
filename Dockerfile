@@ -13,7 +13,13 @@
 # ($python='python3.7'), qui est la version utilisée pour créer le venv du bot
 # sur le VPS (/opt/virtualenv/URBot), même si le système hôte a depuis été mis
 # à niveau vers Python 3.13.5.
-FROM python:3.7-slim
+#
+# Build multi-stage : gcc/build-essential/git/headers -dev ne servent qu'à
+# compiler lxml, jamais à l'exécution. Les garder dans l'image finale
+# coûtait ~440MB pour rien (mesuré sur l'image mono-stage). Le stage final
+# ne garde que les .so runtime (libxml2/libxslt1.1) et le résultat déjà
+# construit.
+FROM python:3.7-slim AS builder
 
 # Dépendances système équivalentes à celles installées par install.sh
 # (python3.7-dev / build-essential) pour compiler les paquets natifs (lxml).
@@ -43,13 +49,6 @@ RUN mkdir -p URbot \
  && cp -r Bot_Planning_python/src/cog_planning URbot/bot/cogs/cog_planning \
  && cp -r Bot_Presentation/src/cog_presentation URbot/bot/cogs/cog_presentation
 
-# bot/urbot.py fait `from Bot_Base.src.urpy import ...` (import package absolu)
-# et `from cog_about import About` / `import settings` (imports bruts résolus
-# via bot/ lui-même). Le clone Bot_Base original est donc conservé sur le
-# disque (jamais supprimé) et /usr/local/src + /usr/local/src/URbot/bot sont
-# ajoutés à PYTHONPATH pour reproduire l'environnement d'exécution du VPS.
-ENV PYTHONPATH="/usr/local/src:/usr/local/src/URbot/bot"
-
 WORKDIR /usr/local/src/URbot
 
 # --- Dépendances Python : combinaison des 3 requirements.txt trouvés ---
@@ -70,6 +69,29 @@ RUN cp -r urpy "$(python3 -c 'import site; print(site.getsitepackages()[0])')/ur
 # Fichiers de stockage webhook créés par install.sh, avec permissions larges
 # (chmod 776 sur le VPS).
 RUN touch wh whPrez && chmod 776 wh whPrez
+
+
+FROM python:3.7-slim
+
+# .so runtime seulement (pas les headers -dev, pas le compilateur) :
+# lxml a été compilé dans le stage builder, il ne lui reste plus qu'à
+# charger ces deux bibliothèques partagées au démarrage.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libxml2 \
+    libxslt1.1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# bot/urbot.py fait `from Bot_Base.src.urpy import ...` (import package absolu)
+# et `from cog_about import About` / `import settings` (imports bruts résolus
+# via bot/ lui-même). Le clone Bot_Base original est donc conservé sur le
+# disque (jamais supprimé) et /usr/local/src + /usr/local/src/URbot/bot sont
+# ajoutés à PYTHONPATH pour reproduire l'environnement d'exécution du VPS.
+COPY --from=builder /usr/local/lib/python3.7/site-packages /usr/local/lib/python3.7/site-packages
+COPY --from=builder /usr/local/src /usr/local/src
+
+ENV PYTHONPATH="/usr/local/src:/usr/local/src/URbot/bot"
+
+WORKDIR /usr/local/src/URbot
 
 # NOTE: .bot_token n'est JAMAIS copié dans l'image. Il est fourni au runtime
 # via un volume monté par docker-compose (cf. docker-compose.yml).
